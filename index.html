@@ -734,7 +734,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;availabilityText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open to senior frontend roles&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;resumeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v18.pdf&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;availabilityText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open to senior frontend roles&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;resumeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v19.pdf&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 // Replace with your Formspree form endpoint, e.g. https://formspree.io/f/xxxxabcd
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
@@ -1235,7 +1235,7 @@ class Component extends DCLogic {
     const err = s.errors;
     return {
       year: new Date().getFullYear(),
-      resumeHref: this.props.resumeUrl || 'uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v18.pdf',
+      resumeHref: this.props.resumeUrl || 'uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v19.pdf',
       showAvailability: this.props.showAvailability !== false,
       backToTopVisible: s.showBackToTop && !s.panelOpen && !s.openId,
       scrollToTop: this.scrollToTop,
