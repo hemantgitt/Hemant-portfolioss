@@ -1252,7 +1252,7 @@ class Component extends DCLogic {
       aiReview: DATA.aiReview,
       certTopics: DATA.certTopics,
       purposes: DATA.purposes,
-      projects: DATA.projects.map((p) => ({ ...p, hasImage: !!p.image, noImage: !p.image, imageFit: 'cover', imagePad: '0', open: () => this.setState({ openId: p.id }) })),
+      projects: DATA.projects.map((p) => ({ ...p, hasImage: !!p.image, noImage: !p.image, imageFit: 'contain', imagePad: p.imagePad || '10px 20px', open: () => this.setState({ openId: p.id }) })),
       current,
       caseOpen: !!s.openId,
       dialogRef: this.dialogRef,
