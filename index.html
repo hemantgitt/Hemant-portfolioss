@@ -1096,17 +1096,21 @@ class Component extends DCLogic {
       });
   };
 
+  clearHoverState = () => {
+    document.body.style.pointerEvents = 'none';
+    setTimeout(() => { document.body.style.pointerEvents = ''; }, 0);
+  };
   toggleTheme = () => {
     const next = this.state.theme === 'dark' ? 'light' : 'dark';
-    this.setState({ theme: next }, () => this.applyPrefs());
+    this.setState({ theme: next }, () => { this.applyPrefs(); this.clearHoverState(); });
   };
   toggleContrast = () => {
     const next = !this.state.contrast;
-    this.setState({ contrast: next }, () => this.applyPrefs());
+    this.setState({ contrast: next }, () => { this.applyPrefs(); this.clearHoverState(); });
   };
   toggleMotion = () => {
     const next = !this.state.motionOff;
-    this.setState({ motionOff: next }, () => this.applyPrefs());
+    this.setState({ motionOff: next }, () => { this.applyPrefs(); this.clearHoverState(); });
   };
   navClick = (id) => {
     this.suppressSpyUntil = Date.now() + 900;
