@@ -300,10 +300,15 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
         <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
           <sc-for list="{{ projects }}" as="p" hint-placeholder-count="5">
             <li style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s;" style-hover="transform: translateY(-4px); box-shadow: var(--shadow-lg);">
-              <div aria-hidden="true" style="height: 100px; background: {{ p.color }}; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px;">
-                <div style="text-align: center;">
-                  <p style="margin: 0; font-family: var(--font-h); font-weight: 700; font-size: 1.8rem; color: rgba(255, 255, 255, 0.9); letter-spacing: -0.02em;">{{ p.name }}</p>
-                </div>
+              <div aria-hidden="true" style="height: 100px; background: {{ p.color }}; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden;">
+                <sc-if value="{{ p.image }}">
+                  <img src="{{ p.image }}" alt="{{ p.name }} logo" style="max-height: 100%; max-width: 100%; object-fit: contain; opacity: 0.95;" />
+                </sc-if>
+                <sc-if value="{{ !p.image }}">
+                  <div style="text-align: center;">
+                    <p style="margin: 0; font-family: var(--font-h); font-weight: 700; font-size: 1.8rem; color: rgba(255, 255, 255, 0.9); letter-spacing: -0.02em;">{{ p.name }}</p>
+                  </div>
+                </sc-if>
                 <span style="position: absolute; right: 16px; bottom: -14px; font-family: var(--font-h); font-weight: 700; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--surface); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px;">{{ p.industry }}</span>
               </div>
               <div style="padding: 22px; display: grid; gap: 12px; align-content: start; flex: 1;">
@@ -821,7 +826,7 @@ const DATA = {
   purposes: ['Job opportunity', 'Recruiter / hiring', 'Interview / technical discussion', 'Professional networking', 'Project discussion', 'Other'],
   projects: [
     {
-      id: 'quivio', name: "Sonny's Quivio", industry: 'Automotive', color: 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)',
+      id: 'quivio', name: "Sonny's Quivio", industry: 'Automotive', color: 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)', image: 'uploads/quivio-logo.svg',
       summary: 'A config-driven, multi-tenant Next.js UI serving 10+ dealer tenants across CRM, SAT and white-label modules, built on a shared library of 30+ reusable components.',
       role: 'Frontend engineering — multi-tenant UI architecture, component library, performance',
       outcomes: ['LCP reduced from 3.8s to 2.6s', 'Initial bundle size cut by 25%', 'SAT module shipped as an installable PWA with push notifications'],
@@ -837,7 +842,7 @@ const DATA = {
       ]
     },
     {
-      id: 'cwc', name: 'CWC', industry: 'Healthcare', color: 'linear-gradient(135deg, #00B4D8 0%, #0096C7 100%)',
+      id: 'cwc', name: 'CWC', industry: 'Healthcare', color: 'linear-gradient(135deg, #00B4D8 0%, #0096C7 100%)', image: 'uploads/cwc-logo.svg',
       summary: 'A WCAG 2.1 AA-compliant React.js patient and admin platform with JWT authentication, role-based access control, real-time data and payment integration.',
       role: 'Frontend engineering — accessible UI, auth/authorisation surface, API integration',
       outcomes: ['Accessibility defects reduced by 20%', 'JWT authentication and role-based access control in the UI', 'Razorpay payment integration; GraphQL and WebSocket data flows'],
@@ -853,7 +858,7 @@ const DATA = {
       ]
     },
     {
-      id: 'pvr', name: 'PVR INOX', industry: 'Entertainment', color: 'linear-gradient(135deg, #D62828 0%, #F77F00 100%)',
+      id: 'pvr', name: 'PVR INOX', industry: 'Entertainment', color: 'linear-gradient(135deg, #D62828 0%, #F77F00 100%)', image: 'uploads/pvr-logo.svg',
       summary: 'Next.js booking, payment and subscription flows for one of India\u2019s largest cinema chains, built on shadcn/ui with 90% statement coverage on booking and payment paths.',
       role: 'Frontend engineering — transactional flows, state management, test coverage',
       outcomes: ['90% statement coverage on booking and payment paths', 'Booking, payment and subscription flows shipped', 'Reusable shadcn/ui component composition'],
