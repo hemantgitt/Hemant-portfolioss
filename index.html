@@ -1086,25 +1086,16 @@ class Component extends DCLogic {
   };
 
   toggleTheme = () => {
-    const r = document.documentElement;
-    const next = r.dataset.theme === 'dark' ? 'light' : 'dark';
-    r.dataset.theme = next;
-    this.persistPrefs({ theme: next });
-    this.setState({ theme: next });
+    const next = this.state.theme === 'dark' ? 'light' : 'dark';
+    this.setState({ theme: next }, () => this.applyPrefs());
   };
   toggleContrast = () => {
-    const r = document.documentElement;
-    const next = r.dataset.contrast !== 'high';
-    r.dataset.contrast = next ? 'high' : 'normal';
-    this.persistPrefs({ contrast: next });
-    this.setState({ contrast: next });
+    const next = !this.state.contrast;
+    this.setState({ contrast: next }, () => this.applyPrefs());
   };
   toggleMotion = () => {
-    const r = document.documentElement;
-    const next = r.dataset.motion !== 'off';
-    r.dataset.motion = next ? 'off' : 'on';
-    this.persistPrefs({ motionOff: next });
-    this.setState({ motionOff: next });
+    const next = !this.state.motionOff;
+    this.setState({ motionOff: next }, () => this.applyPrefs());
   };
   navClick = (id) => {
     this.suppressSpyUntil = Date.now() + 900;
