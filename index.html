@@ -109,6 +109,10 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
 @keyframes fab-in { from { opacity: 0; transform: translateY(10px) scale(0.85); } to { opacity: 1; transform: none; } }
 :root[data-motion="off"] .om-fab { animation: none; transition: none; }
 :root[data-motion="off"] .om-fab:hover, :root[data-motion="off"] .om-fab:active { transform: none; }
+.om-status-dot { animation: status-pulse 2s ease-in-out infinite; }
+@keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(1.15); } }
+:root[data-motion="off"] .om-status-dot { animation: none; opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .om-status-dot { animation: none; opacity: 1; transform: none; } }
 </style>
 </helmet>
 
@@ -169,7 +173,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
         <div style="display: grid; gap: 22px; align-content: start;">
           <sc-if value="{{ showAvailability }}" hint-placeholder-val="{{ true }}">
             <p style="margin: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-family: var(--font-h); font-weight: 600; color: var(--accent); background: var(--accent-tint); padding: 7px 14px; border-radius: 999px; width: fit-content;">
-              <span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: block;"></span>{{ availabilityText }}
+              <span aria-hidden="true" class="om-status-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #22c55e; display: block;"></span>{{ availabilityText }}
             </p>
           </sc-if>
           <h1 id="hero-h" style="margin: 0; font-family: var(--font-h); font-weight: 700; font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.03; letter-spacing: -0.02em;">
@@ -220,9 +224,9 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
           <p style="margin: 0; font-size: 1.15rem; line-height: 1.6; text-wrap: pretty; font-family: var(--font-h); font-weight: 500; letter-spacing: -0.005em;">
             I'm a Senior Frontend Engineer working on production React.js and Next.js applications — scalable, reusable UI, responsive interfaces and the API integration layer that connects them. My focus areas are frontend architecture, Core Web Vitals and performance optimisation, WCAG 2.1 AA accessibility, and frontend security.
           </p>
-          <p style="margin: 0; line-height: 1.7; color: var(--muted); font-size: 1rem;">
-            Day to day that means designing component libraries and state/data-fetching patterns teams can build on, testing the flows that carry money and personal data, and owning code review standards. I currently mentor four engineers at Appinventiv, where the React, TypeScript and accessibility review standards I established were adopted team-wide.
-          </p>
+          <!-- <p style="margin: 0; line-height: 1.7; color: var(--muted); font-size: 1rem;">
+            Day to day that means designing component libraries and state/data-fetching patterns teams can build on, testing the flows that carry money and personal data, and owning code review standards. I most recently mentored four engineers at Appinventiv, where the React, TypeScript and accessibility review standards I established were adopted team-wide.
+          </p> -->
           <ul style="list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
             <sc-for list="{{ aboutFocus }}" as="f" hint-placeholder-count="6">
               <li style="display: flex; align-items: center; gap: 10px; font-family: var(--font-h); font-weight: 500; font-size: 0.86rem; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;">
@@ -480,7 +484,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
             <h3 id="ai-h" style="margin: 0; font-family: var(--font-h); font-weight: 600; font-size: 1.08rem; display: flex; align-items: center; gap: 9px;">
               <span data-icon="cpu" aria-hidden="true" style="width: 18px; height: 18px; display: block; color: var(--accent);"></span>AI-assisted, engineer-reviewed
             </h3>
-            <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--muted);">I use Claude and Cursor to accelerate delivery — about 30% faster feature delivery at Appinventiv — and review every AI-generated change before merge and deployment.</p>
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--muted);">At Appinventiv, I used Claude and Cursor to accelerate delivery by about 30%, reviewing every AI-generated change before merge and deployment.</p>
             <ul style="margin: 0; padding: 0; list-style: none; display: grid; gap: 7px;">
               <sc-for list="{{ aiReview }}" as="r" hint-placeholder-count="5">
                 <li style="display: grid; grid-template-columns: 14px minmax(0,1fr); gap: 9px; font-size: 0.85rem; line-height: 1.45; color: var(--muted);">
@@ -746,7 +750,7 @@ const DATA = {
   heroFacts: [
     { label: 'Experience', value: '6 years', note: 'Production React & Next.js' },
     { label: 'Domains', value: '4 sectors', note: 'Automotive, healthcare, entertainment, government' },
-    { label: 'Current role', value: 'Appinventiv', note: 'Senior Software Engineer, Frontend' },
+    { label: 'Most recent role', value: 'Appinventiv', note: 'Senior Software Engineer, Frontend' },
     { label: 'Mentoring', value: '4 engineers', note: 'Code review standards adopted team-wide' }
   ],
   aboutFocus: [
