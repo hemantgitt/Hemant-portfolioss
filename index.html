@@ -971,17 +971,18 @@ class Component extends DCLogic {
 
   componentDidUpdate(prevProps, prevState) {
     this.paintIcons();
-    prevState = prevState || {};
-    if (!prevState.openId && this.state.openId) {
+    const wasOpen = !!this._caseWasOpen;
+    const isOpen = !!this.state.openId;
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (!wasOpen && isOpen) {
       this.lastFocus = document.activeElement;
-      document.body.style.overflow = 'hidden';
       setTimeout(() => { if (this.dialogEl) this.dialogEl.querySelector('button, a, [tabindex]')?.focus(); this.clearHoverState(); }, 30);
     }
-    if (prevState.openId && !this.state.openId) {
-      document.body.style.overflow = '';
+    if (wasOpen && !isOpen) {
       if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
       this.clearHoverState();
     }
+    this._caseWasOpen = isOpen;
   }
 
   componentWillUnmount() {
