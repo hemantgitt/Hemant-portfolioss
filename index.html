@@ -323,7 +323,14 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
         <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
           <sc-for list="{{ projects }}" as="p" hint-placeholder-count="5">
             <li style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s;" style-hover="transform: translateY(-4px); box-shadow: var(--shadow-lg);">
-              <div aria-hidden="true" style="height: 100px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--surface2)) 0%, var(--surface2) 100%); border-bottom: 1px solid var(--border);"></div>
+              <sc-if value="{{ p.hasImage }}" hint-placeholder-val="{{ false }}">
+                <div aria-hidden="true" style="height: 100px; background: {{ p.imageBg }}; border-bottom: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="{{ p.image }}" alt="" style="width: 100%; height: 100%; object-fit: {{ p.imageFit }}; object-position: center; padding: {{ p.imagePad }}; box-sizing: border-box; display: block;">
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ true }}">
+                <div aria-hidden="true" style="height: 100px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--surface2)) 0%, var(--surface2) 100%); border-bottom: 1px solid var(--border);"></div>
+              </sc-if>
               <div style="display: flex; justify-content: flex-end; padding: 12px 22px 0;">
                 <span style="font-family: var(--font-h); font-weight: 700; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: var(--surface); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px;">{{ p.industry }}</span>
               </div>
@@ -406,7 +413,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
         <p style="margin: 0 0 10px; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-family: var(--font-h); font-weight: 600;">08 — Accessibility</p>
         <h2 id="a11y-h" style="margin: 0 0 18px; font-family: var(--font-h); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.3rem); letter-spacing: -0.02em;">Accessibility, demonstrated</h2>
         <p style="margin: 0 0 36px; max-width: 72ch; line-height: 1.65; color: var(--muted);">
-          WCAG 2.1 AA is part of how I ship, not an audit at the end. On the CWC healthcare platform that approach reduced accessibility defects by 20%. This site is built the same way — semantic landmarks, one <code>h1</code> per page and an ordered heading structure, visible focus rings, 44px touch targets, keyboard paths through every control, and preferences you can change below.
+          WCAG 2.1 AA is part of how I ship, not an audit at the end. On the Evaria - Cycles & Wellness healthcare platform that approach reduced accessibility defects by 20%. This site is built the same way — semantic landmarks, one <code>h1</code> per page and an ordered heading structure, visible focus rings, 44px touch targets, keyboard paths through every control, and preferences you can change below.
         </p>
         <div class="om-split" style="display: grid; gap: 24px; --sa: 1.15fr; --sb: 0.85fr;">
           <ul class="om-grid" style="list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; --cols: repeat(3,1fr);">
@@ -444,7 +451,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
             <h3 id="sec-h" style="margin: 0; font-family: var(--font-h); font-weight: 600; font-size: 1.08rem; display: flex; align-items: center; gap: 9px;">
               <span data-icon="shield-check" aria-hidden="true" style="width: 18px; height: 18px; display: block; color: var(--accent);"></span>Frontend security
             </h3>
-            <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--muted);">JWT authentication and role-based access control on the CWC patient and admin platform, XSS/CSRF-aware data handling, and secure upload flows for photograph, signature and document steps on the UPSC portal.</p>
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--muted);">JWT authentication and role-based access control on the Evaria - Cycles & Wellness patient and admin platform, XSS/CSRF-aware data handling, and secure upload flows for photograph, signature and document steps on the UPSC portal.</p>
             <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px;">
               <sc-for list="{{ securityTags }}" as="t" hint-placeholder-count="6">
                 <li style="font-size: 0.74rem; border: 1px solid var(--border); padding: 5px 11px; border-radius: 999px;">{{ t }}</li>
@@ -802,7 +809,7 @@ const DATA = {
         'Mentored 4 engineers and established frontend code review standards for React, TypeScript and accessibility, adopted team-wide.',
         'Accelerated feature delivery by about 30% using AI-assisted development (Claude, Cursor).',
         'Reviewed every AI-generated change for bugs and security issues — race conditions, stale closures, XSS/CSRF — before merge and AWS deployment.'
-      ], projects: ["Sonny's Quivio", 'CWC', 'PVR INOX'] },
+      ], projects: ["Sonny's Quivio", 'Evaria - Cycles & Wellness', 'PVR INOX'] },
     { company: 'UV Technologies', title: 'Senior Frontend Developer', meta: 'Noida · Nov 2022 – Aug 2024',
       points: [
         'Led requirements gathering with government stakeholders, translating compliance and audit requirements into UI specifications.',
@@ -817,7 +824,7 @@ const DATA = {
   impact: [
     { project: "Sonny's Quivio", value: '3.8s → 2.6s', label: 'Largest Contentful Paint', note: 'Measured improvement on the multi-tenant Next.js UI.' },
     { project: "Sonny's Quivio", value: '−25%', label: 'Initial bundle size', note: 'Bundle optimisation across shared tenant modules.' },
-    { project: 'CWC', value: '−20%', label: 'Accessibility defects', note: 'WCAG 2.1 AA work on the patient and admin platform.' },
+    { project: 'Evaria - Cycles & Wellness', value: '−20%', label: 'Accessibility defects', note: 'WCAG 2.1 AA work on the patient and admin platform.' },
     { project: 'PVR INOX', value: '90%', label: 'Statement coverage', note: 'Jest and React Testing Library on booking and payment paths.' },
     { project: 'UPSC platform', value: '−20%', label: 'Page load time', note: 'Server rendering, pagination and caching on a high-traffic portal.' },
     { project: 'Appinventiv', value: '~30%', label: 'Faster feature delivery', note: 'AI-assisted development with Claude and Cursor; every generated change reviewed for bugs and security issues before merge and deployment — the review, not the tool, is what shipped safely.' }
@@ -848,7 +855,7 @@ const DATA = {
   purposes: ['Job opportunity', 'Recruiter / hiring', 'Interview / technical discussion', 'Professional networking', 'Project discussion', 'Other'],
   projects: [
     {
-      id: 'quivio', name: "Sonny's Quivio", industry: 'Automotive', color: 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)',
+      id: 'quivio', name: "Sonny's Quivio", industry: 'Automotive', color: 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%)', image: 'uploads/quivio_logo.png', imageBg: '#f4f3f2',
       summary: 'A config-driven, multi-tenant Next.js UI serving 10+ dealer tenants across CRM, SAT and white-label modules, built on a shared library of 30+ reusable components.',
       role: 'Frontend engineering — multi-tenant UI architecture, component library, performance',
       outcomes: ['LCP reduced from 3.8s to 2.6s', 'Initial bundle size cut by 25%', 'SAT module shipped as an installable PWA with push notifications'],
@@ -864,7 +871,7 @@ const DATA = {
       ]
     },
     {
-      id: 'cwc', name: 'CWC', industry: 'Healthcare', color: 'linear-gradient(135deg, #00B4D8 0%, #0096C7 100%)',
+      id: 'cwc', name: 'Evaria - Cycles & Wellness', industry: 'Healthcare', color: 'linear-gradient(135deg, #00B4D8 0%, #0096C7 100%)', image: 'uploads/Evaria.png', imageBg: '#f4f3f2',
       summary: 'A WCAG 2.1 AA-compliant React.js patient and admin platform with JWT authentication, role-based access control, real-time data and payment integration.',
       role: 'Frontend engineering — accessible UI, auth/authorisation surface, API integration',
       outcomes: ['Accessibility defects reduced by 20%', 'JWT authentication and role-based access control in the UI', 'Razorpay payment integration; GraphQL and WebSocket data flows'],
@@ -880,7 +887,7 @@ const DATA = {
       ]
     },
     {
-      id: 'pvr', name: 'PVR INOX', industry: 'Entertainment', color: 'linear-gradient(135deg, #D62828 0%, #F77F00 100%)',
+      id: 'pvr', name: 'PVR INOX', industry: 'Entertainment', color: 'linear-gradient(135deg, #D62828 0%, #F77F00 100%)', image: 'uploads/pvr.png', imageBg: '#000',
       summary: 'Next.js booking, payment and subscription flows for one of India\u2019s largest cinema chains, built on shadcn/ui with 90% statement coverage on booking and payment paths.',
       role: 'Frontend engineering — transactional flows, state management, test coverage',
       outcomes: ['90% statement coverage on booking and payment paths', 'Booking, payment and subscription flows shipped', 'Reusable shadcn/ui component composition'],
@@ -896,7 +903,7 @@ const DATA = {
       ]
     },
     {
-      id: 'upsc', name: 'UPSC Examination Platform', industry: 'Government', color: 'linear-gradient(135deg, #1B4965 0%, #5FA8D3 100%)',
+      id: 'upsc', name: 'UPSC Examination Platform', industry: 'Government', color: 'linear-gradient(135deg, #1B4965 0%, #5FA8D3 100%)', image: 'uploads/upscv1.png', imageBg: '#e9edf1',
       summary: 'The Next.js SSR portal for a high-traffic national examination platform, including the multi-step application form with field-level validation, persisted drafts and secure document upload.',
       role: 'Frontend engineering — SSR portal, complex forms, performance, accessibility',
       outcomes: ['Page load time reduced by 20%', 'Multi-step application form with persisted draft state', 'Secure photograph, signature and document upload UX'],
@@ -912,7 +919,7 @@ const DATA = {
       ]
     },
     {
-      id: 'arabez', name: 'Arab EZ Translator', industry: 'Content / Translation', color: 'linear-gradient(135deg, #7209B7 0%, #B5179E 100%)',
+      id: 'arabez', name: 'Arab EZ Translator', industry: 'Content / Translation', color: 'linear-gradient(135deg, #7209B7 0%, #B5179E 100%)', image: 'uploads/ArabEasy%20Blue.png', imageBg: '#f4f3f2',
       summary: 'The core authoring surface for translation workflows — a rich text editor with formatting controls, live word count and syntax highlighting, built from reusable React components across multiple locales.',
       role: 'Frontend engineering — editor surface, reusable components, API integration',
       outcomes: ['Rich text editor with formatting controls and live word count', 'Reusable React components across multiple locales', 'Responsive, cross-browser interfaces to WCAG 2.1 AA'],
@@ -1245,7 +1252,7 @@ class Component extends DCLogic {
       aiReview: DATA.aiReview,
       certTopics: DATA.certTopics,
       purposes: DATA.purposes,
-      projects: DATA.projects.map((p) => ({ ...p, open: () => this.setState({ openId: p.id }) })),
+      projects: DATA.projects.map((p) => ({ ...p, hasImage: !!p.image, noImage: !p.image, imageFit: 'cover', imagePad: '0', open: () => this.setState({ openId: p.id }) })),
       current,
       caseOpen: !!s.openId,
       dialogRef: this.dialogRef,
