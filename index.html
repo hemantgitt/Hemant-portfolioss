@@ -1129,8 +1129,11 @@ class Component extends DCLogic {
   };
 
   clearHoverState = () => {
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     document.body.style.pointerEvents = 'none';
-    setTimeout(() => { document.body.style.pointerEvents = ''; }, 0);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { document.body.style.pointerEvents = ''; });
+    });
   };
   toggleTheme = () => {
     const next = this.state.theme === 'dark' ? 'light' : 'dark';
