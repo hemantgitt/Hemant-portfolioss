@@ -476,14 +476,14 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
     </section>
 
     <section id="contact" data-screen-label="Contact" aria-labelledby="contact-h" style="border-top: 1px solid var(--border);">
-      <div class="om-split" style="max-width: 1180px; margin: 0 auto; padding: clamp(56px,8vw,96px) 20px; display: grid; gap: 36px; --sa: 0.85fr; --sb: 1.15fr;">
-        <div style="display: grid; gap: 18px; align-content: start;">
+      <div style="max-width: 1180px; margin: 0 auto; padding: clamp(56px,8vw,96px) 20px; display: grid; gap: 24px;">
+        <div style="display: grid; gap: 18px; align-content: start; max-width: 60ch;">
           <div>
             <p style="margin: 0 0 10px; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-family: var(--font-h); font-weight: 600;">11 — Contact</p>
             <h2 id="contact-h" style="margin: 0 0 12px; font-family: var(--font-h); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.3rem); letter-spacing: -0.02em;">Let's connect</h2>
-            <p style="margin: 0; max-width: 46ch; line-height: 1.6; color: var(--muted);">Open to senior frontend roles. The fastest route is email or LinkedIn — I reply to recruiters and hiring managers directly.</p>
+            <p style="margin: 0; line-height: 1.6; color: var(--muted);">Open to senior frontend roles. The fastest route is email or LinkedIn — I reply to recruiters and hiring managers directly.</p>
           </div>
-          <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 10px;">
+          <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
             <li style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; display: grid; gap: 3px;">
               <span style="font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">Email</span>
               <a href="mailto:hemantjhaa97@gmail.com" style="font-family: var(--font-h); font-weight: 600; font-size: 0.98rem; word-break: break-all; text-decoration: none; color: var(--text);" style-hover="color: var(--accent);">hemantjhaa97@gmail.com</a>
@@ -505,57 +505,6 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
             <span data-icon="download" aria-hidden="true" style="width: 15px; height: 15px; display: block;"></span>Download résumé (PDF)
           </a>
         </div>
-
-        <form novalidate="{{ true }}" onSubmit="{{ onSubmit }}" aria-labelledby="form-h" style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px; display: grid; gap: 18px;">
-          <div>
-            <h3 id="form-h" style="margin: 0 0 4px; font-family: var(--font-h); font-weight: 600; font-size: 1.15rem;">Send a message</h3>
-            <p style="margin: 0; font-size: 0.82rem; color: var(--muted);">Fields marked * are required.</p>
-          </div>
-          <div style="display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-            <div>
-              <label for="f-name" style="display: block; font-size: 0.8rem; font-family: var(--font-h); font-weight: 500; margin-bottom: 6px; color: var(--muted);">Name *</label>
-              <input id="f-name" name="name" type="text" autoComplete="name" required="{{ true }}" aria-required="true" aria-invalid="{{ errors.nameInvalid }}" aria-describedby="e-name" style="width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);">
-              <p id="e-name" role="alert" style="margin: 6px 0 0; font-size: 0.78rem; color: var(--accent); min-height: 1.1em;">{{ errors.name }}</p>
-            </div>
-            <div>
-              <label for="f-email" style="display: block; font-size: 0.8rem; font-family: var(--font-h); font-weight: 500; margin-bottom: 6px; color: var(--muted);">Email *</label>
-              <input id="f-email" name="email" type="email" autoComplete="email" required="{{ true }}" aria-required="true" aria-invalid="{{ errors.emailInvalid }}" aria-describedby="e-email" style="width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);">
-              <p id="e-email" role="alert" style="margin: 6px 0 0; font-size: 0.78rem; color: var(--accent); min-height: 1.1em;">{{ errors.email }}</p>
-            </div>
-            <div>
-              <label for="f-phone" style="display: block; font-size: 0.8rem; font-family: var(--font-h); font-weight: 500; margin-bottom: 6px; color: var(--muted);">Phone (optional)</label>
-              <input id="f-phone" name="phone" type="tel" autoComplete="tel" inputMode="numeric" maxLength="10" aria-invalid="{{ errors.phoneInvalid }}" aria-describedby="e-phone" style="width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);">
-              <p id="e-phone" role="alert" style="margin: 6px 0 0; font-size: 0.78rem; color: var(--accent); min-height: 1.1em;">{{ errors.phone }}</p>
-            </div>
-            <div>
-              <label for="f-purpose" style="display: block; font-size: 0.8rem; font-family: var(--font-h); font-weight: 500; margin-bottom: 6px; color: var(--muted);">Purpose *</label>
-              <select id="f-purpose" name="purpose" required="{{ true }}" aria-required="true" aria-invalid="{{ errors.purposeInvalid }}" aria-describedby="e-purpose" style="width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);">
-                <option value="">Select a purpose…</option>
-                <sc-for list="{{ purposes }}" as="p" hint-placeholder-count="6">
-                  <option value="{{ p }}">{{ p }}</option>
-                </sc-for>
-              </select>
-              <p id="e-purpose" role="alert" style="margin: 6px 0 0; font-size: 0.78rem; color: var(--accent); min-height: 1.1em;">{{ errors.purpose }}</p>
-            </div>
-          </div>
-          <div>
-            <label for="f-message" style="display: block; font-size: 0.8rem; font-family: var(--font-h); font-weight: 500; margin-bottom: 6px; color: var(--muted);">Message *</label>
-            <textarea id="f-message" name="message" rows="5" required="{{ true }}" aria-required="true" aria-invalid="{{ errors.messageInvalid }}" aria-describedby="e-message" style="width: 100%; min-height: 120px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; resize: vertical;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);"></textarea>
-            <p id="e-message" role="alert" style="margin: 6px 0 0; font-size: 0.78rem; color: var(--accent); min-height: 1.1em;">{{ errors.message }}</p>
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
-            <button type="submit" style="display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding-inline: 20px; background: var(--accent); color: #fff; border: none; font-family: var(--font-h); font-weight: 600; font-size: 0.9rem; border-radius: 12px; cursor: pointer;" style-hover="background: var(--accent-hover);" style-focus="outline: 2px solid var(--accent); outline-offset: 2px;">
-              <span data-icon="send" aria-hidden="true" style="width: 15px; height: 15px; display: block;"></span>Send message
-            </button>
-            <a href="mailto:hemantjhaa97@gmail.com" style="display: inline-flex; align-items: center; min-height: 46px; padding-inline: 18px; text-decoration: none; color: var(--text); border: 1px solid var(--border-strong); font-family: var(--font-h); font-weight: 600; font-size: 0.9rem; border-radius: 12px;" style-hover="background: var(--surface2);" style-focus="outline: 2px solid var(--accent); outline-offset: 2px;">Email instead</a>
-          </div>
-          <sc-if value="{{ formStatus }}" hint-placeholder-val="{{ false }}">
-            <p role="status" aria-live="polite" style="margin: 0; font-size: 0.88rem; line-height: 1.55; background: var(--surface2); border-left: 3px solid var(--accent); border-radius: 8px; padding: 12px 14px;">{{ formStatus }}</p>
-          </sc-if>
-          <p style="margin: 0; font-size: 0.75rem; line-height: 1.5; color: var(--muted);">
-            This form validates in the browser only. No message-delivery service is connected yet, and nothing entered here is stored or transmitted — until an email/backend endpoint is wired in, please use the email or LinkedIn links.
-          </p>
-        </form>
       </div>
     </section>
   </main>
