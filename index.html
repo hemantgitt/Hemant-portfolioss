@@ -524,7 +524,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
             </div>
             <div>
               <label for="f-phone" style="display: block; font-size: 0.8rem; font-family: var(--font-h); font-weight: 500; margin-bottom: 6px; color: var(--muted);">Phone (optional)</label>
-              <input id="f-phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" aria-invalid="{{ errors.phoneInvalid }}" aria-describedby="e-phone" style="width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);">
+              <input id="f-phone" name="phone" type="tel" autoComplete="tel" inputMode="numeric" maxLength="10" aria-invalid="{{ errors.phoneInvalid }}" aria-describedby="e-phone" style="width: 100%; min-height: 46px; padding: 10px 14px; font: inherit; font-size: 0.92rem; color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;" style-focus="outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);">
               <p id="e-phone" role="alert" style="margin: 6px 0 0; font-size: 0.78rem; color: var(--accent); min-height: 1.1em;">{{ errors.phone }}</p>
             </div>
             <div>
@@ -703,6 +703,9 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;availabilityText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open to senior frontend roles&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;resumeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_Sept_v17.pdf&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+// Replace with your Formspree form endpoint, e.g. https://formspree.io/f/xxxxabcd
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
 const DATA = {
   nav: [
     { label: 'Home', href: '#home' }, { label: 'About', href: '#about' },
@@ -1102,7 +1105,7 @@ class Component extends DCLogic {
     if (!email) errors.email = 'Enter your email address.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) errors.email = 'Enter a valid email address, for example name@company.com.';
     const phone = v('phone');
-    if (phone && !/^[+]?[\d\s()-]{7,18}$/.test(phone)) errors.phone = 'Enter a valid phone number, or leave this blank.';
+    if (phone && !/^\d{10}$/.test(phone)) errors.phone = 'Enter a valid 10-digit phone number, or leave this blank.';
     if (!v('purpose')) errors.purpose = 'Select a reason for contact.';
     if (v('message').length < 10) errors.message = 'Add a short message (at least 10 characters).';
 
@@ -1113,10 +1116,24 @@ class Component extends DCLogic {
       if (first && first.focus) first.focus();
       return;
     }
-    this.setState({
-      errors: {},
-      formStatus: 'All fields are valid. This portfolio has no message-delivery service connected, so nothing was sent or stored — copy your message and email hemantjhaa97@gmail.com, or use the LinkedIn link. (Integration point: post this form to an email API or form endpoint.)'
-    });
+
+    this.setState({ errors: {}, formStatus: 'Sending your message…' });
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(f),
+      headers: { Accept: 'application/json' }
+    })
+      .then((res) => {
+        if (res.ok) {
+          f.reset();
+          this.setState({ formStatus: 'Thanks — your message has been sent. I will get back to you soon.' });
+        } else {
+          this.setState({ formStatus: 'Something went wrong sending your message. Please email hemantjhaa97@gmail.com directly.' });
+        }
+      })
+      .catch(() => {
+        this.setState({ formStatus: 'Something went wrong sending your message. Please email hemantjhaa97@gmail.com directly.' });
+      });
   };
 
   toggleTheme = () => {
