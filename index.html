@@ -93,6 +93,21 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
 .om-card-hover:hover { transform: translateY(-4px); box-shadow: var(--shadow-md) !important; }
 :root[data-motion="off"] .om-card-hover { transition: none !important; }
 :root[data-motion="off"] .om-card-hover:hover { transform: none !important; }
+.om-fab {
+  position: fixed; right: 16px; bottom: 16px; z-index: 65;
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: none; border-radius: 50%; cursor: pointer;
+  background: linear-gradient(155deg, var(--accent), var(--accent-press));
+  color: #fff; box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  animation: fab-in 0.25s ease;
+}
+.om-fab:hover { background: linear-gradient(155deg, var(--accent-hover), var(--accent)); box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.om-fab:active { transform: translateY(-1px) scale(0.94); }
+@media (min-width: 640px) { .om-fab { right: 28px; bottom: 28px; width: 50px; height: 50px; } }
+@keyframes fab-in { from { opacity: 0; transform: translateY(10px) scale(0.85); } to { opacity: 1; transform: none; } }
+:root[data-motion="off"] .om-fab { animation: none; transition: none; }
+:root[data-motion="off"] .om-fab:hover, :root[data-motion="off"] .om-fab:active { transform: none; }
 </style>
 </helmet>
 
@@ -642,6 +657,12 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
   </div>
   </sc-if>
 
+  <sc-if value="{{ backToTopVisible }}" hint-placeholder-val="{{ false }}">
+    <button type="button" class="om-fab" onClick="{{ scrollToTop }}" aria-label="Back to top" title="Back to top" style-focus="outline: 2px solid var(--accent); outline-offset: 3px;">
+      <span data-icon="arrow-up" aria-hidden="true" style="width: 19px; height: 19px; display: block;"></span>
+    </button>
+  </sc-if>
+
   <sc-if value="{{ caseOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; inset: 0; z-index: 80; display: flex; justify-content: center; padding: 0; background: rgba(6,6,8,0.6); backdrop-filter: blur(4px);" onClick="{{ onBackdrop }}">
       <div role="dialog" aria-modal="true" aria-labelledby="cs-title" ref="{{ dialogRef }}" style="width: min(980px, 100%); margin: 0 auto; background: var(--bg); overflow: auto; max-height: 100vh;">
@@ -701,7 +722,7 @@ a:not(.om-btn):hover { color: var(--accent-hover); }
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;availabilityText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open to senior frontend roles&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;resumeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_Sept_v17.pdf&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;availabilityText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open to senior frontend roles&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;resumeUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v18.pdf&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 // Replace with your Formspree form endpoint, e.g. https://formspree.io/f/xxxxabcd
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
@@ -912,7 +933,8 @@ class Component extends DCLogic {
   state = {
     theme: 'dark', contrast: false, motionOff: false, fontScale: 'md',
     menuOpen: false, panelOpen: false, openId: null, active: 'home',
-    readTarget: 'about', speak: 'idle', speakStatus: '', errors: {}, formStatus: ''
+    readTarget: 'about', speak: 'idle', speakStatus: '', errors: {}, formStatus: '',
+    showBackToTop: false
   };
 
   componentDidMount() {
@@ -993,6 +1015,8 @@ class Component extends DCLogic {
     if (!sections.length) return;
     const HEADER = 116;
     const updateActive = () => {
+      const shouldShow = window.scrollY > 480;
+      if (shouldShow !== this.state.showBackToTop) this.setState({ showBackToTop: shouldShow });
       if (this.suppressSpyUntil && Date.now() < this.suppressSpyUntil) return;
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
       let current = atBottom ? sections[sections.length - 1].id : sections[0].id;
@@ -1175,6 +1199,13 @@ class Component extends DCLogic {
       this.setState({ active: id });
     }
   };
+  scrollToTop = () => {
+    this.suppressSpyUntil = Date.now() + 900;
+    history.pushState(null, '', location.pathname + location.search);
+    window.scrollTo({ top: 0, behavior: this.motionOK() ? 'smooth' : 'auto' });
+    this.setState({ active: 'home' });
+    this.clearHoverState();
+  };
   toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
   closeMenu = () => this.setState({ menuOpen: false });
   togglePanel = () => this.setState((s) => ({ panelOpen: !s.panelOpen }));
@@ -1191,8 +1222,10 @@ class Component extends DCLogic {
     const err = s.errors;
     return {
       year: new Date().getFullYear(),
-      resumeHref: this.props.resumeUrl || 'uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_Sept_v17.pdf',
+      resumeHref: this.props.resumeUrl || 'uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v18.pdf',
       showAvailability: this.props.showAvailability !== false,
+      backToTopVisible: s.showBackToTop && !s.panelOpen && !s.openId,
+      scrollToTop: this.scrollToTop,
       availabilityText: this.props.availabilityText || 'Open to senior frontend roles',
       navItems: DATA.nav.map((n) => ({ ...n, current: n.href.slice(1) === s.active ? 'true' : 'false', color: n.href.slice(1) === s.active ? 'var(--accent)' : 'var(--muted)', onNavClick: (e) => { this.navClick(n.href.slice(1), e); } })),
       heroStrengths: DATA.heroStrengths,
