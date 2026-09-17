@@ -85,8 +85,8 @@ export function Hero() {
         </div>
         <div className="hero-right">
           <div className="hero-photo-wrap">
+            <span aria-hidden="true" className="hero-photo-grid" />
             <span aria-hidden="true" className="hero-photo-glow" />
-            <span aria-hidden="true" className="hero-photo-ring" />
             <picture>
               <source srcSet={`/images/hero-photo.webp?v=${HERO_PHOTO_VERSION}`} type="image/webp" />
               <img

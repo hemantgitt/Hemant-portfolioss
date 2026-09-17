@@ -247,6 +247,18 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 @media (min-width: 1100px) {
   .hero-photo-wrap { --hero-photo-w: 340px; --hero-photo-h: 425px; }
 }
+/* Faint dot-grid behind the photo card — small repeating radial-gradient
+   dots, low opacity, sized larger than the photo so it peeks out on every
+   side. Sits behind the glow blob (z-index -1 vs the glow's 0). */
+.hero-photo-grid {
+  position: absolute; top: 50%; left: 50%; z-index: -1; pointer-events: none;
+  width: calc(var(--hero-photo-w, 220px) * 1.5); height: calc(var(--hero-photo-h, 275px) * 1.4);
+  transform: translate(-50%, -50%);
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, #94a3b8) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.3;
+  mask-image: radial-gradient(ellipse at center, black 45%, transparent 75%);
+}
 .hero-photo-glow {
   position: absolute; top: 50%; left: 50%; z-index: 0; pointer-events: none;
   width: calc(var(--hero-photo-w, 220px) * 1.25); height: calc(var(--hero-photo-h, 275px) * 1.2);
@@ -254,29 +266,23 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
   background: radial-gradient(circle, color-mix(in srgb, var(--accent) 50%, transparent) 0%, transparent 70%);
   filter: blur(28px);
 }
-/* Rotating gradient ring: a rounded-rectangle 8px wider than the photo on
-   every side, sitting behind it (z-index 1 vs the photo's 2) so only a
-   ~4px ring peeks out past the photo's rounded edge — cheaper and simpler
-   than a border-image/mask trick. Border-radius is offset by the same 4px
-   so the ring's corners stay concentric with the photo's. */
-.hero-photo-ring {
-  position: absolute; top: 50%; left: 50%; z-index: 1; pointer-events: none;
-  width: calc(100% + 8px); height: calc(100% + 8px);
-  border-radius: 36px;
-  background: conic-gradient(from 0deg, var(--accent), color-mix(in srgb, var(--accent) 55%, white) 25%, var(--accent) 50%, color-mix(in srgb, var(--accent) 55%, black) 75%, var(--accent) 100%);
-  transform: translate(-50%, -50%) rotate(0deg);
-  animation: hero-ring-rotate 7s linear infinite;
-}
-@keyframes hero-ring-rotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-:root[data-motion="off"] .hero-photo-ring { animation: none; }
-@media (prefers-reduced-motion: reduce) {
-  .hero-photo-ring { animation: none; }
-}
+/* Pulsing glow on the photo card itself, replacing the old rotating
+   gradient ring: the box-shadow's outer glow layer breathes between a dim
+   and a bright state so it reads as a heartbeat around the photo rather
+   than a spinning border. The first two shadow layers (bg-color ring +
+   shadow-md) stay constant across the keyframe so only the glow layer
+   visibly animates. */
 .hero-photo {
   position: relative; z-index: 2; display: block;
   width: 100%; height: 100%; border-radius: 32px; object-fit: cover; object-position: center 15%;
-  box-shadow: 0 0 0 3px var(--bg), var(--shadow-md);
+  box-shadow: 0 0 0 3px var(--bg), var(--shadow-md), 0 0 12px 1px color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: hero-photo-pulse-glow 3s ease-in-out infinite;
+}
+@keyframes hero-photo-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 3px var(--bg), var(--shadow-md), 0 0 12px 1px color-mix(in srgb, var(--accent) 22%, transparent); }
+  50% { box-shadow: 0 0 0 3px var(--bg), var(--shadow-md), 0 0 20px 4px color-mix(in srgb, var(--accent) 38%, transparent); }
+}
+:root[data-motion="off"] .hero-photo { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo { animation: none; }
 }
