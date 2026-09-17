@@ -111,18 +111,29 @@ export function AccessibilityPanel({
           <label htmlFor="read-pick" style={{ display: 'block', fontSize: '0.78rem', marginBottom: 5, color: 'var(--muted)' }}>
             Section
           </label>
-          <select
-            id="read-pick"
-            value={readTarget}
-            onChange={(e) => onSetReadTarget(e.target.value)}
-            style={{ width: '100%', minHeight: 40, padding: '8px 10px', font: 'inherit', fontSize: '0.85rem', color: 'var(--text)', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 8 }}
-          >
-            {readable.map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.label}
-              </option>
-            ))}
-          </select>
+          <div style={{ position: 'relative' }}>
+            <select
+              id="read-pick"
+              value={readTarget}
+              onChange={(e) => onSetReadTarget(e.target.value)}
+              style={{
+                width: '100%', minHeight: 40, padding: '8px 34px 8px 10px', font: 'inherit', fontSize: '0.85rem', color: 'var(--text)',
+                background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 8,
+                appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none',
+              }}
+            >
+              {readable.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.label}
+                </option>
+              ))}
+            </select>
+            <Icon
+              name="chevron-down"
+              size={16}
+              style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)', color: 'var(--muted)', pointerEvents: 'none' }}
+            />
+          </div>
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           <button type="button" onClick={onSpeakPlay} className="btn btn-primary" style={{ minHeight: 40, flex: 1, justifyContent: 'center', fontSize: '0.82rem' }}>

@@ -1,5 +1,5 @@
 {
-  "eyebrow": "09 — Engineering practice",
+  "eyebrow": "08 — Engineering practice",
   "title": "Security, testing & AI-assisted delivery",
   "security": {
     "icon": "shield-check",
@@ -11,7 +11,7 @@
   "testing": {
     "icon": "flask-conical",
     "title": "Testing & quality",
-    "body": "Jest and React Testing Library, weighted toward the paths where failure costs the most. On PVR INOX booking and payment flows that meant 90% statement coverage, with component tests guarding reusable UI against regressions.",
+    "body": "Jest and React Testing Library, weighted toward the paths where failure costs the most — demonstrated on the PVR INOX booking and payment flows, with component tests guarding reusable UI against regressions.",
     "coveragePercent": 90,
     "coverageLabel": "90% statement coverage — booking & payment paths (documented)",
     "tags": ["Jest", "React Testing Library", "Component testing", "Critical-path coverage", "Regression prevention"]
@@ -19,7 +19,6 @@
   "ai": {
     "icon": "cpu",
     "title": "AI-assisted, engineer-reviewed",
-    "body": "At Appinventiv, I used Claude and Cursor to accelerate delivery by about 30%, reviewing every AI-generated change before merge and deployment.",
-    "reviewPoints": ["Bugs and edge cases", "Race conditions", "Stale closures", "XSS / CSRF concerns", "Security issues before merge and deployment", "Code quality and readability"]
+    "body": "AI-assisted development is part of the workflow at Appinventiv, but every generated change goes through the same review bar as hand-written code before it merges — see Experience for how that plays out day to day."
   }
 }

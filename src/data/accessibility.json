@@ -1,7 +1,7 @@
 {
-  "eyebrow": "08 — Accessibility",
+  "eyebrow": "07 — Accessibility",
   "title": "Accessibility, demonstrated",
-  "intro": "WCAG 2.1 AA is part of how I ship, not an audit at the end. On the Evaria - Cycles & Wellness healthcare platform that approach reduced accessibility defects by 20%. This site is built the same way — semantic landmarks, one h1 per page and an ordered heading structure, visible focus rings, 44px touch targets, keyboard paths through every control, and preferences you can change below.",
+  "intro": "WCAG 2.1 AA is part of how I ship, not an audit at the end — demonstrated on the Evaria - Cycles & Wellness healthcare platform (see Impact for the measured result). This site is built the same way — semantic landmarks, one h1 per page and an ordered heading structure, visible focus rings, 44px touch targets, keyboard paths through every control, and preferences you can change below.",
   "practices": [
     { "icon": "code-xml", "title": "Semantic HTML", "body": "Landmarks, lists and native controls before ARIA." },
     { "icon": "heading-1", "title": "Heading hierarchy", "body": "One h1, ordered structure, no level skipping." },

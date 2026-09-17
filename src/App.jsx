@@ -14,7 +14,6 @@ import site from './data/site.json';
 // Below-the-fold sections are code-split so the initial bundle only ships
 // what's needed to paint the hero. Each becomes its own chunk at build time.
 const AboutSection = lazy(() => import('./components/sections/AboutSection.jsx').then((m) => ({ default: m.AboutSection })));
-const ExpertiseSection = lazy(() => import('./components/sections/ExpertiseSection.jsx').then((m) => ({ default: m.ExpertiseSection })));
 const SkillsSection = lazy(() => import('./components/sections/SkillsSection.jsx').then((m) => ({ default: m.SkillsSection })));
 const ExperienceSection = lazy(() => import('./components/sections/ExperienceSection.jsx').then((m) => ({ default: m.ExperienceSection })));
 const ProjectsSection = lazy(() => import('./components/sections/ProjectsSection.jsx').then((m) => ({ default: m.ProjectsSection })));
@@ -88,9 +87,6 @@ export default function App() {
         <Hero />
         <Suspense fallback={<SectionFallback />}>
           <AboutSection reducedMotion={reducedMotion} />
-        </Suspense>
-        <Suspense fallback={<SectionFallback />}>
-          <ExpertiseSection reducedMotion={reducedMotion} />
         </Suspense>
         <Suspense fallback={<SectionFallback />}>
           <SkillsSection reducedMotion={reducedMotion} />

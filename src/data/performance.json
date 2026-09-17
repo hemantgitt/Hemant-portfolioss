@@ -1,7 +1,7 @@
 {
-  "eyebrow": "07 — Performance",
+  "eyebrow": "06 — Performance",
   "title": "How I approach performance",
-  "body": "Performance work starts with field and lab measurement, not guesses: Lighthouse in CI and Datadog RUM in production, then the specific Core Web Vital that is failing. On Sonny's Quivio that path took LCP from 3.8s to 2.6s and cut the initial bundle by 25%; on the UPSC portal, server rendering, pagination and caching reduced page load time by 20%.",
+  "body": "Performance work starts with field and lab measurement, not guesses: Lighthouse in CI and Datadog RUM in production, then the specific Core Web Vital that is failing, before touching any code. That measure-first discipline is what drove the LCP and bundle-size work on Sonny's Quivio and the server-rendering and caching work on the UPSC portal — see Impact for the measured results.",
   "topics": ["Core Web Vitals", "LCP", "INP", "CLS", "Code splitting", "Lazy loading", "Bundle optimisation", "SSR", "ISR", "Caching", "Lighthouse", "Datadog RUM"],
   "flow": [
     { "n": "01", "title": "Measure", "body": "Lighthouse in the build pipeline, Datadog RUM for real-user field data." },

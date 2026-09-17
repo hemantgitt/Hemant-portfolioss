@@ -67,14 +67,6 @@ export function EngineeringSection({ reducedMotion }) {
               {eng.ai.title}
             </h3>
             <p style={{ fontSize: '0.9rem', lineHeight: 1.55, color: 'var(--muted)' }}>{eng.ai.body}</p>
-            <ul style={{ display: 'grid', gap: 7 }}>
-              {eng.ai.reviewPoints.map((r) => (
-                <li key={r} style={{ display: 'grid', gridTemplateColumns: '14px minmax(0,1fr)', gap: 9, fontSize: '0.85rem', lineHeight: 1.45, color: 'var(--muted)' }}>
-                  <Icon name="search-check" size={14} style={{ marginTop: 2, color: 'var(--accent)' }} />
-                  {r}
-                </li>
-              ))}
-            </ul>
           </section>
         </div>
       </div>

@@ -1,5 +1,5 @@
 {
-  "eyebrow": "03 — Skills",
+  "eyebrow": "02 — Skills",
   "title": "Technologies I work with",
   "groups": [
     { "id": "sg-fe", "name": "Frontend", "icon": "code-xml", "items": [
