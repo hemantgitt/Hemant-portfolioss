@@ -1,0 +1,14 @@
+{
+  "eyebrow": "01 — About",
+  "title": "Professional summary",
+  "intro": "I'm a Senior Frontend Engineer working on production React.js and Next.js applications — scalable, reusable UI, responsive interfaces and the API integration layer that connects them. My focus areas are frontend architecture, Core Web Vitals and performance optimisation, WCAG 2.1 AA accessibility, and frontend security.",
+  "body": "Day to day that means designing component libraries and state/data-fetching patterns teams can build on, testing the flows that carry money and personal data, and owning code review standards. I most recently mentored four engineers at Appinventiv, where the React, TypeScript and accessibility review standards I established were adopted team-wide.",
+  "focus": [
+    { "icon": "layout-template", "label": "Frontend architecture" },
+    { "icon": "gauge", "label": "Core Web Vitals" },
+    { "icon": "accessibility", "label": "WCAG 2.1 AA" },
+    { "icon": "shield-check", "label": "Frontend security" },
+    { "icon": "flask-conical", "label": "Testing & quality" },
+    { "icon": "users", "label": "Code review & mentoring" }
+  ]
+}

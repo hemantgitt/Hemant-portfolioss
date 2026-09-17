@@ -1,0 +1,19 @@
+{
+  "eyebrow": "08 — Accessibility",
+  "title": "Accessibility, demonstrated",
+  "intro": "WCAG 2.1 AA is part of how I ship, not an audit at the end. On the Evaria - Cycles & Wellness healthcare platform that approach reduced accessibility defects by 20%. This site is built the same way — semantic landmarks, one h1 per page and an ordered heading structure, visible focus rings, 44px touch targets, keyboard paths through every control, and preferences you can change below.",
+  "practices": [
+    { "icon": "code-xml", "title": "Semantic HTML", "body": "Landmarks, lists and native controls before ARIA." },
+    { "icon": "heading-1", "title": "Heading hierarchy", "body": "One h1, ordered structure, no level skipping." },
+    { "icon": "keyboard", "title": "Keyboard paths", "body": "Every control reachable and operable without a pointer." },
+    { "icon": "focus", "title": "Visible focus", "body": "Focus ring on every interactive element." },
+    { "icon": "ear", "title": "Screen readers", "body": "Meaningful names, live regions for status, labelled icon buttons." },
+    { "icon": "scan-search", "title": "axe DevTools", "body": "Automated checks alongside manual keyboard and reader passes." },
+    { "icon": "contrast", "title": "Colour contrast", "body": "AA contrast plus an optional high-contrast mode." },
+    { "icon": "square-check", "title": "Accessible forms", "body": "Labelled fields, described errors, announced validation." },
+    { "icon": "move-diagonal", "title": "Focus management", "body": "Dialogs trap focus and return it on close." }
+  ],
+  "tryItTitle": "Try it on this page",
+  "tryItBody": "Press Tab to walk the page — every control shows a focus ring. Esc closes any open dialog or panel, and focus returns to where you left it.",
+  "readAloudNote": "Read-aloud uses your browser's speech voice, never autoplays, and has play, pause and stop controls. Every spoken passage is also on the page as text."
+}

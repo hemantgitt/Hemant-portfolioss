@@ -1,0 +1,122 @@
+{
+  "eyebrow": "05 — Projects",
+  "title": "Enterprise case studies",
+  "intro": "Client and enterprise work. Public portfolio case studies — URLs, source, screenshots and internal implementation details are intentionally omitted.",
+  "items": [
+    {
+      "id": "quivio",
+      "name": "Sonny's Quivio",
+      "category": "Automotive",
+      "image": "/uploads/quivio_logo.png",
+      "imageBg": "#f4f3f2",
+      "imageWidth": 750,
+      "imageHeight": 260,
+      "description": "A config-driven, multi-tenant Next.js UI serving 10+ dealer tenants across CRM, SAT and white-label modules, built on a shared library of 30+ reusable components.",
+      "role": "Frontend engineering — multi-tenant UI architecture, component library, performance",
+      "highlights": ["LCP reduced from 3.8s to 2.6s", "Initial bundle size cut by 25%", "SAT module shipped as an installable PWA with push notifications"],
+      "tech": ["Next.js (SSR)", "React.js", "TypeScript", "Redux Toolkit", "TanStack Query", "Recharts", "PWA / service workers", "Webpack", "Lighthouse", "Datadog RUM"],
+      "metrics": [{ "label": "LCP", "value": "3.8s → 2.6s" }, { "label": "Initial bundle", "value": "−25%" }, { "label": "Dealer tenants", "value": "10+" }, { "label": "Shared components", "value": "30+" }],
+      "caseStudyUrl": null,
+      "sections": [
+        { "h": "Context", "p": "At a high level, Quivio is an automotive platform whose dealer network needs the same product to present differently per tenant — CRM, SAT and white-label modules across 10+ dealer organisations.", "bullets": [] },
+        { "h": "Challenge", "p": "From the frontend perspective, the risk in multi-tenant UI is duplication: a fork per tenant multiplies defects, slows delivery and degrades performance as bundles grow.", "bullets": ["Tenant-specific presentation without tenant-specific codebases", "A first paint fast enough for daily operational use", "Dashboard analytics and field workflows in one product surface"] },
+        { "h": "My frontend contribution", "p": "I built the config-driven UI layer and the shared component library the tenant experiences are assembled from, and owned the performance work on it.", "bullets": ["Config-driven composition so tenant differences are data, not branches", "A shared library of 30+ reusable components adopted across modules", "Performance work on the critical rendering path and bundle graph", "The SAT module as an installable PWA with push notifications"] },
+        { "h": "Architecture & engineering approach", "p": "A conceptual view: tenant configuration resolves at render time into a composition of shared components, with server rendering for the first view and cached, query-managed data for the rest.", "bullets": ["Next.js SSR for first-view rendering", "Redux Toolkit for client state; TanStack Query for server state and caching", "Recharts for dashboard analytics", "Service workers for installability and push notifications"] },
+        { "h": "Performance & observability", "p": "Measurement first: Lighthouse in the pipeline, Datadog RUM in the field. The documented results were LCP from 3.8s to 2.6s and a 25% reduction in initial bundle size.", "bullets": ["Code splitting and lazy loading on non-critical modules", "Webpack bundle analysis to remove and defer weight", "Datadog RUM to confirm improvements against real users"] },
+        { "h": "Outcome", "p": "10+ dealer tenants served from one config-driven frontend, a faster first paint, a lighter initial bundle, and an installable SAT experience with push notifications.", "bullets": [] }
+      ]
+    },
+    {
+      "id": "cwc",
+      "name": "Evaria - Cycles & Wellness",
+      "category": "Healthcare",
+      "image": "/uploads/Evaria.png",
+      "imageBg": "#f4f3f2",
+      "imageWidth": 100,
+      "imageHeight": 52,
+      "description": "A WCAG 2.1 AA-compliant React.js patient and admin platform with JWT authentication, role-based access control, real-time data and payment integration.",
+      "role": "Frontend engineering — accessible UI, auth/authorisation surface, API integration",
+      "highlights": ["Accessibility defects reduced by 20%", "JWT authentication and role-based access control in the UI", "Razorpay payment integration; GraphQL and WebSocket data flows"],
+      "tech": ["React.js", "TypeScript", "Material UI", "SCSS", "REST APIs", "GraphQL", "WebSockets", "JWT", "axe DevTools"],
+      "metrics": [{ "label": "Accessibility defects", "value": "−20%" }, { "label": "Conformance target", "value": "WCAG 2.1 AA" }, { "label": "User surfaces", "value": "Patient + admin" }],
+      "caseStudyUrl": null,
+      "sections": [
+        { "h": "Context", "p": "At a high level, two audiences share one platform: patients completing care tasks and administrators managing them. Healthcare context makes accessibility and access control non-negotiable.", "bullets": [] },
+        { "h": "Challenge", "p": "From the frontend perspective, the same component set had to serve very different permissions and assistive-technology needs without diverging into two products.", "bullets": ["WCAG 2.1 AA conformance across both surfaces", "Role-appropriate UI driven by authorisation, not guesswork", "Real-time updates and payments inside an accessible flow"] },
+        { "h": "My frontend contribution", "p": "I built the accessible React UI for both surfaces and the client-side authentication, authorisation and data-integration layers behind it.", "bullets": ["Accessible component patterns on Material UI and SCSS", "JWT authentication handling in the client", "Role-based access control shaping navigation and available actions", "Razorpay payment integration in the patient flow"] },
+        { "h": "Architecture & engineering approach", "p": "A conceptual view: an accessible component layer above a data layer that mixes REST and GraphQL requests with a WebSocket channel for live updates, with route and action gating derived from role.", "bullets": ["REST and GraphQL for reads and writes", "WebSockets for real-time data flows", "Authorisation-aware rendering of navigation and controls"] },
+        { "h": "Accessibility & security", "p": "Accessibility was tested, not asserted: axe DevTools alongside manual keyboard and screen-reader passes, which brought accessibility defects down by 20%. Security stayed at the boundary: token handling, role gating, and XSS/CSRF-aware data handling.", "bullets": ["Semantic structure, ARIA only where native semantics fell short", "Keyboard operability and focus management in dialogs and forms", "Contrast and form-error accessibility in clinical contexts"] },
+        { "h": "Outcome", "p": "An accessible patient and admin platform with 20% fewer accessibility defects, role-appropriate access, real-time data and working payments.", "bullets": [] }
+      ]
+    },
+    {
+      "id": "pvr",
+      "name": "PVR INOX",
+      "category": "Entertainment",
+      "image": "/uploads/pvr.png",
+      "imageBg": "#000000",
+      "imageWidth": 250,
+      "imageHeight": 242,
+      "description": "Next.js booking, payment and subscription flows for one of India's largest cinema chains, built on shadcn/ui with 90% statement coverage on booking and payment paths.",
+      "role": "Frontend engineering — transactional flows, state management, test coverage",
+      "highlights": ["90% statement coverage on booking and payment paths", "Booking, payment and subscription flows shipped", "Reusable shadcn/ui component composition"],
+      "tech": ["Next.js", "React.js", "TypeScript", "Redux Toolkit", "shadcn/ui", "REST APIs", "Jest", "React Testing Library"],
+      "metrics": [{ "label": "Statement coverage", "value": "90%" }, { "label": "Flows", "value": "Booking · Payment · Subscription" }],
+      "caseStudyUrl": null,
+      "sections": [
+        { "h": "Context", "p": "At a high level, cinema booking is a multi-step transaction at consumer scale: selection, seating, payment, and subscription entitlements, where an abandoned step is lost revenue.", "bullets": [] },
+        { "h": "Challenge", "p": "From the frontend perspective, transactional flows fail in the seams — partial state, double submission, interrupted payments. Those are exactly the paths that need the most test pressure.", "bullets": ["Multi-step state that survives navigation and retries", "Payment and subscription branches sharing one flow", "Confidence to ship changes to revenue-critical screens"] },
+        { "h": "My frontend contribution", "p": "I shipped the booking, payment and subscription flows and the test suite that protects them.", "bullets": ["Flow composition on shadcn/ui components", "Redux Toolkit state for step, selection and transaction status", "REST API integration across the transaction steps", "Jest and React Testing Library suites on booking and payment paths"] },
+        { "h": "Architecture & engineering approach", "p": "A conceptual view: a step machine over shared flow state, with UI composed from reusable primitives so payment and subscription variants reuse the same building blocks.", "bullets": ["Single source of truth for flow state", "Reusable component primitives over per-screen markup", "Error and retry states treated as first-class UI"] },
+        { "h": "Testing & quality", "p": "Coverage was concentrated where failure is most expensive: 90% statement coverage on booking and payment paths, with component tests guarding the shared primitives against regressions.", "bullets": ["Behaviour-level tests via React Testing Library", "Critical-path coverage over blanket coverage targets", "Regression tests accompanying flow changes"] },
+        { "h": "Outcome", "p": "Booking, payment and subscription flows in production for a national cinema chain, with documented 90% statement coverage on the paths that carry payment.", "bullets": [] }
+      ]
+    },
+    {
+      "id": "upsc",
+      "name": "UPSC Examination Platform",
+      "category": "Government",
+      "image": "/uploads/upscv1.png",
+      "imageBg": "#e9edf1",
+      "imageWidth": 400,
+      "imageHeight": 299,
+      "description": "The Next.js SSR portal for a high-traffic national examination platform, including the multi-step application form with field-level validation, persisted drafts and secure document upload.",
+      "role": "Frontend engineering — SSR portal, complex forms, performance, accessibility",
+      "highlights": ["Page load time reduced by 20%", "Multi-step application form with persisted draft state", "Secure photograph, signature and document upload UX"],
+      "tech": ["Next.js (SSR/ISR)", "React.js", "TypeScript", "Material UI", "i18n", "WCAG 2.1 AA"],
+      "metrics": [{ "label": "Page load time", "value": "−20%" }, { "label": "Scale", "value": "National, high traffic" }, { "label": "Conformance target", "value": "WCAG 2.1 AA" }],
+      "caseStudyUrl": null,
+      "sections": [
+        { "h": "Context", "p": "At a high level, a national examination portal serves applicants across a wide range of devices, connection quality and languages, in bursts of very high traffic around deadlines.", "bullets": [] },
+        { "h": "Challenge", "p": "From the frontend perspective, two problems dominate: keeping pages fast under load, and making a long application form survivable — including uploads that must not be lost.", "bullets": ["Load performance during deadline traffic peaks", "A long, validated, resumable application form", "Accessibility and multi-locale support as delivery requirements"] },
+        { "h": "My frontend contribution", "p": "I built the SSR portal and the multi-step application form, and owned the performance and accessibility work on both.", "bullets": ["Server rendering, pagination and caching that cut page load time by 20%", "Multi-step form with field-level validation", "Persisted draft state so progress is not lost between sessions", "Secure photograph, signature and document upload flows"] },
+        { "h": "Architecture & engineering approach", "p": "A conceptual view: server-rendered routes for first paint, paginated and cached data for list-heavy screens, and a form layer that validates per field and persists progress as the applicant moves through steps.", "bullets": ["Next.js SSR/ISR for render strategy per route", "Pagination and caching to bound payload size", "Material UI components extended for accessible form patterns", "i18n across the applicant-facing surface"] },
+        { "h": "Accessibility & upload UX", "p": "Government delivery ran through security and accessibility review gates. Uploads needed clear constraints, states and error recovery, and every validation message had to be announced, not just coloured.", "bullets": ["WCAG 2.1 AA structure, labelling and keyboard operability", "Field-level errors described programmatically to assistive technology", "Explicit upload requirements, progress and failure states"] },
+        { "h": "Outcome", "p": "A high-traffic national examination portal with 20% faster page loads, a resumable validated application form, and accessible, multi-locale applicant journeys.", "bullets": [] }
+      ]
+    },
+    {
+      "id": "arabez",
+      "name": "Arab EZ Translator",
+      "category": "Content / Translation",
+      "image": "/uploads/ArabEasy%20Blue.png",
+      "imageBg": "#f4f3f2",
+      "imageWidth": 2377,
+      "imageHeight": 580,
+      "description": "The core authoring surface for translation workflows — a rich text editor with formatting controls, live word count and syntax highlighting, built from reusable React components across multiple locales.",
+      "role": "Frontend engineering — editor surface, reusable components, API integration",
+      "highlights": ["Rich text editor with formatting controls and live word count", "Reusable React components across multiple locales", "Responsive, cross-browser interfaces to WCAG 2.1 AA"],
+      "tech": ["React.js", "JavaScript (ES6+)", "Material UI", "REST APIs"],
+      "metrics": [{ "label": "Locales", "value": "Multiple" }, { "label": "Conformance target", "value": "WCAG 2.1 AA" }],
+      "caseStudyUrl": null,
+      "sections": [
+        { "h": "Context", "p": "At a high level, translators work all day in one screen. The authoring surface is the product, so its responsiveness and predictability matter more than anything around it.", "bullets": [] },
+        { "h": "Challenge", "p": "From the frontend perspective, a rich text editor concentrates difficulty: formatting state, live feedback and keyboard behaviour all have to stay correct while text is being edited continuously.", "bullets": ["Formatting controls that stay in sync with selection", "Live feedback (word count) without interrupting typing", "Multi-locale content, including right-to-left considerations"] },
+        { "h": "My frontend contribution", "p": "I built the authoring surface and the reusable component set behind it, and integrated the REST APIs for content management and translation features.", "bullets": ["Rich text editor with formatting controls", "Live word count and syntax highlighting", "Reusable React components shared across the product", "REST API integration for content and translation workflows"] },
+        { "h": "Architecture & engineering approach", "p": "A conceptual view: a controlled editor surface with a toolbar driven by current selection state, above a component layer shared with the rest of the application.", "bullets": ["Component composition on Material UI", "Locale-aware rendering of the authoring surface", "Responsive, cross-browser layout behaviour"] },
+        { "h": "Accessibility", "p": "The interface was built to WCAG 2.1 AA: keyboard-operable formatting controls, labelled toolbar actions, and cross-browser responsive behaviour on real devices.", "bullets": [] },
+        { "h": "Outcome", "p": "A reusable, accessible authoring surface for translation workflows across multiple locales and browsers.", "bullets": [] }
+      ]
+    }
+  ]
+}

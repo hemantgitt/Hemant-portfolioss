@@ -1,0 +1,22 @@
+{
+  "eyebrow": "04 — Experience",
+  "title": "Where I've worked",
+  "items": [
+    { "company": "Appinventiv", "title": "Senior Software Engineer, Frontend", "meta": "Noida · Sep 2024 – Jul 2026",
+      "points": [
+        "Mentored 4 engineers and established frontend code review standards for React, TypeScript and accessibility, adopted team-wide.",
+        "Accelerated feature delivery by about 30% using AI-assisted development (Claude, Cursor).",
+        "Reviewed every AI-generated change for bugs and security issues — race conditions, stale closures, XSS/CSRF — before merge and AWS deployment."
+      ], "projects": ["Sonny's Quivio", "Evaria - Cycles & Wellness", "PVR INOX"] },
+    { "company": "UV Technologies", "title": "Senior Frontend Developer", "meta": "Noida · Nov 2022 – Aug 2024",
+      "points": [
+        "Led requirements gathering with government stakeholders, translating compliance and audit requirements into UI specifications.",
+        "Partnered with backend and QA teams to deliver against strict security and accessibility review gates."
+      ], "projects": ["UPSC Examination Platform"] },
+    { "company": "Blue9 Technologies", "title": "Software Engineer", "meta": "Gurugram · Aug 2020 – Oct 2022",
+      "points": [
+        "Developed reusable React components and REST API integrations for content management and translation features across multiple locales.",
+        "Converted designs into responsive, cross-browser interfaces using Material UI with WCAG 2.1 AA accessibility."
+      ], "projects": ["Arab EZ Translator"] }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "eyebrow": "10 — Education",
+  "title": "Education & certification",
+  "degree": {
+    "title": "B.Tech, Electronics & Communication Engineering",
+    "note": "APJ Abdul Kalam Technical University, Ghaziabad · 2015 – 2019"
+  },
+  "certification": {
+    "title": "Frontend System Design — NamasteDev",
+    "note": "Certification",
+    "topics": ["High-level design", "Low-level design", "REST", "GraphQL", "gRPC", "Caching", "CDN strategies", "Web security", "Performance", "Offline support", "Accessibility", "Logging & monitoring"]
+  }
+}

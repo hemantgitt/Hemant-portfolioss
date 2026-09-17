@@ -1,0 +1,44 @@
+import { useCallback, useEffect, useState } from 'react';
+import { PREFS_STORAGE_KEY } from '../constants/config.js';
+
+function readStoredPrefs() {
+  try {
+    return JSON.parse(localStorage.getItem(PREFS_STORAGE_KEY) || 'null');
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Dark/light theme state, persisted to localStorage, falling back to the
+ * user's OS-level `prefers-color-scheme` on first visit. Applies
+ * `data-theme` on <html> so CSS custom properties can react to it.
+ *
+ * @param {'dark'|'light'} [defaultTheme]
+ */
+export function useTheme(defaultTheme = 'dark') {
+  const [theme, setTheme] = useState(() => {
+    const saved = readStoredPrefs();
+    if (saved && saved.theme) return saved.theme;
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    }
+    return defaultTheme;
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    const saved = readStoredPrefs() || {};
+    try {
+      localStorage.setItem(PREFS_STORAGE_KEY, JSON.stringify({ ...saved, theme }));
+    } catch {
+      /* localStorage unavailable (private mode, quota) — theme still applies for this session */
+    }
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+  }, []);
+
+  return { theme, setTheme, toggleTheme, isDark: theme === 'dark' };
+}

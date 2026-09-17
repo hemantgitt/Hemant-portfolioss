@@ -1,0 +1,25 @@
+{
+  "eyebrow": "09 — Engineering practice",
+  "title": "Security, testing & AI-assisted delivery",
+  "security": {
+    "icon": "shield-check",
+    "title": "Frontend security",
+    "body": "JWT authentication and role-based access control on the Evaria - Cycles & Wellness patient and admin platform, XSS/CSRF-aware data handling, and secure upload flows for photograph, signature and document steps on the UPSC portal.",
+    "tags": ["JWT authentication", "Role-based access control", "XSS prevention", "CSRF prevention", "Secure API interaction", "Secure document upload", "Security review of AI-generated code"],
+    "footnote": "Implementation specifics are deliberately not published."
+  },
+  "testing": {
+    "icon": "flask-conical",
+    "title": "Testing & quality",
+    "body": "Jest and React Testing Library, weighted toward the paths where failure costs the most. On PVR INOX booking and payment flows that meant 90% statement coverage, with component tests guarding reusable UI against regressions.",
+    "coveragePercent": 90,
+    "coverageLabel": "90% statement coverage — booking & payment paths (documented)",
+    "tags": ["Jest", "React Testing Library", "Component testing", "Critical-path coverage", "Regression prevention"]
+  },
+  "ai": {
+    "icon": "cpu",
+    "title": "AI-assisted, engineer-reviewed",
+    "body": "At Appinventiv, I used Claude and Cursor to accelerate delivery by about 30%, reviewing every AI-generated change before merge and deployment.",
+    "reviewPoints": ["Bugs and edge cases", "Race conditions", "Stale closures", "XSS / CSRF concerns", "Security issues before merge and deployment", "Code quality and readability"]
+  }
+}

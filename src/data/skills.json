@@ -1,0 +1,38 @@
+{
+  "eyebrow": "03 — Skills",
+  "title": "Technologies I work with",
+  "groups": [
+    { "id": "sg-fe", "name": "Frontend", "icon": "code-xml", "items": [
+      { "name": "React.js", "icon": "atom" }, { "name": "Next.js (SSR/ISR)", "icon": "triangle" },
+      { "name": "TypeScript", "icon": "file-code" }, { "name": "JavaScript (ES6+)", "icon": "braces" },
+      { "name": "HTML5", "icon": "code" }, { "name": "CSS / SCSS", "icon": "palette" },
+      { "name": "Tailwind CSS", "icon": "wind" }, { "name": "Material UI", "icon": "layout-panel-left" }
+    ] },
+    { "id": "sg-state", "name": "State & data", "icon": "database", "items": [
+      { "name": "Redux Toolkit", "icon": "refresh-cw" }, { "name": "TanStack Query", "icon": "database" },
+      { "name": "React Hooks", "icon": "anchor" }, { "name": "REST APIs", "icon": "plug" },
+      { "name": "GraphQL", "icon": "share-2" }, { "name": "WebSockets", "icon": "radio" }
+    ] },
+    { "id": "sg-perf", "name": "Performance", "icon": "gauge", "items": [
+      { "name": "Core Web Vitals", "icon": "gauge" }, { "name": "LCP", "icon": "image" },
+      { "name": "INP", "icon": "mouse-pointer-click" }, { "name": "CLS", "icon": "move-vertical" },
+      { "name": "Webpack", "icon": "package" }, { "name": "Vite", "icon": "zap" },
+      { "name": "Lighthouse", "icon": "activity" }, { "name": "Datadog RUM", "icon": "chart-line" }
+    ] },
+    { "id": "sg-qa", "name": "Quality & accessibility", "icon": "accessibility", "items": [
+      { "name": "Jest", "icon": "flask-conical" }, { "name": "React Testing Library", "icon": "test-tube" },
+      { "name": "WCAG 2.1 AA", "icon": "accessibility" }, { "name": "ARIA", "icon": "ear" },
+      { "name": "axe DevTools", "icon": "scan-search" }, { "name": "XSS / CSRF prevention", "icon": "shield-alert" },
+      { "name": "JWT", "icon": "key-round" }, { "name": "RBAC", "icon": "lock" }
+    ] },
+    { "id": "sg-tool", "name": "Tooling & infrastructure", "icon": "wrench", "items": [
+      { "name": "GitHub Actions", "icon": "git-branch" }, { "name": "AWS (EC2, S3, CloudFront)", "icon": "cloud" },
+      { "name": "Docker", "icon": "container" }, { "name": "Git", "icon": "git-commit-horizontal" },
+      { "name": "ESLint", "icon": "check-check" }, { "name": "Prettier", "icon": "align-left" },
+      { "name": "Husky", "icon": "git-pull-request" }, { "name": "Figma", "icon": "figma" }
+    ] },
+    { "id": "sg-ai", "name": "AI-assisted development", "icon": "cpu", "items": [
+      { "name": "Claude", "icon": "bot" }, { "name": "Cursor", "icon": "text-cursor" }
+    ] }
+  ]
+}

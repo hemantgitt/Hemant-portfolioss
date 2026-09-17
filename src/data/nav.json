@@ -1,0 +1,11 @@
+[
+  { "label": "Home", "href": "#home" },
+  { "label": "About", "href": "#about" },
+  { "label": "Expertise", "href": "#expertise" },
+  { "label": "Skills", "href": "#skills" },
+  { "label": "Experience", "href": "#experience" },
+  { "label": "Projects", "href": "#projects" },
+  { "label": "Impact", "href": "#impact" },
+  { "label": "Accessibility", "href": "#accessibility" },
+  { "label": "Contact", "href": "#contact" }
+]

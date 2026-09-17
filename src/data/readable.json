@@ -1,0 +1,7 @@
+[
+  { "id": "about", "label": "About — professional summary" },
+  { "id": "impact", "label": "Engineering impact" },
+  { "id": "performance", "label": "Performance approach" },
+  { "id": "accessibility", "label": "Accessibility" },
+  { "id": "contact", "label": "Contact details" }
+]
