@@ -21,7 +21,7 @@ export function Hero() {
             <span aria-hidden="true" className="status-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', display: 'block' }} />
             {hero.availabilityText}
           </p>
-          <h1 id="hero-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
+          <h1 id="hero-h" className="hero-name-in" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
             {hero.name}
           </h1>
           <p style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: 'clamp(1.05rem, 2.2vw, 1.45rem)', lineHeight: 1.3, color: 'var(--muted)' }}>

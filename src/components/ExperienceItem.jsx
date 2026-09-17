@@ -1,11 +1,15 @@
 import { memo } from 'react';
 import { Icon } from './Icon.jsx';
 
-/** @param {{ item: import('../data/types.js').ExperienceEntry }} props */
-function ExperienceItemBase({ item }) {
+/** @param {{ item: import('../data/types.js').ExperienceEntry, isActive?: boolean }} props */
+function ExperienceItemBase({ item, isActive }) {
   return (
     <li style={{ position: 'relative', padding: '28px 0 28px 32px', display: 'grid', gap: 14 }}>
-      <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: 34, width: 12, height: 12, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 0 4px var(--bg)' }} />
+      <span
+        aria-hidden="true"
+        className={`exp-dot${isActive ? ' is-active' : ''}`}
+        style={{ position: 'absolute', left: 0, top: 34, width: 12, height: 12, borderRadius: '50%', background: isActive ? 'var(--accent)' : 'var(--muted)', boxShadow: '0 0 0 4px var(--bg)' }}
+      />
       <div className="split" style={{ display: 'grid', gap: 6, '--sa': '0.32fr', '--sb': '0.68fr' }}>
         <div style={{ display: 'grid', gap: 4, alignContent: 'start' }}>
           <p style={{ fontSize: '0.8rem', color: 'var(--muted)', fontFamily: 'var(--font-h)', fontWeight: 600 }}>{item.meta}</p>

@@ -1,6 +1,7 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo } from 'react';
 import { Header } from './components/Header.jsx';
 import { Hero } from './components/sections/Hero.jsx';
+import { ScrollProgressBar } from './components/ScrollProgressBar.jsx';
 import { AccessibilityPanel } from './components/AccessibilityPanel.jsx';
 import { BackToTop } from './components/BackToTop.jsx';
 import { useTheme } from './hooks/useTheme.js';
@@ -78,6 +79,8 @@ export default function App() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+
+      <ScrollProgressBar />
 
       <Header active={active} onNavigate={handleNavigate} isDark={isDark} onToggleTheme={toggleTheme} onOpenA11yPanel={a11y.openPanel} panelOpen={a11y.panelOpen} />
 
