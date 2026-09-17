@@ -2,6 +2,7 @@ import { useState } from 'react';
 import nav from '../data/nav.json';
 import site from '../data/site.json';
 import { Icon } from './Icon.jsx';
+import { useModal } from '../hooks/useModal.js';
 import { NAV_SUPPRESS_MS } from '../constants/config.js';
 
 /**
@@ -12,6 +13,7 @@ import { NAV_SUPPRESS_MS } from '../constants/config.js';
  */
 export function Header({ active, onNavigate, isDark, onToggleTheme, onOpenA11yPanel, panelOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const mobileNavRef = useModal(menuOpen);
 
   const handleNavClick = (e, href) => {
     const id = href.slice(1);
@@ -109,16 +111,23 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, onOpenA11yPa
         </div>
       </div>
 
-      <nav className="mob-only" id="mobile-nav" aria-label="Primary mobile" hidden={!menuOpen} style={{ maxWidth: 1180, margin: '8px auto 0', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, boxShadow: 'var(--shadow-md)' }}>
-        <ul style={{ padding: 8, display: 'grid', gap: 2 }}>
-          {nav.map((item) => (
-            <li key={item.href}>
+      <nav
+        ref={mobileNavRef}
+        className="mob-only"
+        id="mobile-nav"
+        aria-label="Primary mobile"
+        hidden={!menuOpen}
+        style={{ maxWidth: 1180, margin: '8px auto 0', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, boxShadow: 'var(--shadow-md)' }}
+      >
+        <ul style={{ padding: 8, display: 'grid' }}>
+          {nav.map((item, i) => (
+            <li key={item.href} style={{ borderTop: i === 0 ? 'none' : '1px solid var(--border)' }}>
               <a href={item.href} onClick={(e) => handleNavClick(e, item.href)} className="mobile-nav-link">
                 {item.label}
               </a>
             </li>
           ))}
-          <li style={{ padding: 6 }}>
+          <li style={{ padding: 6, borderTop: '1px solid var(--border)' }}>
             <a
               href={site.resumeUrl}
               download={site.resumeDownloadName}
