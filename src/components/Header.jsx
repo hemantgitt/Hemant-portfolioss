@@ -42,10 +42,10 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, onOpenA11yPa
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
-          style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1rem', letterSpacing: '-0.01em', textDecoration: 'none', color: 'var(--text)', marginRight: 'auto', display: 'flex', alignItems: 'baseline', gap: 8 }}
+          style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1rem', letterSpacing: '-0.01em', textDecoration: 'none', color: 'var(--text)', marginRight: 'auto', lineHeight: 1.3 }}
         >
-          {site.logoInitials}
-          <span style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.06em' }}>{site.logoTag}</span>
+          {site.logoInitials}{' '}
+          <span style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>{site.logoTag}</span>
         </a>
 
         <nav className="desk-only" aria-label="Primary">
