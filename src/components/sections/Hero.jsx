@@ -8,7 +8,7 @@ export function Hero() {
     <section id="home" aria-labelledby="hero-h" style={{ position: 'relative', overflow: 'hidden' }}>
       <div
         aria-hidden="true"
-        style={{ position: 'absolute', inset: '-20% -10% auto -10%', height: 620, background: 'radial-gradient(circle at 30% 20%, var(--hero-glow, var(--accent-tint)), transparent 60%)', pointerEvents: 'none' }}
+        style={{ position: 'absolute', inset: '-20% -10%', background: 'radial-gradient(circle at 30% 20%, var(--hero-glow, var(--accent-tint)), transparent 55%)', pointerEvents: 'none' }}
       />
       <div className="split" style={{ position: 'relative', maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px, 10vw, 120px) 20px 80px', display: 'grid', gap: 56, '--sa': '1.15fr', '--sb': '0.85fr' }}>
         <div style={{ display: 'grid', gap: 22, alignContent: 'start' }}>
