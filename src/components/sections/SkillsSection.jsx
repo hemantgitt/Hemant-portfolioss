@@ -11,10 +11,17 @@ export function SkillsSection({ reducedMotion }) {
       <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px,8vw,96px) 20px' }}>
         <SectionHeader eyebrow={skills.eyebrow} title={skills.title} id="skills-h" style={{ marginBottom: 36 }} />
         <div style={{ display: 'grid', gap: 28, gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-          {skills.groups.map((g) => (
-            <section key={g.id} aria-labelledby={g.id} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 20 }}>
-              <h3 id={g.id} style={{ margin: '0 0 14px', fontSize: '0.78rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: 'var(--font-h)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Icon name={g.icon} size={15} style={{ color: 'var(--accent)' }} />
+          {skills.groups.map((g, i) => (
+            <section
+              key={g.id}
+              aria-labelledby={g.id}
+              className={`feature-card${g.id === 'sg-fe' ? ' feature-card--primary' : ''}${visible ? ' card-reveal-in' : ''}`}
+              style={visible ? { animationDelay: `${i * 80}ms` } : { opacity: 0 }}
+            >
+              <h3 id={g.id} style={{ margin: '0 0 14px', fontSize: '0.78rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: 'var(--font-h)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span className="icon-chip">
+                  <Icon name={g.icon} size={15} />
+                </span>
                 {g.name}
               </h3>
               <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>

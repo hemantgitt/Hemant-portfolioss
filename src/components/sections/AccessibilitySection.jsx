@@ -12,15 +12,21 @@ export function AccessibilitySection({ reducedMotion, onOpenPanel, onReadAloud }
         <SectionHeader eyebrow={a11y.eyebrow} title={a11y.title} id="a11y-h" subtitle={a11y.intro} style={{ marginBottom: 36 }} />
         <div className="split" style={{ display: 'grid', gap: 24, '--sa': '1.15fr', '--sb': '0.85fr' }}>
           <ul className="grid-auto" style={{ display: 'grid', gap: 12, '--cols': 'repeat(3,1fr)' }}>
-            {a11y.practices.map((a) => (
-              <li key={a.title} className="card-hover" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: 16, display: 'grid', gap: 6, alignContent: 'start' }}>
-                <Icon name={a.icon} size={16} style={{ color: 'var(--accent)' }} />
+            {a11y.practices.map((a, i) => (
+              <li
+                key={a.title}
+                className={`feature-card${visible ? ' card-reveal-in' : ''}`}
+                style={{ padding: 16, display: 'grid', gap: 6, alignContent: 'start', ...(visible ? { animationDelay: `${i * 50}ms` } : { opacity: 0 }) }}
+              >
+                <span className="icon-chip">
+                  <Icon name={a.icon} size={15} />
+                </span>
                 <h3 style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.9rem' }}>{a.title}</h3>
                 <p style={{ fontSize: '0.8rem', lineHeight: 1.5, color: 'var(--muted)' }}>{a.body}</p>
               </li>
             ))}
           </ul>
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 22, display: 'grid', gap: 14, alignContent: 'start' }}>
+          <div className="feature-card" style={{ padding: 22, display: 'grid', gap: 14, alignContent: 'start' }}>
             <h3 style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.05rem' }}>{a11y.tryItTitle}</h3>
             <p style={{ fontSize: '0.87rem', lineHeight: 1.55, color: 'var(--muted)' }}>
               Press <kbd>Tab</kbd> to walk the page — every control shows a focus ring. <kbd>Esc</kbd> closes any open dialog or panel, and focus returns to where you left it.

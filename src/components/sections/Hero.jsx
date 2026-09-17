@@ -31,7 +31,7 @@ export function Hero() {
           <p style={{ maxWidth: '56ch', fontSize: '1.05rem', lineHeight: 1.65, color: 'var(--muted)' }}>{hero.summary}</p>
           <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 }}>
             {hero.strengths.map((s) => (
-              <li key={s} style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', border: '1px solid var(--border)', padding: '7px 13px', borderRadius: 999 }}>
+              <li key={s} className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
                 {s}
               </li>
             ))}
@@ -52,8 +52,8 @@ export function Hero() {
           </div>
         </div>
         <dl style={{ display: 'grid', gap: 12, alignContent: 'start' }}>
-          {hero.facts.map((f) => (
-            <StatCard key={f.label} {...f} />
+          {hero.facts.map((f, i) => (
+            <StatCard key={f.label} {...f} delayMs={i * 80} />
           ))}
         </dl>
       </div>

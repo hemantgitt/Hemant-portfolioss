@@ -19,9 +19,15 @@ export function AboutSection({ reducedMotion }) {
         <div style={{ display: 'grid', gap: 20 }}>
           <p style={{ fontSize: '1.15rem', lineHeight: 1.6, fontFamily: 'var(--font-h)', fontWeight: 500, letterSpacing: '-0.005em' }}>{about.intro}</p>
           <ul style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', marginTop: 8 }}>
-            {about.focus.map((f) => (
-              <li key={f.label} style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.86rem', padding: '12px 14px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12 }}>
-                <Icon name={f.icon} size={16} style={{ color: 'var(--accent)', flex: 'none' }} />
+            {about.focus.map((f, i) => (
+              <li
+                key={f.label}
+                className={`info-chip${visible ? ' card-reveal-in' : ''}`}
+                style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.86rem', padding: '10px 14px', borderRadius: 12, ...(visible ? { animationDelay: `${i * 60}ms` } : { opacity: 0 }) }}
+              >
+                <span className="icon-chip" style={{ width: 24, height: 24 }}>
+                  <Icon name={f.icon} size={14} />
+                </span>
                 {f.label}
               </li>
             ))}

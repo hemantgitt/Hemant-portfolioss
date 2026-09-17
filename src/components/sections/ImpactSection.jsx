@@ -11,7 +11,7 @@ export function ImpactSection({ reducedMotion }) {
         <SectionHeader eyebrow={impact.eyebrow} title={impact.title} id="impact-h" subtitle={impact.intro} style={{ marginBottom: 36 }} />
         <ul className="grid-auto" style={{ display: 'grid', gap: 16, '--cols': 'repeat(3,1fr)' }}>
           {impact.items.map((m, i) => (
-            <ImpactStat key={m.project + m.label + i} {...m} />
+            <ImpactStat key={m.project + m.label + i} {...m} visible={visible} delayMs={i * 60} />
           ))}
         </ul>
       </div>

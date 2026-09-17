@@ -12,17 +12,17 @@ export function PerformanceSection({ reducedMotion }) {
           <p style={{ margin: '0 0 20px', lineHeight: 1.65, color: 'var(--muted)' }}>{perf.body}</p>
           <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             {perf.topics.map((t) => (
-              <li key={t} style={{ fontSize: '0.78rem', fontFamily: 'var(--font-h)', fontWeight: 500, border: '1px solid var(--border)', padding: '6px 13px', borderRadius: 999 }}>
+              <li key={t} className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500 }}>
                 {t}
               </li>
             ))}
           </ul>
         </div>
-        <figure style={{ margin: 0, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden' }}>
+        <figure className="feature-card" style={{ margin: 0, padding: 0, overflow: 'hidden' }}>
           <ol style={{ padding: 8 }}>
             {perf.flow.map((step) => (
               <li key={step.n} style={{ display: 'grid', gridTemplateColumns: '32px minmax(0,1fr)', gap: 14, alignItems: 'start', padding: '12px 12px' }}>
-                <span aria-hidden="true" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--accent)', background: 'var(--accent-tint)', borderRadius: 8, width: 30, height: 30, display: 'grid', placeItems: 'center' }}>
+                <span aria-hidden="true" className="icon-chip" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '0.85rem', width: 30, height: 30 }}>
                   {step.n}
                 </span>
                 <span>

@@ -129,9 +129,67 @@ button { font: inherit; }
 .mobile-nav-link:hover { background: var(--surface2); }
 .mobile-nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--surface2); font-size: 0.79rem; font-family: var(--font-b); font-weight: 500; transition: background 0.2s; }
-.pill:hover { background: var(--accent-tint); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--surface2); border: 1px solid transparent; font-size: 0.79rem; font-family: var(--font-b); font-weight: 500; transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
+.pill:hover { background: var(--accent-tint); border-color: var(--accent); transform: scale(1.03); }
+:root[data-motion="off"] .pill { transition: none; }
+:root[data-motion="off"] .pill:hover { transform: none; }
 
-.tag { font-size: 0.75rem; border: 1px solid var(--border); padding: 5px 11px; border-radius: 999px; color: var(--muted); }
+.tag { font-size: 0.75rem; border: 1px solid var(--border); padding: 5px 11px; border-radius: 999px; color: var(--muted); transition: border-color 0.15s ease, color 0.15s ease; }
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+:root[data-motion="off"] .tag { transition: none; }
 
 kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; font-family: var(--font-b); background: var(--surface2); }
+
+/* Shared "feature card" treatment (Skills, Expertise): a subtle top accent,
+   a colored icon chip (matching the rounded-square chip pattern used for
+   the Performance step numbers), and a gentler lift on hover than the
+   standard card-hover (translateY(-2px) + a soft accent-tinted shadow
+   instead of a hard one). */
+.feature-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0.7;
+}
+.feature-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+:root[data-motion="off"] .feature-card { transition: none; }
+:root[data-motion="off"] .feature-card:hover { transform: none; box-shadow: none; }
+
+@media (min-width: 720px) {
+  .feature-card--primary { grid-column: span 2; }
+}
+
+.icon-chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 8px; flex: none;
+  background: var(--accent-tint); color: var(--accent);
+}
+
+/* Compact info chip (About's focus tabs, and similar small tag-like rows):
+   lighter-weight than .feature-card -- just a hover border/background
+   shift, no top accent bar or lift, since these are small inline items. */
+.info-chip {
+  background: var(--surface); border: 1px solid var(--border);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.info-chip:hover { border-color: var(--accent); background: var(--accent-tint); }
+:root[data-motion="off"] .info-chip { transition: none; }
+
+@keyframes card-fade-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.card-reveal-in { animation: card-fade-in 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+:root[data-motion="off"] .card-reveal-in { animation: none; }

@@ -10,9 +10,15 @@ export function EngineeringSection({ reducedMotion }) {
       <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px,8vw,96px) 20px' }}>
         <SectionHeader eyebrow={eng.eyebrow} title={eng.title} id="eng-h" style={{ marginBottom: 36 }} />
         <div className="grid-auto" style={{ display: 'grid', gap: 16, '--cols': 'repeat(3,1fr)' }}>
-          <section aria-labelledby="sec-h" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 22, display: 'grid', gap: 14, alignContent: 'start' }}>
-            <h3 id="sec-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.08rem', display: 'flex', alignItems: 'center', gap: 9 }}>
-              <Icon name={eng.security.icon} size={18} style={{ color: 'var(--accent)' }} />
+          <section
+            aria-labelledby="sec-h"
+            className={`feature-card${visible ? ' card-reveal-in' : ''}`}
+            style={{ padding: 22, display: 'grid', gap: 14, alignContent: 'start', ...(visible ? { animationDelay: '0ms' } : { opacity: 0 }) }}
+          >
+            <h3 id="sec-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.08rem', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span className="icon-chip">
+                <Icon name={eng.security.icon} size={16} />
+              </span>
               {eng.security.title}
             </h3>
             <p style={{ fontSize: '0.9rem', lineHeight: 1.55, color: 'var(--muted)' }}>{eng.security.body}</p>
@@ -24,9 +30,15 @@ export function EngineeringSection({ reducedMotion }) {
             <p style={{ fontSize: '0.78rem', color: 'var(--muted)' }}>{eng.security.footnote}</p>
           </section>
 
-          <section className="card-hover" aria-labelledby="test-h" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 22, display: 'grid', gap: 14, alignContent: 'start' }}>
-            <h3 id="test-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.08rem', display: 'flex', alignItems: 'center', gap: 9 }}>
-              <Icon name={eng.testing.icon} size={18} style={{ color: 'var(--accent)' }} />
+          <section
+            aria-labelledby="test-h"
+            className={`feature-card${visible ? ' card-reveal-in' : ''}`}
+            style={{ padding: 22, display: 'grid', gap: 14, alignContent: 'start', ...(visible ? { animationDelay: '80ms' } : { opacity: 0 }) }}
+          >
+            <h3 id="test-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.08rem', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span className="icon-chip">
+                <Icon name={eng.testing.icon} size={16} />
+              </span>
               {eng.testing.title}
             </h3>
             <p style={{ fontSize: '0.9rem', lineHeight: 1.55, color: 'var(--muted)' }}>{eng.testing.body}</p>
@@ -43,9 +55,15 @@ export function EngineeringSection({ reducedMotion }) {
             </ul>
           </section>
 
-          <section className="card-hover" aria-labelledby="ai-h" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: 22, display: 'grid', gap: 14, alignContent: 'start' }}>
-            <h3 id="ai-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.08rem', display: 'flex', alignItems: 'center', gap: 9 }}>
-              <Icon name={eng.ai.icon} size={18} style={{ color: 'var(--accent)' }} />
+          <section
+            aria-labelledby="ai-h"
+            className={`feature-card${visible ? ' card-reveal-in' : ''}`}
+            style={{ padding: 22, display: 'grid', gap: 14, alignContent: 'start', ...(visible ? { animationDelay: '160ms' } : { opacity: 0 }) }}
+          >
+            <h3 id="ai-h" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.08rem', display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span className="icon-chip">
+                <Icon name={eng.ai.icon} size={16} />
+              </span>
               {eng.ai.title}
             </h3>
             <p style={{ fontSize: '0.9rem', lineHeight: 1.55, color: 'var(--muted)' }}>{eng.ai.body}</p>

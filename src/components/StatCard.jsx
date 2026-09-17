@@ -1,12 +1,9 @@
 import { memo } from 'react';
 
-/** @param {{ label: string, value: string, note: string }} props */
-function StatCardBase({ label, value, note }) {
+/** @param {{ label: string, value: string, note: string, delayMs?: number }} props */
+function StatCardBase({ label, value, note, delayMs = 0 }) {
   return (
-    <div
-      className="card-hover"
-      style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '18px 20px', display: 'grid', gap: 4 }}
-    >
+    <div className="feature-card card-reveal-in" style={{ padding: '18px 20px', display: 'grid', gap: 4, animationDelay: `${delayMs}ms` }}>
       <dt style={{ fontSize: '0.7rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: 'var(--font-h)', fontWeight: 600 }}>
         {label}
       </dt>

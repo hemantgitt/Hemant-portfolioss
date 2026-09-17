@@ -16,32 +16,40 @@ export function ContactSection({ reducedMotion }) {
             <p style={{ lineHeight: 1.6, color: 'var(--muted)' }}>{contact.body}</p>
           </div>
           <ul style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
-            <li className="card-hover" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '14px 16px', display: 'grid', gap: 3 }}>
-              <Icon name="mail" size={20} style={{ color: 'var(--accent)' }} />
+            <li className={`feature-card${visible ? ' card-reveal-in' : ''}`} style={{ padding: '14px 16px', display: 'grid', gap: 6, ...(visible ? { animationDelay: '0ms' } : { opacity: 0 }) }}>
+              <span className="icon-chip">
+                <Icon name="mail" size={16} />
+              </span>
               <a href={site.emailHref} style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.98rem', wordBreak: 'break-all', textDecoration: 'none', color: 'var(--text)' }}>
                 {site.email}
               </a>
             </li>
-            <li className="card-hover" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '14px 16px', display: 'grid', gap: 3 }}>
-              <Icon name="phone" size={20} style={{ color: 'var(--accent)' }} />
+            <li className={`feature-card${visible ? ' card-reveal-in' : ''}`} style={{ padding: '14px 16px', display: 'grid', gap: 6, ...(visible ? { animationDelay: '60ms' } : { opacity: 0 }) }}>
+              <span className="icon-chip">
+                <Icon name="phone" size={16} />
+              </span>
               <a href={site.phoneHref} style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.98rem', textDecoration: 'none', color: 'var(--text)' }}>
                 {site.phone}
               </a>
             </li>
-            <li className="card-hover" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '14px 16px', display: 'grid', gap: 3 }}>
-              <LinkedInIcon size={20} style={{ color: 'var(--accent)' }} />
+            <li className={`feature-card${visible ? ' card-reveal-in' : ''}`} style={{ padding: '14px 16px', display: 'grid', gap: 6, ...(visible ? { animationDelay: '120ms' } : { opacity: 0 }) }}>
+              <span className="icon-chip">
+                <LinkedInIcon size={16} />
+              </span>
               <a href={site.linkedinUrl} rel="noopener" style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.98rem', wordBreak: 'break-all', textDecoration: 'none', color: 'var(--text)' }}>
                 {site.linkedinLabel}
               </a>
             </li>
-            <li className="card-hover" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: '14px 16px', display: 'grid', gap: 3 }}>
-              <Icon name="map-pin" size={20} style={{ color: 'var(--accent)' }} />
+            <li className={`feature-card${visible ? ' card-reveal-in' : ''}`} style={{ padding: '14px 16px', display: 'grid', gap: 6, ...(visible ? { animationDelay: '180ms' } : { opacity: 0 }) }}>
+              <span className="icon-chip">
+                <Icon name="map-pin" size={16} />
+              </span>
               <span style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.98rem' }}>{site.location}</span>
             </li>
           </ul>
           <a href={site.resumeUrl} download={site.resumeDownloadName} className="btn btn-primary" style={{ minHeight: 46, paddingInline: 20, width: 'fit-content', fontSize: '0.9rem' }}>
             <Icon name="download" size={15} />
-            Download résumé (PDF)
+            Download Resume
           </a>
         </div>
       </div>
