@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Icon } from './Icon.jsx';
 import { useModal } from '../hooks/useModal.js';
 
@@ -18,7 +19,13 @@ export function CaseStudyModal({ project, onClose }) {
     if (e.target === e.currentTarget) onClose();
   };
 
-  return (
+  // Rendered via a portal into document.body rather than in place: this
+  // modal is mounted inside sections that have a CSS `transform` animation
+  // (the scroll-reveal effect), and any ancestor with a transform becomes
+  // the containing block for `position: fixed` descendants — which broke
+  // the backdrop, making it cover only part of that ancestor's box instead
+  // of the full viewport. Escaping to body sidesteps that entirely.
+  return createPortal(
     // The backdrop is a pointer-only convenience for closing; keyboard users
     // close via the Escape handler above or the Close button in the dialog,
     // so it's intentionally not a focusable/keyboard-interactive element.
@@ -75,6 +82,7 @@ export function CaseStudyModal({ project, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
