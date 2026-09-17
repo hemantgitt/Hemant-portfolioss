@@ -1,17 +1,20 @@
+import { useState } from 'react';
 import hero from '../../data/hero.json';
 import site from '../../data/site.json';
-import { StatCard } from '../StatCard.jsx';
 import { Icon } from '../Icon.jsx';
+import { QuickStatsModal } from '../QuickStatsModal.jsx';
 
 export function Hero() {
+  const [statsOpen, setStatsOpen] = useState(false);
+
   return (
     <section id="home" aria-labelledby="hero-h" style={{ position: 'relative', overflow: 'hidden' }}>
       <div
         aria-hidden="true"
         style={{ position: 'absolute', inset: '-20% -10%', background: 'radial-gradient(circle at 30% 20%, var(--hero-glow, var(--accent-tint)), transparent 55%)', pointerEvents: 'none' }}
       />
-      <div className="split" style={{ position: 'relative', maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px, 10vw, 120px) 20px 80px', display: 'grid', gap: 56, '--sa': '1.15fr', '--sb': '0.85fr' }}>
-        <div style={{ display: 'grid', gap: 22, alignContent: 'start' }}>
+      <div className="hero-grid" style={{ position: 'relative', maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px, 10vw, 120px) 20px 80px' }}>
+        <div className="hero-left">
           <p
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', fontFamily: 'var(--font-h)', fontWeight: 600,
@@ -21,9 +24,23 @@ export function Hero() {
             <span aria-hidden="true" className="status-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', display: 'block' }} />
             {hero.availabilityText}
           </p>
-          <h1 id="hero-h" className="hero-name-in" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
-            {hero.name}
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <picture>
+              <source srcSet="/images/hero-photo.webp" type="image/webp" />
+              <img
+                className="hero-avatar-mobile"
+                src="/images/hero-photo.jpg"
+                width={56}
+                height={56}
+                alt={`${hero.name}, ${hero.title}`}
+                loading="eager"
+                fetchPriority="high"
+              />
+            </picture>
+            <h1 id="hero-h" className="hero-name-in" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
+              {hero.name}
+            </h1>
+          </div>
           <p style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: 'clamp(1.05rem, 2.2vw, 1.45rem)', lineHeight: 1.3, color: 'var(--muted)' }}>
             {hero.title}
             <span style={{ color: 'var(--text)' }}> — {hero.titleSuffix}</span>
@@ -49,14 +66,37 @@ export function Hero() {
               <Icon name="mail" size={15} />
               Contact me
             </a>
+            <button
+              type="button"
+              onClick={() => setStatsOpen(true)}
+              className="btn btn-outline hero-quick-stats-btn"
+              style={{ minHeight: 46, paddingInline: 22, fontSize: '0.9rem' }}
+            >
+              <Icon name="chart-line" size={15} />
+              Quick stats
+            </button>
           </div>
         </div>
-        <dl style={{ display: 'grid', gap: 12, alignContent: 'start' }}>
-          {hero.facts.map((f, i) => (
-            <StatCard key={f.label} {...f} delayMs={i * 80} />
-          ))}
-        </dl>
+        <div className="hero-right">
+          <div className="hero-photo-wrap">
+            <span aria-hidden="true" className="hero-photo-glow" />
+            <span aria-hidden="true" className="hero-photo-ring" />
+            <picture>
+              <source srcSet="/images/hero-photo.webp" type="image/webp" />
+              <img
+                className="hero-photo"
+                src="/images/hero-photo.jpg"
+                width={340}
+                height={425}
+                alt={`${hero.name}, ${hero.title}`}
+                loading="eager"
+                fetchPriority="high"
+              />
+            </picture>
+          </div>
+        </div>
       </div>
+      {statsOpen && <QuickStatsModal facts={hero.facts} onClose={() => setStatsOpen(false)} />}
     </section>
   );
 }

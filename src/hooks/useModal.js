@@ -32,9 +32,18 @@ export function useModal(isOpen) {
     return undefined;
   }, [isOpen]);
 
-  useEffect(() => () => {
-    document.body.style.overflow = '';
-  }, []);
+  // Callers that unmount the dialog on close (rather than toggling `isOpen`
+  // to false and keeping it mounted) never hit the isOpen=false branch
+  // above, so restore scroll and focus here too.
+  useEffect(
+    () => () => {
+      document.body.style.overflow = '';
+      if (lastFocusRef.current && typeof lastFocusRef.current.focus === 'function') {
+        lastFocusRef.current.focus();
+      }
+    },
+    []
+  );
 
   return dialogRef;
 }

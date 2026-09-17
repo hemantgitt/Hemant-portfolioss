@@ -193,3 +193,90 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 @keyframes card-fade-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .card-reveal-in { animation: card-fade-in 0.4s cubic-bezier(0.16,1,0.3,1) both; }
 :root[data-motion="off"] .card-reveal-in { animation: none; }
+
+/* Hero split layout: on mobile there's a single column (text, then stats)
+   with a small avatar inline before the name; from 768px up, text sits in
+   a left column and a right column stacks the large photo above the stat
+   cards. The right column is a plain flex column (not grid-template-areas
+   spanning rows) — an earlier version spanned the text cell across two
+   auto-sized grid rows, which let the browser distribute row height
+   unevenly and left a large gap between the photo and the first stat card.
+   768px is deliberately not the only breakpoint: the 42% right column is
+   too narrow for a 280px photo (plus its 1.2x glow) right at 768px, so the
+   photo size steps up in two stages (768px, 1100px) rather than jumping
+   straight to full size — otherwise the glow visually crowds the text
+   column on tablet widths even though nothing technically overflows. */
+.hero-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 768px) {
+  .hero-grid { grid-template-columns: minmax(0, 58%) minmax(0, 42%); column-gap: 40px; align-items: start; }
+}
+@media (min-width: 1100px) {
+  .hero-grid { column-gap: 56px; }
+}
+.hero-left { display: grid; gap: 22px; align-content: start; }
+.hero-right { display: none; }
+@media (min-width: 768px) {
+  .hero-right { display: flex; flex-direction: column; gap: 28px; align-items: center; max-width: 100%; }
+}
+
+.quick-stats-grid { grid-template-columns: 1fr; }
+@media (min-width: 520px) {
+  .quick-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.hero-avatar-mobile {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center 15%; flex: none;
+  border: 2px solid var(--accent); box-shadow: var(--shadow-sm);
+}
+@media (min-width: 768px) {
+  .hero-avatar-mobile { display: none; }
+}
+
+/* Trigger for the "Quick stats" modal (the 4 hero stat cards). Now shown at
+   every breakpoint since the cards live in the modal only — the right
+   column's space goes entirely to the enlarged photo instead. */
+
+.hero-photo-wrap {
+  position: relative;
+  width: var(--hero-photo-w, 220px); height: var(--hero-photo-h, 275px);
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  .hero-photo-wrap { --hero-photo-w: 260px; --hero-photo-h: 325px; }
+}
+@media (min-width: 1100px) {
+  .hero-photo-wrap { --hero-photo-w: 340px; --hero-photo-h: 425px; }
+}
+.hero-photo-glow {
+  position: absolute; top: 50%; left: 50%; z-index: 0; pointer-events: none;
+  width: calc(var(--hero-photo-w, 220px) * 1.25); height: calc(var(--hero-photo-h, 275px) * 1.2);
+  transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 50%, transparent) 0%, transparent 70%);
+  filter: blur(28px);
+}
+/* Rotating gradient ring: a rounded-rectangle 8px wider than the photo on
+   every side, sitting behind it (z-index 1 vs the photo's 2) so only a
+   ~4px ring peeks out past the photo's rounded edge — cheaper and simpler
+   than a border-image/mask trick. Border-radius is offset by the same 4px
+   so the ring's corners stay concentric with the photo's. */
+.hero-photo-ring {
+  position: absolute; top: 50%; left: 50%; z-index: 1; pointer-events: none;
+  width: calc(100% + 8px); height: calc(100% + 8px);
+  border-radius: 36px;
+  background: conic-gradient(from 0deg, var(--accent), color-mix(in srgb, var(--accent) 55%, white) 25%, var(--accent) 50%, color-mix(in srgb, var(--accent) 55%, black) 75%, var(--accent) 100%);
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: hero-ring-rotate 7s linear infinite;
+}
+@keyframes hero-ring-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+:root[data-motion="off"] .hero-photo-ring { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo-ring { animation: none; }
+}
+.hero-photo {
+  position: relative; z-index: 2; display: block;
+  width: 100%; height: 100%; border-radius: 32px; object-fit: cover; object-position: center 15%;
+  box-shadow: 0 0 0 3px var(--bg), var(--shadow-md);
+}
