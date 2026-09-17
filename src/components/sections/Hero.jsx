@@ -4,6 +4,12 @@ import site from '../../data/site.json';
 import { Icon } from '../Icon.jsx';
 import { QuickStatsModal } from '../QuickStatsModal.jsx';
 
+// Bump this whenever the hero-photo files in public/images are replaced.
+// Browsers (and the Vercel CDN) cache /images/hero-photo.* by URL, so
+// overwriting the same filename without a version marker can keep serving
+// stale bytes after a redeploy until a hard refresh.
+const HERO_PHOTO_VERSION = 2;
+
 export function Hero() {
   const [statsOpen, setStatsOpen] = useState(false);
 
@@ -26,10 +32,10 @@ export function Hero() {
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <picture>
-              <source srcSet="/images/hero-photo.webp" type="image/webp" />
+              <source srcSet={`/images/hero-photo.webp?v=${HERO_PHOTO_VERSION}`} type="image/webp" />
               <img
                 className="hero-avatar-mobile"
-                src="/images/hero-photo.jpg"
+                src={`/images/hero-photo.jpg?v=${HERO_PHOTO_VERSION}`}
                 width={56}
                 height={56}
                 alt={`${hero.name}, ${hero.title}`}
@@ -82,10 +88,10 @@ export function Hero() {
             <span aria-hidden="true" className="hero-photo-glow" />
             <span aria-hidden="true" className="hero-photo-ring" />
             <picture>
-              <source srcSet="/images/hero-photo.webp" type="image/webp" />
+              <source srcSet={`/images/hero-photo.webp?v=${HERO_PHOTO_VERSION}`} type="image/webp" />
               <img
                 className="hero-photo"
-                src="/images/hero-photo.jpg"
+                src={`/images/hero-photo.jpg?v=${HERO_PHOTO_VERSION}`}
                 width={340}
                 height={425}
                 alt={`${hero.name}, ${hero.title}`}
