@@ -23,20 +23,20 @@ const ACCENT_SWATCHES = [
 export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'purple', onSetAccent, onOpenA11yPanel, panelOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileNavRef = useModal(menuOpen);
-  const [accentMenuOpen, setAccentMenuOpen] = useState(false);
-  const accentMenuRef = useRef(null);
-  const accentTriggerRef = useRef(null);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const appearanceRef = useRef(null);
+  const appearanceTriggerRef = useRef(null);
 
   useEffect(() => {
-    if (!accentMenuOpen) return undefined;
+    if (!appearanceOpen) return undefined;
     const onDocClick = (e) => {
-      if (accentMenuRef.current?.contains(e.target) || accentTriggerRef.current?.contains(e.target)) return;
-      setAccentMenuOpen(false);
+      if (appearanceRef.current?.contains(e.target) || appearanceTriggerRef.current?.contains(e.target)) return;
+      setAppearanceOpen(false);
     };
     const onKey = (e) => {
       if (e.key === 'Escape') {
-        setAccentMenuOpen(false);
-        accentTriggerRef.current?.focus();
+        setAppearanceOpen(false);
+        appearanceTriggerRef.current?.focus();
       }
     };
     document.addEventListener('mousedown', onDocClick);
@@ -45,12 +45,10 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
       document.removeEventListener('mousedown', onDocClick);
       document.removeEventListener('keydown', onKey);
     };
-  }, [accentMenuOpen]);
+  }, [appearanceOpen]);
 
   const pickAccent = (key) => {
     onSetAccent(key);
-    setAccentMenuOpen(false);
-    accentTriggerRef.current?.focus();
   };
 
   const handleNavClick = (e, href) => {
@@ -106,61 +104,91 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            type="button"
-            aria-pressed={isDark}
-            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-            title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-            onClick={onToggleTheme}
-            className="icon-btn"
-          >
-            <Icon name={isDark ? 'sun' : 'moon'} size={16} />
-          </button>
           <div style={{ position: 'relative' }}>
             <button
-              ref={accentTriggerRef}
+              ref={appearanceTriggerRef}
               type="button"
-              aria-haspopup="menu"
-              aria-expanded={accentMenuOpen}
-              aria-label={`Accent color (current: ${ACCENT_SWATCHES.find((a) => a.key === accent)?.label ?? 'Purple'})`}
-              title="Accent color"
-              onClick={() => setAccentMenuOpen((v) => !v)}
+              aria-haspopup="dialog"
+              aria-expanded={appearanceOpen}
+              aria-label="Appearance settings (theme and accent color)"
+              title="Appearance"
+              onClick={() => setAppearanceOpen((v) => !v)}
               className="icon-btn"
             >
-              <Icon name="palette" size={16} />
+              <Icon name="settings-2" size={16} />
             </button>
-            {accentMenuOpen && (
+            {appearanceOpen && (
               <div
-                ref={accentMenuRef}
-                role="menu"
-                aria-label="Choose accent color"
+                ref={appearanceRef}
+                role="dialog"
+                aria-label="Appearance settings"
                 style={{
-                  position: 'absolute', top: 'calc(100% + 8px)', right: 0, zIndex: 80, minWidth: 168,
+                  position: 'absolute', top: 'calc(100% + 8px)', right: 0, zIndex: 80, width: 'min(220px, calc(100vw - 40px))',
                   background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12,
-                  boxShadow: 'var(--shadow-lg)', padding: 8, display: 'grid', gap: 2,
+                  boxShadow: 'var(--shadow-lg)', padding: 14, display: 'grid', gap: 12,
                 }}
               >
-                {ACCENT_SWATCHES.map((a) => {
-                  const active = accent === a.key;
-                  return (
+                <div>
+                  <p style={{ fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', margin: '0 0 8px' }}>Theme</p>
+                  <div style={{ display: 'flex', gap: 6 }}>
                     <button
-                      key={a.key}
                       type="button"
-                      role="menuitemradio"
-                      aria-checked={active}
-                      onClick={() => pickAccent(a.key)}
+                      aria-pressed={!isDark}
+                      onClick={() => isDark && onToggleTheme()}
                       style={{
-                        display: 'flex', alignItems: 'center', gap: 10, minHeight: 38, padding: '6px 10px', borderRadius: 8,
-                        border: 'none', background: active ? 'var(--surface2)' : 'transparent', color: 'var(--text)',
-                        fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.85rem', cursor: 'pointer', textAlign: 'left',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, flex: 1, minHeight: 38, borderRadius: 8, cursor: 'pointer',
+                        fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.82rem',
+                        border: `1px solid ${!isDark ? 'var(--accent)' : 'var(--border)'}`,
+                        background: !isDark ? 'var(--accent)' : 'transparent',
+                        color: !isDark ? '#fff' : 'var(--text)',
                       }}
                     >
-                      <span aria-hidden="true" style={{ width: 16, height: 16, borderRadius: '50%', background: a.color, flex: 'none', boxShadow: active ? `0 0 0 2px var(--surface), 0 0 0 3.5px ${a.color}` : 'none' }} />
-                      {a.label}
-                      {active && <Icon name="check" size={14} style={{ marginLeft: 'auto', color: 'var(--accent)' }} />}
+                      <Icon name="sun" size={14} />
+                      Light
                     </button>
-                  );
-                })}
+                    <button
+                      type="button"
+                      aria-pressed={isDark}
+                      onClick={() => !isDark && onToggleTheme()}
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, flex: 1, minHeight: 38, borderRadius: 8, cursor: 'pointer',
+                        fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.82rem',
+                        border: `1px solid ${isDark ? 'var(--accent)' : 'var(--border)'}`,
+                        background: isDark ? 'var(--accent)' : 'transparent',
+                        color: isDark ? '#fff' : 'var(--text)',
+                      }}
+                    >
+                      <Icon name="moon" size={14} />
+                      Dark
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <p style={{ fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', margin: '0 0 8px' }}>Accent color</p>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    {ACCENT_SWATCHES.map((a) => {
+                      const active = accent === a.key;
+                      return (
+                        <button
+                          key={a.key}
+                          type="button"
+                          aria-pressed={active}
+                          aria-label={a.label}
+                          title={a.label}
+                          onClick={() => pickAccent(a.key)}
+                          style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 38, width: 38, borderRadius: 8, cursor: 'pointer',
+                            border: `1px solid ${active ? a.color : 'var(--border)'}`,
+                            background: 'transparent',
+                            boxShadow: active ? `0 0 0 2px color-mix(in srgb, ${a.color} 35%, transparent)` : 'none',
+                          }}
+                        >
+                          <span aria-hidden="true" style={{ width: 16, height: 16, borderRadius: '50%', background: a.color }} />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             )}
           </div>
