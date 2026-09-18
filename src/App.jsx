@@ -5,6 +5,7 @@ import { ScrollProgressBar } from './components/ScrollProgressBar.jsx';
 import { AccessibilityPanel } from './components/AccessibilityPanel.jsx';
 import { BackToTop } from './components/BackToTop.jsx';
 import { useTheme } from './hooks/useTheme.js';
+import { useAccentColor } from './hooks/useAccentColor.js';
 import { useAccessibilityPreferences } from './hooks/useAccessibilityPreferences.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useScrollSpy } from './hooks/useScrollSpy.js';
@@ -34,6 +35,7 @@ function SectionFallback() {
 
 export default function App() {
   const { isDark, toggleTheme } = useTheme('dark');
+  const { accent, setAccent } = useAccentColor('purple');
   const a11y = useAccessibilityPreferences();
   const reducedMotion = useReducedMotion(a11y.motionOff);
   const { active, setActive, showBackToTop, suppress } = useScrollSpy(SECTION_IDS);
@@ -76,7 +78,16 @@ export default function App() {
 
       <ScrollProgressBar />
 
-      <Header active={active} onNavigate={handleNavigate} isDark={isDark} onToggleTheme={toggleTheme} onOpenA11yPanel={a11y.openPanel} panelOpen={a11y.panelOpen} />
+      <Header
+        active={active}
+        onNavigate={handleNavigate}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
+        accent={accent}
+        onSetAccent={setAccent}
+        onOpenA11yPanel={a11y.openPanel}
+        panelOpen={a11y.panelOpen}
+      />
 
       <main id="main" style={{ flex: 1 }}>
         <Hero />
@@ -123,6 +134,8 @@ export default function App() {
           onClose={a11y.closePanel}
           isDark={isDark}
           onToggleTheme={toggleTheme}
+          accent={accent}
+          onSetAccent={setAccent}
           contrast={a11y.contrast}
           onToggleContrast={a11y.toggleContrast}
           motionOff={a11y.motionOff}

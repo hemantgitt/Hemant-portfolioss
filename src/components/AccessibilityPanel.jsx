@@ -6,9 +6,17 @@ const FONT_SCALES = [
   { key: 'xl', label: 'Largest' },
 ];
 
+const ACCENT_SWATCHES = [
+  { key: 'purple', label: 'Purple', color: '#6e5bf0' },
+  { key: 'maroon', label: 'Maroon', color: '#d1435f' },
+  { key: 'teal', label: 'Teal', color: '#14b8a6' },
+  { key: 'emerald', label: 'Emerald', color: '#10b981' },
+];
+
 /**
  * @param {{
  *   onClose: () => void, isDark: boolean, onToggleTheme: () => void,
+ *   accent: 'purple'|'maroon'|'teal'|'emerald', onSetAccent: (accent: string) => void,
  *   contrast: boolean, onToggleContrast: () => void,
  *   motionOff: boolean, onToggleMotion: () => void,
  *   fontScale: string, onSetFontScale: (key: string) => void,
@@ -20,6 +28,8 @@ export function AccessibilityPanel({
   onClose,
   isDark,
   onToggleTheme,
+  accent,
+  onSetAccent,
   contrast,
   onToggleContrast,
   motionOff,
@@ -103,6 +113,34 @@ export function AccessibilityPanel({
           </span>
         </label>
       </div>
+
+      <fieldset style={{ border: '1px solid var(--border)', borderRadius: 12, padding: 12, margin: 0, display: 'grid', gap: 10 }}>
+        <legend style={{ fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase', padding: '0 6px', color: 'var(--muted)' }}>Accent color</legend>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {ACCENT_SWATCHES.map((a) => {
+            const active = accent === a.key;
+            return (
+              <button
+                key={a.key}
+                type="button"
+                aria-pressed={active}
+                aria-label={a.label}
+                title={a.label}
+                onClick={() => onSetAccent(a.key)}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 38, width: 38, borderRadius: 8, cursor: 'pointer',
+                  transition: 'border-color 0.2s, box-shadow 0.2s',
+                  border: `1px solid ${active ? a.color : 'var(--border)'}`,
+                  background: 'transparent',
+                  boxShadow: active ? `0 0 0 2px color-mix(in srgb, ${a.color} 35%, transparent)` : 'none',
+                }}
+              >
+                <span aria-hidden="true" style={{ width: 18, height: 18, borderRadius: '50%', background: a.color }} />
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
 
       <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14, display: 'grid', gap: 8 }}>
         <h3 style={{ fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)' }}>Read aloud</h3>

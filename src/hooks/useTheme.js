@@ -14,6 +14,10 @@ function readStoredPrefs() {
  * user's OS-level `prefers-color-scheme` on first visit. Applies
  * `data-theme` on <html> so CSS custom properties can react to it.
  *
+ * Accent color (purple/maroon/teal/emerald) is a separate, independent
+ * choice — see useAccentColor.js — so it can be combined freely with
+ * either background mode instead of being folded into this value.
+ *
  * @param {'dark'|'light'} [defaultTheme]
  */
 export function useTheme(defaultTheme = 'dark') {
