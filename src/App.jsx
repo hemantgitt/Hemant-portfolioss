@@ -9,7 +9,6 @@ import { useAccessibilityPreferences } from './hooks/useAccessibilityPreferences
 import { useReducedMotion } from './hooks/useReducedMotion.js';
 import { useScrollSpy } from './hooks/useScrollSpy.js';
 import nav from './data/nav.json';
-import site from './data/site.json';
 
 // Below-the-fold sections are code-split so the initial bundle only ships
 // what's needed to paint the hero. Each becomes its own chunk at build time.
@@ -38,10 +37,6 @@ export default function App() {
   const a11y = useAccessibilityPreferences();
   const reducedMotion = useReducedMotion(a11y.motionOff);
   const { active, setActive, showBackToTop, suppress } = useScrollSpy(SECTION_IDS);
-
-  useEffect(() => {
-    document.title = `${site.name} | ${site.title}`;
-  }, []);
 
   useEffect(() => {
     const onKey = (e) => {

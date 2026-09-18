@@ -1,0 +1,15 @@
+{
+  "name": "Hemant Jha — Portfolio",
+  "short_name": "Hemant Jha",
+  "description": "Senior Frontend Engineer portfolio - React.js, Next.js, TypeScript. Performance, accessibility and frontend architecture.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0d",
+  "theme_color": "#6e5bf0",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
