@@ -124,10 +124,36 @@ button { font: inherit; }
 
 [data-reading="true"] { outline: 2px dashed var(--accent); outline-offset: 12px; border-radius: 12px; }
 
-.card-hover { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1); will-change: transform; }
-.card-hover:hover { transform: translateY(-4px); box-shadow: var(--shadow-md) !important; }
-:root[data-motion="off"] .card-hover { transition: none !important; }
-:root[data-motion="off"] .card-hover:hover { transform: none !important; }
+/* Project cards: same lift/glow language as .feature-card (Skills,
+   Performance, etc.) so the hover treatment reads consistently across the
+   site instead of Projects feeling like a different, flatter component. */
+.card-hover {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, border-color 0.25s ease;
+  will-change: transform;
+}
+.card-hover::after {
+  content: '';
+  position: absolute;
+  /* Fixed px, not %: top/right percentages resolve against this card's own
+     (often tall, content-driven) height, which pushed the glow's box far
+     above the visible card and left it fully clipped by overflow:hidden. */
+  top: -50px; right: -50px;
+  width: 170px; height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%);
+  opacity: 0; transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 14px 30px -10px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+.card-hover:hover::after { opacity: 1; }
+:root[data-motion="off"] .card-hover,
+:root[data-motion="off"] .card-hover::after { transition: none !important; }
+:root[data-motion="off"] .card-hover:hover { transform: none !important; box-shadow: none !important; }
 
 .fab {
   position: fixed; right: 16px; bottom: 16px; z-index: 65;
@@ -145,10 +171,14 @@ button { font: inherit; }
 :root[data-motion="off"] .fab { animation: none; transition: none; }
 :root[data-motion="off"] .fab:hover, :root[data-motion="off"] .fab:active { transform: none; }
 
-.status-dot { animation: status-pulse 2s ease-in-out infinite; }
-@keyframes status-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(1.15); } }
-:root[data-motion="off"] .status-dot { animation: none; opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .status-dot { animation: none; opacity: 1; transform: none; } }
+.status-dot { animation: status-pulse 1.8s ease-out infinite; }
+@keyframes status-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+  70% { box-shadow: 0 0 0 9px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+:root[data-motion="off"] .status-dot { animation: none; box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .status-dot { animation: none; box-shadow: none; } }
 
 /* Reusable interactive-element classes (buttons, pills, icon buttons, nav
    links) — real CSS :hover/:focus-visible rules replacing the original
@@ -195,6 +225,42 @@ button { font: inherit; }
 .tag:hover { border-color: var(--accent); color: var(--accent); }
 :root[data-motion="off"] .tag { transition: none; }
 
+/* Hero strengths marquee: the tag list is duplicated once in the DOM
+   (second copy aria-hidden) and the whole track slides left by exactly
+   -50% on a linear loop, so the moment the first copy scrolls fully out of
+   view the second copy is in the exact position the first one started in
+   -- the loop point is invisible. Pure CSS transform on a fixed-width flex
+   row, so it's GPU-composited and costs nothing on the main thread (no JS
+   ticking, no layout thrash) unlike a JS-driven marquee. Edge fade uses a
+   mask so tags don't pop in/out abruptly at the container boundary. */
+.strengths-marquee {
+  overflow: hidden;
+  /* A wider fade than a desktop-width container needs: on a ~360px phone
+     screen a tag is a much bigger fraction of the visible strip, so a
+     narrow 6% fade left most of a cut-off word fully opaque right up to
+     the edge and just looked like a hard, broken-looking crop instead of
+     an intentional scroll fade. */
+  mask-image: linear-gradient(90deg, transparent, black 16%, black 84%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 16%, black 84%, transparent);
+}
+.strengths-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: max-content;
+  animation: strengths-scroll 24s linear infinite;
+}
+.strengths-marquee:hover .strengths-track { animation-play-state: paused; }
+@keyframes strengths-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+:root[data-motion="off"] .strengths-marquee { overflow: visible; mask-image: none; -webkit-mask-image: none; }
+:root[data-motion="off"] .strengths-track { animation: none; flex-wrap: wrap; width: auto; }
+:root[data-motion="off"] .strengths-track li[aria-hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .strengths-marquee { overflow: visible; mask-image: none; -webkit-mask-image: none; }
+  .strengths-track { animation: none; flex-wrap: wrap; width: auto; }
+  .strengths-track li[aria-hidden] { display: none; }
+}
+
 kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; font-family: var(--font-b); background: var(--surface2); }
 
 /* Shared "feature card" treatment (Skills, Expertise, Performance,
@@ -226,8 +292,8 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 .feature-card::after {
   content: '';
   position: absolute;
-  top: -40%; right: -25%;
-  width: 65%; aspect-ratio: 1;
+  top: -50px; right: -50px;
+  width: 170px; height: 170px;
   border-radius: 50%;
   background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%);
   opacity: 0; transition: opacity 0.35s ease;
@@ -248,6 +314,26 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 
 @media (min-width: 720px) {
   .feature-card--primary { grid-column: span 2; }
+}
+
+/* Single-card row list: the same "one card, several icon+text rows" shape
+   Performance's flow steps use, reused by Accessibility/Impact/Engineering
+   so a handful of short facts reads as one crisp card instead of a grid of
+   many small ones. A hairline divider between rows is the one addition
+   over Performance's version -- these lists run longer (6-9 rows vs. 5),
+   so a divider keeps rows visually separate without extra vertical gap. */
+.flow-row { display: grid; grid-template-columns: 32px minmax(0,1fr); gap: 14px; align-items: start; padding: 13px 14px; }
+.flow-row:not(:first-child) { border-top: 1px solid var(--border); }
+
+/* Accessibility section on mobile: only the first 4 practices show (full
+   9 is desktop-only) and the "Try it on this page" card is dropped
+   entirely, so the section doesn't dominate the mobile scroll -- .desk-only
+   can't be reused here since its `display: block !important` would break
+   these elements' own `display: grid`. */
+.a11y-row-extra, .a11y-tryit { display: none; }
+@media (min-width: 1140px) {
+  .a11y-row-extra { display: grid; }
+  .a11y-tryit { display: grid; }
 }
 
 .icon-chip {
@@ -439,3 +525,68 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 @media (prefers-reduced-motion: reduce) {
   .hero-photo { animation: none; }
 }
+
+/* Site footer: a full-width accent topline (matching the top-bar treatment
+   feature cards use) plus a radial glow anchored bottom-right so the block
+   isn't just flat -surface2 like it used to be. Everything below reveals
+   with the same scroll-triggered fade as every other section instead of
+   just being static text with no motion at all. */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent, var(--surface2));
+  margin-top: 80px;
+}
+.site-footer-topline {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.6;
+}
+.site-footer::before {
+  content: '';
+  position: absolute;
+  bottom: -30%; right: -10%;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.site-footer-heading {
+  margin: 0; font-family: var(--font-h); font-weight: 600; font-size: 0.82rem;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
+}
+.site-footer-link {
+  display: inline-flex; align-items: center; color: var(--muted); text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease; width: fit-content;
+}
+.site-footer-link:hover { color: var(--accent); transform: translateX(3px); }
+:root[data-motion="off"] .site-footer-link { transition: none; }
+:root[data-motion="off"] .site-footer-link:hover { transform: none; }
+
+.site-footer-social {
+  display: flex; align-items: center; gap: 10px; font-size: 0.88rem;
+  color: var(--text); text-decoration: none;
+}
+.site-footer-social .icon-chip { transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease; }
+.site-footer-social:hover .icon-chip { background: var(--accent); color: var(--accent-contrast); transform: scale(1.08); }
+:root[data-motion="off"] .site-footer-social .icon-chip { transition: none; }
+:root[data-motion="off"] .site-footer-social:hover .icon-chip { transform: none; }
+
+.site-footer-bottom {
+  position: relative;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--border);
+  font-size: 0.8rem; color: var(--muted);
+}
+.site-footer-top-btn {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  background: transparent; border: 1px solid var(--border); border-radius: 999px;
+  padding: 8px 14px; font-family: var(--font-h); font-weight: 600; font-size: 0.78rem; color: var(--text);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.site-footer-top-btn:hover { border-color: var(--accent); color: var(--accent); }
+.site-footer-top-btn svg { transition: transform 0.2s ease; }
+.site-footer-top-btn:hover svg { transform: translateY(-2px); }
+:root[data-motion="off"] .site-footer-top-btn,
+:root[data-motion="off"] .site-footer-top-btn svg { transition: none; }
+:root[data-motion="off"] .site-footer-top-btn:hover svg { transform: none; }

@@ -69,13 +69,20 @@ export function Hero() {
             <span style={{ color: 'var(--text)' }}> — {hero.titleSuffix}</span>
           </p>
           <p style={{ maxWidth: '56ch', fontSize: '1.05rem', lineHeight: 1.65, color: 'var(--muted)' }}>{hero.summary}</p>
-          <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 }}>
-            {hero.strengths.map((s) => (
-              <li key={s} className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
-                {s}
-              </li>
-            ))}
-          </ul>
+          <div className="strengths-marquee" style={{ marginTop: 4 }}>
+            <ul className="strengths-track" aria-label="Core strengths">
+              {hero.strengths.map((s) => (
+                <li key={s} className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
+                  {s}
+                </li>
+              ))}
+              {hero.strengths.map((s) => (
+                <li key={`${s}-dup`} aria-hidden="true" className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 10 }}>
             <a href="#projects" className="btn btn-primary" style={{ minHeight: 46, paddingInline: 22, fontSize: '0.9rem', boxShadow: 'var(--shadow-sm)' }}>
               View my work

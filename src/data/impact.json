@@ -3,11 +3,11 @@
   "title": "Measured outcomes",
   "intro": "Every figure below is documented from the work in my resume — no estimates added.",
   "items": [
-    { "project": "Sonny's Quivio", "value": "3.8s → 2.6s", "label": "Largest Contentful Paint", "note": "Measured improvement on the multi-tenant Next.js UI." },
-    { "project": "Sonny's Quivio", "value": "−25%", "label": "Initial bundle size", "note": "Bundle optimisation across shared tenant modules." },
-    { "project": "Evaria - Cycles & Wellness", "value": "−20%", "label": "Accessibility defects", "note": "WCAG 2.1 AA work on the patient and admin platform." },
-    { "project": "PVR INOX", "value": "90%", "label": "Statement coverage", "note": "Jest and React Testing Library on booking and payment paths." },
-    { "project": "UPSC platform", "value": "−20%", "label": "Page load time", "note": "Server rendering, pagination and caching on a high-traffic portal." },
-    { "project": "Appinventiv", "value": "~30%", "label": "Faster feature delivery", "note": "AI-assisted development with Claude and Cursor; every generated change reviewed for bugs and security issues before merge and deployment — the review, not the tool, is what shipped safely." }
+    { "project": "Sonny's Quivio", "value": "3.8s → 2.6s", "label": "Largest Contentful Paint", "note": "Multi-tenant Next.js UI." },
+    { "project": "Sonny's Quivio", "value": "−25%", "label": "Initial bundle size", "note": "Shared tenant module optimisation." },
+    { "project": "Evaria - Cycles & Wellness", "value": "−20%", "label": "Accessibility defects", "note": "WCAG 2.1 AA, patient & admin platform." },
+    { "project": "PVR INOX", "value": "90%", "label": "Statement coverage", "note": "Booking & payment paths, Jest + RTL." },
+    { "project": "UPSC platform", "value": "−20%", "label": "Page load time", "note": "SSR, pagination and caching." },
+    { "project": "Appinventiv", "value": "~30%", "label": "Faster feature delivery", "note": "AI-assisted; every change reviewed before merge." }
   ]
 }

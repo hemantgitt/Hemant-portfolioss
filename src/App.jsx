@@ -124,7 +124,7 @@ export default function App() {
       </main>
 
       <Suspense fallback={null}>
-        <Footer />
+        <Footer reducedMotion={reducedMotion} />
       </Suspense>
 
       <BackToTop visible={backToTopVisible} onClick={scrollToTop} />
