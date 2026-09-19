@@ -7,7 +7,7 @@ import { NAV_SUPPRESS_MS } from '../constants/config.js';
 
 const ACCENT_SWATCHES = [
   { key: 'purple', label: 'Purple', color: '#6e5bf0' },
-  { key: 'maroon', label: 'Maroon', color: '#d1435f' },
+  { key: 'maroon', label: 'Maroon', color: '#bf3852' },
   { key: 'teal', label: 'Teal', color: '#14b8a6' },
   { key: 'emerald', label: 'Emerald', color: '#10b981' },
 ];
@@ -26,6 +26,26 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
   const [appearanceOpen, setAppearanceOpen] = useState(false);
   const appearanceRef = useRef(null);
   const appearanceTriggerRef = useRef(null);
+  const navListRef = useRef(null);
+  const navLinkRefs = useRef({});
+  const [navIndicator, setNavIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+
+  useEffect(() => {
+    const measure = () => {
+      const listEl = navListRef.current;
+      const activeEl = navLinkRefs.current[active];
+      if (!listEl || !activeEl) {
+        setNavIndicator((s) => ({ ...s, opacity: 0 }));
+        return;
+      }
+      const listRect = listEl.getBoundingClientRect();
+      const activeRect = activeEl.getBoundingClientRect();
+      setNavIndicator({ left: activeRect.left - listRect.left, width: activeRect.width, opacity: 1 });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [active]);
 
   useEffect(() => {
     if (!appearanceOpen) return undefined;
@@ -87,10 +107,21 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
         </a>
 
         <nav className="desk-only" aria-label="Primary">
-          <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 22 }}>
+          <ul ref={navListRef} style={{ position: 'relative', display: 'flex', flexWrap: 'wrap', gap: 22, paddingBottom: 8 }}>
+            <span
+              aria-hidden="true"
+              style={{
+                position: 'absolute', bottom: 0, height: 2, borderRadius: 999, background: 'var(--accent)',
+                left: navIndicator.left, width: navIndicator.width, opacity: navIndicator.opacity,
+                transition: 'left 0.3s cubic-bezier(0.16,1,0.3,1), width 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s',
+              }}
+            />
             {nav.map((item) => (
               <li key={item.href}>
                 <a
+                  ref={(el) => {
+                    navLinkRefs.current[item.href.slice(1)] = el;
+                  }}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   aria-current={active === item.href.slice(1) ? 'true' : undefined}
@@ -140,7 +171,7 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
                         fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.82rem',
                         border: `1px solid ${!isDark ? 'var(--accent)' : 'var(--border)'}`,
                         background: !isDark ? 'var(--accent)' : 'transparent',
-                        color: !isDark ? '#fff' : 'var(--text)',
+                        color: !isDark ? 'var(--accent-contrast)' : 'var(--text)',
                       }}
                     >
                       <Icon name="sun" size={14} />
@@ -155,7 +186,7 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
                         fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.82rem',
                         border: `1px solid ${isDark ? 'var(--accent)' : 'var(--border)'}`,
                         background: isDark ? 'var(--accent)' : 'transparent',
-                        color: isDark ? '#fff' : 'var(--text)',
+                        color: isDark ? 'var(--accent-contrast)' : 'var(--text)',
                       }}
                     >
                       <Icon name="moon" size={14} />

@@ -35,9 +35,9 @@
    more saturated light-context shade (paired with [data-theme="light"]) so
    contrast stays comfortable on both backgrounds. */
 :root[data-accent="maroon"] {
-  --accent: #d1435f; --accent-hover: #e35f79; --accent-press: #b02f4d;
-  --accent-tint: rgba(209,67,95,0.14); --accent-tint-strong: rgba(209,67,95,0.26);
-  --hero-glow: rgba(209,67,95,0.22);
+  --accent: #bf3852; --accent-hover: #cf4a63; --accent-press: #a52c44;
+  --accent-tint: rgba(191,56,82,0.14); --accent-tint-strong: rgba(191,56,82,0.26);
+  --hero-glow: rgba(191,56,82,0.22);
   --accent-contrast: #ffffff;
 }
 :root[data-theme="light"][data-accent="maroon"] {
@@ -45,27 +45,36 @@
   --accent-tint: rgba(184,38,74,0.08); --accent-tint-strong: rgba(184,38,74,0.16);
   --hero-glow: rgba(184,38,74,0.22);
 }
+/* Teal/emerald are bright enough that white text on them (the usual
+   --accent-contrast) fails WCAG AA contrast (~2.5:1, needs 4.5:1) — measured
+   with the standard relative-luminance formula, not eyeballed. Dark-context
+   keeps the vivid accent color (it reads fine as text/borders against the
+   near-black bg) but switches --accent-contrast to a dark color for when
+   it's used as a button/badge background. Light-context instead darkens the
+   accent itself (700-weight shade) so white text passes comfortably. */
 :root[data-accent="teal"] {
   --accent: #14b8a6; --accent-hover: #2dd4bf; --accent-press: #0d9488;
   --accent-tint: rgba(20,184,166,0.14); --accent-tint-strong: rgba(20,184,166,0.26);
   --hero-glow: rgba(20,184,166,0.22);
-  --accent-contrast: #ffffff;
+  --accent-contrast: #062420;
 }
 :root[data-theme="light"][data-accent="teal"] {
-  --accent: #0d9488; --accent-hover: #0f766e; --accent-press: #115e59;
-  --accent-tint: rgba(13,148,136,0.08); --accent-tint-strong: rgba(13,148,136,0.16);
-  --hero-glow: rgba(13,148,136,0.22);
+  --accent: #0f766e; --accent-hover: #115e59; --accent-press: #134e4a;
+  --accent-tint: rgba(15,118,110,0.08); --accent-tint-strong: rgba(15,118,110,0.16);
+  --hero-glow: rgba(15,118,110,0.22);
+  --accent-contrast: #ffffff;
 }
 :root[data-accent="emerald"] {
   --accent: #10b981; --accent-hover: #34d399; --accent-press: #059669;
   --accent-tint: rgba(16,185,129,0.14); --accent-tint-strong: rgba(16,185,129,0.26);
   --hero-glow: rgba(16,185,129,0.22);
-  --accent-contrast: #ffffff;
+  --accent-contrast: #042e22;
 }
 :root[data-theme="light"][data-accent="emerald"] {
-  --accent: #059669; --accent-hover: #047857; --accent-press: #065f46;
-  --accent-tint: rgba(5,150,105,0.08); --accent-tint-strong: rgba(5,150,105,0.16);
-  --hero-glow: rgba(5,150,105,0.22);
+  --accent: #047857; --accent-hover: #065f46; --accent-press: #064e3b;
+  --accent-tint: rgba(4,120,87,0.08); --accent-tint-strong: rgba(4,120,87,0.16);
+  --hero-glow: rgba(4,120,87,0.22);
+  --accent-contrast: #ffffff;
 }
 :root[data-contrast="high"] { --border: var(--border-strong); --muted: var(--text); }
 :root[data-contrast="high"][data-theme="dark"], :root[data-contrast="high"]:not([data-theme="light"]) { --bg: #000; --surface: #0c0c0c; --text: #fff; --accent: #a496ff; }
@@ -98,7 +107,7 @@ button { font: inherit; }
 .exp-dot { transition: background 0.2s ease-out; }
 .exp-dot.is-active { background: var(--accent); }
 
-.skip-link { position: absolute; left: 20px; top: -120px; z-index: 95; background: var(--accent); color: #fff; font-family: var(--font-h); font-weight: 600; padding: 10px 18px; text-decoration: none; border-radius: 10px; }
+.skip-link { position: absolute; left: 20px; top: -120px; z-index: 95; background: var(--accent); color: var(--accent-contrast, #fff); font-family: var(--font-h); font-weight: 600; padding: 10px 18px; text-decoration: none; border-radius: 10px; }
 .skip-link:focus-visible { top: 16px; }
 
 .desk-only { display: none !important; }
@@ -125,7 +134,7 @@ button { font: inherit; }
   width: 44px; height: 44px; display: grid; place-items: center;
   border: none; border-radius: 50%; cursor: pointer;
   background: linear-gradient(155deg, var(--accent), var(--accent-press));
-  color: #fff; box-shadow: var(--shadow-md);
+  color: var(--accent-contrast, #fff); box-shadow: var(--shadow-md);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   animation: fab-in 0.25s ease;
 }
@@ -156,7 +165,7 @@ button { font: inherit; }
   font-family: var(--font-h); font-weight: 600; border-radius: 12px; cursor: pointer; border: none;
 }
 .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary { background: var(--accent); color: var(--accent-contrast, #fff); }
 .btn-primary:hover { background: var(--accent-hover); }
 .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
 .btn-outline:hover { background: var(--surface2); }
@@ -257,7 +266,20 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 .hero-left { display: grid; gap: 22px; align-content: start; }
 .hero-right { display: none; }
 @media (min-width: 768px) {
-  .hero-right { display: flex; flex-direction: column; gap: 28px; align-items: center; max-width: 100%; }
+  .hero-right { display: flex; flex-direction: column; gap: 28px; align-items: center; max-width: 100%; position: relative; }
+}
+
+/* Cursor-follow spotlight behind the photo (see Hero.jsx's mousemove
+   effect, which sets --cursor-x/--cursor-y). Desktop/hover-capable only —
+   hidden under reduced motion so it never becomes a distraction, and it's
+   a no-op visually until JS has actually moved the cursor over it. */
+.hero-cursor-glow {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: 24px; overflow: hidden;
+  background: radial-gradient(280px circle at var(--cursor-x, 50%) var(--cursor-y, 50%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+}
+:root[data-motion="off"] .hero-cursor-glow { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor-glow { display: none; }
 }
 
 .quick-stats-grid { grid-template-columns: 1fr; }

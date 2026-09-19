@@ -8,7 +8,7 @@ const FONT_SCALES = [
 
 const ACCENT_SWATCHES = [
   { key: 'purple', label: 'Purple', color: '#6e5bf0' },
-  { key: 'maroon', label: 'Maroon', color: '#d1435f' },
+  { key: 'maroon', label: 'Maroon', color: '#bf3852' },
   { key: 'teal', label: 'Teal', color: '#14b8a6' },
   { key: 'emerald', label: 'Emerald', color: '#10b981' },
 ];
@@ -77,7 +77,7 @@ export function AccessibilityPanel({
                   transition: 'background 0.2s, border-color 0.2s, color 0.2s',
                   border: `1px solid ${active ? 'var(--accent)' : 'var(--border)'}`,
                   background: active ? 'var(--accent)' : 'transparent',
-                  color: active ? '#fff' : 'var(--text)',
+                  color: active ? 'var(--accent-contrast)' : 'var(--text)',
                 }}
               >
                 {f.label}

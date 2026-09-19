@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import hero from '../../data/hero.json';
 import site from '../../data/site.json';
 import { Icon } from '../Icon.jsx';
@@ -12,6 +12,23 @@ const HERO_PHOTO_VERSION = 2;
 
 export function Hero() {
   const [statsOpen, setStatsOpen] = useState(false);
+  const heroRightRef = useRef(null);
+
+  // Cursor-follow spotlight behind the photo — desktop/mouse only (skipped
+  // entirely on touch devices, where a pointer-move listener wouldn't fire
+  // meaningfully anyway). Purely additive: the glow itself is hidden via
+  // CSS under reduced-motion, so this effect just becomes a no-op there.
+  useEffect(() => {
+    const el = heroRightRef.current;
+    if (!el || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return undefined;
+    const onMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--cursor-x', `${e.clientX - rect.left}px`);
+      el.style.setProperty('--cursor-y', `${e.clientY - rect.top}px`);
+    };
+    el.addEventListener('mousemove', onMove);
+    return () => el.removeEventListener('mousemove', onMove);
+  }, []);
 
   return (
     <section id="home" aria-labelledby="hero-h" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -83,7 +100,8 @@ export function Hero() {
             </button>
           </div>
         </div>
-        <div className="hero-right">
+        <div className="hero-right" ref={heroRightRef}>
+          <span aria-hidden="true" className="hero-cursor-glow" />
           <div className="hero-photo-wrap">
             <span aria-hidden="true" className="hero-photo-grid" />
             <span aria-hidden="true" className="hero-photo-glow" />
