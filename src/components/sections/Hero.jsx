@@ -89,16 +89,17 @@ export function Hero() {
               <Icon name="mail" size={15} />
               Contact me
             </a>
-            <button
-              type="button"
-              onClick={() => setStatsOpen(true)}
-              className="btn btn-outline hero-quick-stats-btn"
-              style={{ minHeight: 46, paddingInline: 22, fontSize: '0.9rem' }}
-            >
-              <Icon name="chart-line" size={15} />
-              Quick stats
-            </button>
           </div>
+          <button type="button" onClick={() => setStatsOpen(true)} aria-haspopup="dialog" className="hero-stats-chip hero-quick-stats-btn">
+            <span aria-hidden="true" className="hero-stats-chip-icon">
+              <Icon name="chart-line" size={14} />
+            </span>
+            <span>
+              <strong>{hero.facts[0].value}</strong> · <strong>{hero.facts[1].value}</strong>
+              <span className="hero-stats-chip-label"> — quick stats</span>
+            </span>
+            <Icon name="arrow-right" size={14} className="hero-stats-chip-arrow" />
+          </button>
         </div>
         <div className="hero-right" ref={heroRightRef}>
           <span aria-hidden="true" className="hero-cursor-glow" />

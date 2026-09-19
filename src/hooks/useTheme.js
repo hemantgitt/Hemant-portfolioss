@@ -10,9 +10,11 @@ function readStoredPrefs() {
 }
 
 /**
- * Dark/light theme state, persisted to localStorage, falling back to the
- * user's OS-level `prefers-color-scheme` on first visit. Applies
- * `data-theme` on <html> so CSS custom properties can react to it.
+ * Dark/light theme state, persisted to localStorage. First-time visitors
+ * (no saved preference) always start on `defaultTheme` (dark) regardless of
+ * the OS's `prefers-color-scheme` — the site has an explicit in-page toggle,
+ * so it doesn't need to guess from system settings. Applies `data-theme` on
+ * <html> so CSS custom properties can react to it.
  *
  * Accent color (purple/maroon/teal/emerald) is a separate, independent
  * choice — see useAccentColor.js — so it can be combined freely with
@@ -24,9 +26,6 @@ export function useTheme(defaultTheme = 'dark') {
   const [theme, setTheme] = useState(() => {
     const saved = readStoredPrefs();
     if (saved && saved.theme) return saved.theme;
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
     return defaultTheme;
   });
 

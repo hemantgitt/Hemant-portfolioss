@@ -1,9 +1,15 @@
 import { memo } from 'react';
+import { Icon } from './Icon.jsx';
 
-/** @param {{ label: string, value: string, note: string, delayMs?: number }} props */
-function StatCardBase({ label, value, note, delayMs = 0 }) {
+/** @param {{ label: string, value: string, note: string, icon?: string, delayMs?: number }} props */
+function StatCardBase({ label, value, note, icon, delayMs = 0 }) {
   return (
-    <div className="feature-card card-reveal-in" style={{ padding: '18px 20px', display: 'grid', gap: 4, animationDelay: `${delayMs}ms` }}>
+    <div className="feature-card card-reveal-in stat-card" style={{ padding: '18px 20px', display: 'grid', gap: 4, animationDelay: `${delayMs}ms` }}>
+      {icon && (
+        <span aria-hidden="true" className="stat-card-icon">
+          <Icon name={icon} size={16} />
+        </span>
+      )}
       <dt style={{ fontSize: '0.7rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', fontFamily: 'var(--font-h)', fontWeight: 600 }}>
         {label}
       </dt>

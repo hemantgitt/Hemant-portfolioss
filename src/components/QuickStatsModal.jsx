@@ -4,6 +4,11 @@ import { Icon } from './Icon.jsx';
 import { StatCard } from './StatCard.jsx';
 import { useModal } from '../hooks/useModal.js';
 
+// Matched to hero.json's facts by array position — icon is purely decorative
+// (the underlying data has no icon field), so this stays a positional map
+// rather than something keyed by label text.
+const FACT_ICONS = ['activity', 'globe', 'briefcase', 'users'];
+
 /**
  * Modal for the hero's 4 stat cards (Experience, Domains, Most recent role,
  * Mentoring), which now live only in this modal rather than inline in the
@@ -59,19 +64,27 @@ export function QuickStatsModal({ facts, onClose }) {
         aria-labelledby="quick-stats-title"
         ref={dialogRef}
         className="quick-stats-dialog"
-        style={{ width: '100%', maxWidth: 560, maxHeight: '85vh', overflow: 'auto', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 20, boxShadow: 'var(--shadow-lg)' }}
+        style={{ width: '100%', maxWidth: 600, maxHeight: '85vh', overflow: 'auto', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 20, boxShadow: 'var(--shadow-lg)' }}
       >
-        <div style={{ position: 'sticky', top: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '18px 20px', borderBottom: '1px solid var(--border)', background: 'var(--surface)' }}>
-          <h2 id="quick-stats-title" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1.05rem' }}>
-            Quick stats
-          </h2>
-          <button type="button" onClick={onClose} aria-label="Close quick stats" className="icon-btn" style={{ width: 34, height: 34, flex: 'none' }}>
-            <Icon name="x" size={15} />
-          </button>
+        <div className="quick-stats-header">
+          <span aria-hidden="true" className="quick-stats-header-glow" />
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+            <div>
+              <p style={{ fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-h)', fontWeight: 600, margin: '0 0 4px' }}>
+                At a glance
+              </p>
+              <h2 id="quick-stats-title" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1.25rem', margin: 0 }}>
+                Quick stats
+              </h2>
+            </div>
+            <button type="button" onClick={onClose} aria-label="Close quick stats" className="icon-btn" style={{ width: 34, height: 34, flex: 'none', position: 'relative' }}>
+              <Icon name="x" size={15} />
+            </button>
+          </div>
         </div>
         <dl className="quick-stats-grid" style={{ display: 'grid', gap: 12, padding: 20 }}>
           {facts.map((f, i) => (
-            <StatCard key={f.label} {...f} delayMs={i * 60} />
+            <StatCard key={f.label} {...f} icon={FACT_ICONS[i]} delayMs={i * 60} />
           ))}
         </dl>
       </div>
