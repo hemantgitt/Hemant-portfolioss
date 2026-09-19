@@ -197,11 +197,14 @@ button { font: inherit; }
 
 kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; font-family: var(--font-b); background: var(--surface2); }
 
-/* Shared "feature card" treatment (Skills, Expertise): a subtle top accent,
-   a colored icon chip (matching the rounded-square chip pattern used for
-   the Performance step numbers), and a gentler lift on hover than the
-   standard card-hover (translateY(-2px) + a soft accent-tinted shadow
-   instead of a hard one). */
+/* Shared "feature card" treatment (Skills, Expertise, Performance,
+   Education, Engineering, Accessibility, Contact): a top accent bar, a
+   corner glow that blooms in on hover, a gradient-ringed icon chip, and a
+   gentler lift than the standard card-hover (translateY(-2px) + a soft
+   accent-tinted shadow instead of a hard one). The corner glow and icon
+   chip are what turn this from a flat bordered box into something with
+   actual depth — both stay subtle at rest and intensify only on hover, so
+   the grid doesn't look busy when nothing is being interacted with. */
 .feature-card {
   position: relative;
   background: var(--surface);
@@ -209,7 +212,7 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
   border-radius: 16px;
   padding: 20px;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, border-color 0.25s ease;
 }
 .feature-card::before {
   content: '';
@@ -218,13 +221,29 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
   height: 3px;
   background: linear-gradient(90deg, var(--accent), transparent);
   opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: -40%; right: -25%;
+  width: 65%; aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 72%);
+  opacity: 0; transition: opacity 0.35s ease;
+  pointer-events: none;
 }
 .feature-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: var(--border-strong);
-  box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--accent) 35%, transparent);
+  box-shadow: 0 14px 30px -10px color-mix(in srgb, var(--accent) 38%, transparent);
 }
-:root[data-motion="off"] .feature-card { transition: none; }
+.feature-card:hover::before { opacity: 1; }
+.feature-card:hover::after { opacity: 1; }
+:root[data-motion="off"] .feature-card,
+:root[data-motion="off"] .feature-card::before,
+:root[data-motion="off"] .feature-card::after,
+:root[data-motion="off"] .icon-chip { transition: none; }
 :root[data-motion="off"] .feature-card:hover { transform: none; box-shadow: none; }
 
 @media (min-width: 720px) {
@@ -232,9 +251,18 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 }
 
 .icon-chip {
+  position: relative;
   display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 8px; flex: none;
-  background: var(--accent-tint); color: var(--accent);
+  width: 32px; height: 32px; border-radius: 9px; flex: none;
+  background: linear-gradient(155deg, var(--accent-tint-strong), var(--accent-tint));
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease, color 0.3s ease;
+}
+.feature-card:hover .icon-chip {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  transform: scale(1.08) rotate(-4deg);
 }
 
 /* Compact info chip (About's focus tabs, and similar small tag-like rows):
