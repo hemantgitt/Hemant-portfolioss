@@ -27,5 +27,18 @@
     "oxlint": "^1.81.0",
     "prettier": "^3.9.7",
     "vite": "^8.3.0"
-  }
+  },
+  "description": "A migration of the original static HTML/CSS/JS portfolio to a componentized React + Vite application. The visual design, copy, dark/light theme, accessibility panel and animations are unchanged — this is an architecture rebuild, not a redesign.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemantgitt/Hemant-portfolioss.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hemantgitt/Hemant-portfolioss/issues"
+  },
+  "homepage": "https://github.com/hemantgitt/Hemant-portfolioss#readme"
 }

@@ -175,6 +175,13 @@ button { font: inherit; }
 .nav-link[aria-current="true"] { color: var(--accent); }
 .nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
 
+/* Header logo hover: scale-up on the logo mark only, so the surrounding
+   name/title text doesn't visually jump around when the pointer is near. */
+.logo-scale-hover img { transition: transform 0.2s cubic-bezier(0.16,1,0.3,1); }
+.logo-scale-hover:hover img, .logo-scale-hover:focus-visible img { transform: scale(1.12); }
+:root[data-motion="off"] .logo-scale-hover img { transition: none; }
+:root[data-motion="off"] .logo-scale-hover:hover img { transform: none; }
+
 .mobile-nav-link { display: block; padding: 12px 10px; min-height: 44px; text-decoration: none; color: var(--text); font-family: var(--font-h); font-weight: 500; border-radius: 10px; }
 .mobile-nav-link:hover { background: var(--surface2); }
 .mobile-nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

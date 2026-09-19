@@ -12,7 +12,7 @@
 //   fingerprints those filenames per build, so a cached one is never stale.
 // CACHE_NAME is bumped so `activate` deletes the old v1 cache (which held
 // the stale index.html) on every device that already had it installed.
-const CACHE_NAME = 'hjha-portfolio-v2';
+const CACHE_NAME = 'hjha-portfolio-v4';
 const APP_SHELL = ['/', '/index.html', '/manifest.webmanifest', '/favicon.svg'];
 
 self.addEventListener('install', (event) => {

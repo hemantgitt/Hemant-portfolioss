@@ -100,10 +100,14 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
-          style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1rem', letterSpacing: '-0.01em', textDecoration: 'none', color: 'var(--text)', marginRight: 'auto', lineHeight: 1.3 }}
+          className="logo-scale-hover"
+          style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'var(--text)', marginRight: 'auto', lineHeight: 1.3 }}
         >
-          {site.logoInitials}{' '}
-          <span style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>{site.logoTag}</span>
+          <img src="/logo-main.svg" alt="" width={36} height={36} style={{ display: 'block', flex: 'none' }} />
+          <span style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1rem', letterSpacing: '-0.01em' }}>
+            {site.logoInitials}{' '}
+            <span style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>{site.logoTag}</span>
+          </span>
         </a>
 
         <nav className="desk-only" aria-label="Primary">
