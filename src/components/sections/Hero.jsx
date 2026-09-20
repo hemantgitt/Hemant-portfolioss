@@ -4,6 +4,21 @@ import site from '../../data/site.json';
 import { Icon } from '../Icon.jsx';
 import { QuickStatsModal } from '../QuickStatsModal.jsx';
 
+// Maps hero.strengths (plain label strings) to the same lucide icon used for
+// that skill in skills.json, so the marquee tags below don't need their own
+// duplicate icon field in hero.json.
+const STRENGTH_ICONS = {
+  'React.js': 'atom',
+  'Next.js': 'triangle',
+  TypeScript: 'file-code',
+  'Frontend architecture': 'layout-template',
+  Performance: 'gauge',
+  Accessibility: 'accessibility',
+  'API integration': 'plug',
+  Security: 'shield-alert',
+  Testing: 'test-tube',
+};
+
 // Bump this whenever the hero-photo files in public/images are replaced.
 // Browsers (and the Vercel CDN) cache /images/hero-photo.* by URL, so
 // overwriting the same filename without a version marker can keep serving
@@ -47,37 +62,42 @@ export function Hero() {
             <span aria-hidden="true" className="status-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', display: 'block' }} />
             {hero.availabilityText}
           </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <picture>
-              <source srcSet={`/images/hero-photo.webp?v=${HERO_PHOTO_VERSION}`} type="image/webp" />
-              <img
-                className="hero-avatar-mobile"
-                src={`/images/hero-photo.jpg?v=${HERO_PHOTO_VERSION}`}
-                width={56}
-                height={56}
-                alt={`${hero.name}, ${hero.title}`}
-                loading="eager"
-                fetchPriority="high"
-              />
-            </picture>
-            <h1 id="hero-h" className="hero-name-in" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
-              {hero.name}
-            </h1>
+          <div className="hero-name-3d">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <picture>
+                <source srcSet={`/images/hero-photo.webp?v=${HERO_PHOTO_VERSION}`} type="image/webp" />
+                <img
+                  className="hero-avatar-mobile"
+                  src={`/images/hero-photo.jpg?v=${HERO_PHOTO_VERSION}`}
+                  width={56}
+                  height={56}
+                  alt={`${hero.name}, ${hero.title}`}
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </picture>
+              <h1 id="hero-h" className="hero-name-in hero-name-3d-text" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
+                {hero.name}
+              </h1>
+            </div>
+            <p className="hero-title-badge">
+              <Icon name="briefcase" size={14} />
+              {hero.title}
+              <span className="hero-title-badge-suffix">— {hero.titleSuffix}</span>
+            </p>
           </div>
-          <p style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: 'clamp(1.05rem, 2.2vw, 1.45rem)', lineHeight: 1.3, color: 'var(--muted)' }}>
-            {hero.title}
-            <span style={{ color: 'var(--text)' }}> — {hero.titleSuffix}</span>
-          </p>
           <p style={{ maxWidth: '56ch', fontSize: '1.05rem', lineHeight: 1.65, color: 'var(--muted)' }}>{hero.summary}</p>
           <div className="strengths-marquee" style={{ marginTop: 4 }}>
             <ul className="strengths-track" aria-label="Core strengths">
               {hero.strengths.map((s) => (
-                <li key={s} className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
+                <li key={s} className="tag" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
+                  {STRENGTH_ICONS[s] && <Icon name={STRENGTH_ICONS[s]} size={13} className="tag-icon" />}
                   {s}
                 </li>
               ))}
               {hero.strengths.map((s) => (
-                <li key={`${s}-dup`} aria-hidden="true" className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
+                <li key={`${s}-dup`} aria-hidden="true" className="tag" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.8rem', color: 'var(--text)', padding: '7px 13px' }}>
+                  {STRENGTH_ICONS[s] && <Icon name={STRENGTH_ICONS[s]} size={13} className="tag-icon" />}
                   {s}
                 </li>
               ))}

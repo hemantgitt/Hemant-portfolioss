@@ -103,6 +103,40 @@ button { font: inherit; }
 @keyframes hero-name-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .hero-name-in { animation: hero-name-in 0.6s ease-out both; }
 
+/* Name + title block gets a slight 3D extrusion: layered text-shadow gives
+   the headline physical depth, and the whole block tilts subtly on hover
+   like it's a raised plate reacting to the cursor (perspective + rotate).
+   Disabled under reduced-motion/data-motion=off, where only the flat
+   text-shadow depth remains. */
+.hero-name-3d { perspective: 800px; }
+.hero-name-3d-text {
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  width: fit-content;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-name-3d:hover .hero-name-3d-text { transform: rotateX(6deg) rotateY(-4deg) translateZ(6px); }
+}
+:root[data-motion="off"] .hero-name-3d-text,
+:root[data-motion="off"] .hero-name-3d:hover .hero-name-3d-text { transition: none; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-name-3d-text { transition: none; }
+  .hero-name-3d:hover .hero-name-3d-text { transform: none; }
+}
+
+.hero-title-badge {
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  font-family: var(--font-h); font-weight: 500; font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+  color: var(--muted); background: var(--surface); border: 1px solid var(--border);
+  padding: 8px 14px 8px 12px; border-radius: 999px; margin-top: 12px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, var(--shadow-sm);
+}
+.hero-title-badge svg { color: var(--accent); flex: none; }
+.hero-title-badge-suffix { color: var(--text); font-weight: 600; }
+
+.tag-icon { color: var(--accent); flex: none; }
+
 .exp-line-fill { transform: scaleY(0); transform-origin: top; }
 .exp-dot { transition: background 0.2s ease-out; }
 .exp-dot.is-active { background: var(--accent); }
@@ -476,7 +510,7 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
    directly) rather than a plain outline button, so it reads as "peek at my
    stats" instead of just another CTA lost in the button row. */
 .hero-stats-chip {
-  display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 10px; justify-self: start; width: fit-content;
   margin-top: 4px; padding: 9px 16px 9px 9px; border-radius: 999px; cursor: pointer;
   border: 1px solid var(--border-strong); background: var(--accent-tint);
   color: var(--text); font-family: var(--font-b); font-size: 0.86rem;
