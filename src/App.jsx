@@ -1,4 +1,4 @@
-import { Suspense, lazy, useCallback, useEffect, useMemo } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Header } from './components/Header.jsx';
 import { Hero } from './components/sections/Hero.jsx';
 import { ScrollProgressBar } from './components/ScrollProgressBar.jsx';
@@ -42,6 +42,8 @@ export default function App() {
   const reducedMotion = useReducedMotion(a11y.motionOff);
   const { active, setActive, showBackToTop, suppress } = useScrollSpy(SECTION_IDS);
   const { updateAvailable, applyUpdate } = useServiceWorkerUpdate();
+  const footerRef = useRef(null);
+  const [footerInView, setFooterInView] = useState(false);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -51,6 +53,19 @@ export default function App() {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [a11y]);
+
+  // The footer has its own "Back to top" button, so the fixed FAB (bottom-
+  // right, same corner the footer's button sits in at page-bottom widths)
+  // needs to step aside once the footer is on screen -- otherwise the two
+  // visually collide/overlap right where a visitor is most likely to reach
+  // for one of them.
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el || !('IntersectionObserver' in window)) return undefined;
+    const observer = new IntersectionObserver(([entry]) => setFooterInView(entry.isIntersecting));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleNavigate = useCallback(
     (id, suppressMs) => {
@@ -71,7 +86,10 @@ export default function App() {
     a11y.readSection('about');
   }, [a11y]);
 
-  const backToTopVisible = useMemo(() => showBackToTop && !a11y.panelOpen, [showBackToTop, a11y.panelOpen]);
+  const backToTopVisible = useMemo(
+    () => showBackToTop && !a11y.panelOpen && !footerInView,
+    [showBackToTop, a11y.panelOpen, footerInView]
+  );
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', fontFamily: 'var(--font-b)', display: 'flex', flexDirection: 'column' }}>
@@ -126,9 +144,11 @@ export default function App() {
         </Suspense>
       </main>
 
-      <Suspense fallback={null}>
-        <Footer reducedMotion={reducedMotion} />
-      </Suspense>
+      <div ref={footerRef}>
+        <Suspense fallback={null}>
+          <Footer reducedMotion={reducedMotion} />
+        </Suspense>
+      </div>
 
       <BackToTop visible={backToTopVisible} onClick={scrollToTop} />
 
