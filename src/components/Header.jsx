@@ -111,7 +111,7 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
         </a>
 
         <nav className="desk-only" aria-label="Primary">
-          <ul ref={navListRef} style={{ position: 'relative', display: 'flex', flexWrap: 'wrap', gap: 22, paddingBottom: 8 }}>
+          <ul ref={navListRef} className="nav-list" style={{ position: 'relative', display: 'flex', flexWrap: 'wrap', paddingBottom: 8 }}>
             <span
               aria-hidden="true"
               style={{
