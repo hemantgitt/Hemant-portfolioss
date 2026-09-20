@@ -37,7 +37,29 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <script>
+      // If the browser already knows it's offline, skip straight to the
+      // dedicated offline page (wifi icon, auto-reload on reconnect) rather
+      // than showing the generic "still loading" fallback below and making
+      // the visitor click Reload themselves once they're back online.
+      if (!navigator.onLine) location.replace('/offline.html');
+    </script>
+    <!-- Inline, dependency-free fallback: shows immediately since it needs
+         no external CSS/JS, and is silently replaced the moment React
+         mounts into #root (createRoot(...).render() overwrites it). If the
+         app bundle can't load at all -- offline with an asset missing from
+         cache, a flaky connection, a JS error -- this is what the visitor
+         sees instead of a blank white page, with a way to recover. -->
+    <div id="root">
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0a0d;color:#f3f3f6;font-family:system-ui,sans-serif;padding:20px;text-align:center;">
+        <div style="max-width:360px;">
+          <div style="width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:radial-gradient(circle,rgba(110,91,240,0.22),rgba(110,91,240,0.04) 70%);border:1px solid rgba(110,91,240,0.3);display:flex;align-items:center;justify-content:center;font-size:1.6rem;">↻</div>
+          <p style="margin:0 0 8px;font-weight:600;font-size:1.05rem;">Still loading…</p>
+          <p style="margin:0 0 20px;color:#98989f;font-size:0.88rem;line-height:1.55;">If this doesn't finish in a few seconds, check your connection and reload.</p>
+          <button type="button" onclick="location.reload()" style="cursor:pointer;border:none;border-radius:10px;padding:10px 20px;font-weight:600;font-size:0.85rem;color:#fff;background:#6e5bf0;">Reload</button>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

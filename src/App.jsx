@@ -4,7 +4,9 @@ import { Hero } from './components/sections/Hero.jsx';
 import { ScrollProgressBar } from './components/ScrollProgressBar.jsx';
 import { AccessibilityPanel } from './components/AccessibilityPanel.jsx';
 import { BackToTop } from './components/BackToTop.jsx';
+import { UpdateBanner } from './components/UpdateBanner.jsx';
 import { useTheme } from './hooks/useTheme.js';
+import { useServiceWorkerUpdate } from './hooks/useServiceWorkerUpdate.js';
 import { useAccentColor } from './hooks/useAccentColor.js';
 import { useAccessibilityPreferences } from './hooks/useAccessibilityPreferences.js';
 import { useReducedMotion } from './hooks/useReducedMotion.js';
@@ -39,6 +41,7 @@ export default function App() {
   const a11y = useAccessibilityPreferences();
   const reducedMotion = useReducedMotion(a11y.motionOff);
   const { active, setActive, showBackToTop, suppress } = useScrollSpy(SECTION_IDS);
+  const { updateAvailable, applyUpdate } = useServiceWorkerUpdate();
 
   useEffect(() => {
     const onKey = (e) => {
@@ -128,6 +131,8 @@ export default function App() {
       </Suspense>
 
       <BackToTop visible={backToTopVisible} onClick={scrollToTop} />
+
+      {updateAvailable && <UpdateBanner onRefresh={applyUpdate} />}
 
       {a11y.panelOpen && (
         <AccessibilityPanel
