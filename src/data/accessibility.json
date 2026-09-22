@@ -4,8 +4,7 @@
   "intro": "WCAG 2.1 AA is built-in, not audited later — shipped on healthcare platforms (see Impact). Here: semantic landmarks, ordered headings, visible focus rings, 44px touch targets, full keyboard navigation, and user preference controls.",
   "practices": [
     { "icon": "code-xml", "title": "Semantic HTML", "body": "Landmarks, lists and native controls before ARIA." },
-    { "icon": "heading-1", "title": "Heading hierarchy", "body": "One h1, ordered structure, no level skipping." },
-    { "icon": "keyboard", "title": "Keyboard paths", "body": "Every control reachable and operable without a pointer." },
+  
     { "icon": "focus", "title": "Visible focus", "body": "Focus ring on every interactive element." },
     { "icon": "ear", "title": "Screen readers", "body": "Meaningful names, live status regions, labelled icons." },
     { "icon": "scan-search", "title": "axe DevTools", "body": "Automated checks alongside manual keyboard and reader passes." },

@@ -2,8 +2,34 @@
 .spin { animation: spin 0.8s linear infinite; }
 :root[data-motion="off"] .spin { animation-duration: 1.6s; }
 
-.contact-form-field:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); background: var(--surface); }
+.contact-form-field:focus-visible { outline: none; border-color: var(--accent) !important; }
 .contact-form-field::placeholder { color: var(--muted); opacity: 0.7; }
+
+/* "Let's connect" card: a solid-accent info panel fused edge-to-edge with
+   the form panel (see ContactSection.jsx) rather than two separate cards,
+   modeled on a reference layout the user liked. */
+.contact-card-info {
+  position: relative; overflow: hidden;
+  background: linear-gradient(155deg, var(--accent), color-mix(in srgb, var(--accent) 60%, black));
+  color: var(--accent-contrast);
+  padding: clamp(28px, 4vw, 40px);
+}
+.contact-card-blob {
+  position: absolute; right: -70px; bottom: -70px; width: 230px; height: 230px;
+  border-radius: 50%; background: rgba(255,255,255,0.08); pointer-events: none;
+}
+.contact-card-icon {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; flex: none;
+  background: rgba(255,255,255,0.16); color: inherit;
+}
+.contact-card-resume-btn {
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  padding: 11px 18px; border-radius: 999px; font-family: var(--font-h); font-weight: 600; font-size: 0.86rem;
+  color: inherit; text-decoration: none; background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28); transition: background 0.2s ease;
+}
+.contact-card-resume-btn:hover, .contact-card-resume-btn:focus-visible { background: rgba(255,255,255,0.24); }
+.contact-card-form { background: var(--surface); padding: clamp(28px, 4vw, 40px); }
 
 /* Design tokens — ported 1:1 from the original static site so the visual
    design, dark/light themes and high-contrast mode are unchanged. */
@@ -392,6 +418,21 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 .flow-row { display: grid; grid-template-columns: 32px minmax(0,1fr); gap: 14px; align-items: start; padding: 13px 14px; }
 .flow-row:not(:first-child) { border-top: 1px solid var(--border); }
 
+/* Impact section's rows reuse .flow-row's divider/padding but need their
+   own column shape: a fixed 96px value column wrapped multi-word values
+   ("3.8s → 2.6s") onto two lines while leaving a wide, mostly-empty gap to
+   the label on desktop. max-content sizes the column to the widest value
+   actually present instead, so nothing wraps. The label+note pair also
+   switches from stacked to a single inline line at desktop widths --
+   stacked was needed on narrow mobile but just left the row looking sparse
+   once there was enough width for both on one line. */
+.impact-row { grid-template-columns: max-content minmax(0,1fr); column-gap: 22px; }
+.impact-value { white-space: nowrap; }
+.impact-detail { max-width: 640px; }
+@media (min-width: 720px) {
+  .impact-detail { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 10px; }
+}
+
 /* Accessibility section on mobile: only the first 4 practices show (full
    9 is desktop-only) and the "Try it on this page" card is dropped
    entirely, so the section doesn't dominate the mobile scroll -- .desk-only
@@ -618,6 +659,48 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
   background: radial-gradient(circle, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
   pointer-events: none;
 }
+/* CTA banner: same solid-accent-panel language as the "Let's connect" card
+   (ContactSection.jsx) so the footer reads as one deliberate close to the
+   page instead of a plain link list. */
+.contact-attachment-btn {
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content; cursor: pointer;
+  padding: 9px 15px; border-radius: 10px; border: 1px dashed var(--border-strong);
+  background: transparent; color: var(--muted); font-family: var(--font-b); font-size: 0.86rem;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.contact-attachment-btn:hover, .contact-attachment-btn:focus-visible { border-color: var(--accent); color: var(--accent); }
+.contact-attachment-chip {
+  display: flex; align-items: center; gap: 8px; width: fit-content; max-width: 100%;
+  padding: 8px 8px 8px 12px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); font-size: 0.85rem;
+}
+.contact-attachment-remove {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; flex: none; cursor: pointer;
+  border: none; background: transparent; color: var(--muted); transition: background 0.15s ease, color 0.15s ease;
+}
+.contact-attachment-remove:hover { background: var(--surface3); color: var(--danger, #e5484d); }
+
+.site-footer-cta {
+  position: relative; overflow: hidden; border-radius: 22px;
+  background: linear-gradient(155deg, var(--accent), color-mix(in srgb, var(--accent) 60%, black));
+  color: var(--accent-contrast);
+  padding: clamp(28px, 5vw, 44px);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+}
+.site-footer-cta-blob {
+  position: absolute; left: -60px; top: -80px; width: 220px; height: 220px;
+  border-radius: 50%; background: rgba(255,255,255,0.08); pointer-events: none;
+}
+.site-footer-cta-btn {
+  display: inline-flex; align-items: center; gap: 8px; flex: none;
+  padding: 13px 22px; border-radius: 999px; font-family: var(--font-h); font-weight: 600; font-size: 0.88rem;
+  text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease;
+}
+.site-footer-cta-btn-solid { background: var(--bg); color: var(--text); }
+.site-footer-cta-btn-solid:hover, .site-footer-cta-btn-solid:focus-visible { background: color-mix(in srgb, var(--bg) 85%, white); }
+.site-footer-cta-btn-outline { background: rgba(255,255,255,0.12); color: inherit; border: 1px solid rgba(255,255,255,0.32); }
+.site-footer-cta-btn-outline:hover, .site-footer-cta-btn-outline:focus-visible { background: rgba(255,255,255,0.22); }
+
 .site-footer-heading {
   margin: 0; font-family: var(--font-h); font-weight: 600; font-size: 0.82rem;
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
@@ -642,8 +725,14 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 .site-footer-bottom {
   position: relative;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
-  margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--border);
+  margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--border);
   font-size: 0.8rem; color: var(--muted);
+}
+.site-footer-bottom-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.site-footer-bottom-tag::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex: none;
 }
 .site-footer-top-btn {
   display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
