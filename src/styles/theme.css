@@ -2,7 +2,8 @@
 .spin { animation: spin 0.8s linear infinite; }
 :root[data-motion="off"] .spin { animation-duration: 1.6s; }
 
-.contact-form-field:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.contact-form-field:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); background: var(--surface); }
+.contact-form-field::placeholder { color: var(--muted); opacity: 0.7; }
 
 /* Design tokens — ported 1:1 from the original static site so the visual
    design, dark/light themes and high-contrast mode are unchanged. */
