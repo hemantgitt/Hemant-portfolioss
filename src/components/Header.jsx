@@ -269,7 +269,10 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
         style={{ maxWidth: 1180, margin: '8px auto 0', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, boxShadow: 'var(--shadow-md)' }}
       >
         <ul style={{ padding: 8, display: 'grid' }}>
-          {nav.map((item, i) => (
+          {/* Impact section is desktop-only (see ImpactSection.jsx), so its
+              link would be dead on mobile -- left out here rather than
+              scrolling to a hidden section. */}
+          {nav.filter((item) => item.href !== '#impact').map((item, i) => (
             <li key={item.href} style={{ borderTop: i === 0 ? 'none' : '1px solid var(--border)' }}>
               <a href={item.href} onClick={(e) => handleNavClick(e, item.href)} className="mobile-nav-link">
                 {item.label}

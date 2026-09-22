@@ -70,7 +70,8 @@ export function Footer({ reducedMotion } = {}) {
             <p className="site-footer-heading">Quick links</p>
             <ul style={{ display: 'grid', gap: 9, fontSize: '0.87rem' }}>
               {nav.map((item) => (
-                <li key={item.href}>
+                // Impact section is desktop-only (see ImpactSection.jsx); its link would be dead on mobile.
+                <li key={item.href} className={item.href === '#impact' ? 'desk-only' : undefined}>
                   <a href={item.href} className="site-footer-link">
                     {item.label}
                   </a>

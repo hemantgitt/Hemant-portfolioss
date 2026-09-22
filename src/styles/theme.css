@@ -418,20 +418,6 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 .flow-row { display: grid; grid-template-columns: 32px minmax(0,1fr); gap: 14px; align-items: start; padding: 13px 14px; }
 .flow-row:not(:first-child) { border-top: 1px solid var(--border); }
 
-/* Impact section's rows reuse .flow-row's divider/padding but need their
-   own column shape: a fixed 96px value column wrapped multi-word values
-   ("3.8s → 2.6s") onto two lines while leaving a wide, mostly-empty gap to
-   the label on desktop. max-content sizes the column to the widest value
-   actually present instead, so nothing wraps. The label+note pair also
-   switches from stacked to a single inline line at desktop widths --
-   stacked was needed on narrow mobile but just left the row looking sparse
-   once there was enough width for both on one line. */
-.impact-row { grid-template-columns: max-content minmax(0,1fr); column-gap: 22px; }
-.impact-value { white-space: nowrap; }
-.impact-detail { max-width: 640px; }
-@media (min-width: 720px) {
-  .impact-detail { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 10px; }
-}
 
 /* Accessibility section on mobile: only the first 4 practices show (full
    9 is desktop-only) and the "Try it on this page" card is dropped
