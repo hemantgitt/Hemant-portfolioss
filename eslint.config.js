@@ -27,5 +27,9 @@ export default [
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
+  {
+    files: ['api/**/*.js'],
+    languageOptions: { globals: { ...globals.node } },
+  },
   prettierConfig,
 ];

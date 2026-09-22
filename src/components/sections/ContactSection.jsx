@@ -3,13 +3,14 @@ import site from '../../data/site.json';
 import { SectionHeader } from '../SectionHeader.jsx';
 import { Icon } from '../Icon.jsx';
 import { LinkedInIcon } from '../LinkedInIcon.jsx';
+import { ContactForm } from '../ContactForm.jsx';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver.js';
 
 export function ContactSection({ reducedMotion }) {
   const [ref, visible] = useIntersectionObserver({ reduced: reducedMotion });
   return (
     <section id="contact" ref={ref} aria-labelledby="contact-h" data-readable="Contact details" className={visible ? 'reveal-in' : 'reveal-init'} style={{ borderTop: '1px solid var(--border)' }}>
-      <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px,8vw,96px) 20px', display: 'grid', gap: 24 }}>
+      <div className="split" style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px,8vw,96px) 20px', display: 'grid', gap: 40, '--sa': '1.1fr', '--sb': '1fr' }}>
         <div style={{ display: 'grid', gap: 18, alignContent: 'start', maxWidth: '60ch' }}>
           <div>
             <SectionHeader eyebrow={contact.eyebrow} title={contact.title} id="contact-h" style={{ marginBottom: 12 }} />
@@ -52,6 +53,7 @@ export function ContactSection({ reducedMotion }) {
             Download Resume
           </a>
         </div>
+        <ContactForm />
       </div>
     </section>
   );

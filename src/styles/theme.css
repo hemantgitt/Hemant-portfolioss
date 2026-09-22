@@ -1,3 +1,9 @@
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin { animation: spin 0.8s linear infinite; }
+:root[data-motion="off"] .spin { animation-duration: 1.6s; }
+
+.contact-form-field:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+
 /* Design tokens — ported 1:1 from the original static site so the visual
    design, dark/light themes and high-contrast mode are unchanged. */
 :root {
@@ -110,7 +116,12 @@ button { font: inherit; }
    text-shadow depth remains. */
 .hero-name-3d { perspective: 800px; }
 .hero-name-3d-text {
-  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  /* A fixed rgba(0,0,0,..) shadow reads as depth on the dark theme's near-
+     black bg, but on the light theme's pale bg the same dark, heavily
+     blurred shadow shows up as a dirty smudge under the text instead.
+     color-mix against --text keeps it dark-on-dark / light-on-light and
+     tones the blur down so it stays a subtle lift, not a stain. */
+  text-shadow: 0 3px 8px color-mix(in srgb, var(--text) 14%, transparent);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
   width: fit-content;
