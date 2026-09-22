@@ -16,27 +16,30 @@ export function AboutSection({ reducedMotion }) {
     >
       <div className="split" style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px,8vw,96px) 20px', display: 'grid', gap: 40, '--sa': '0.7fr', '--sb': '1.3fr' }}>
         <SectionHeader eyebrow={about.eyebrow} title={about.title} id="about-h" />
-        <div style={{ display: 'grid', gap: 20 }}>
-          <p className="desk-only" style={{ fontSize: '1.15rem', lineHeight: 1.6, fontFamily: 'var(--font-h)', fontWeight: 500, letterSpacing: '-0.005em' }}>
-            {about.intro}
-          </p>
-          <p className="mob-only" style={{ fontSize: '1.15rem', lineHeight: 1.6, fontFamily: 'var(--font-h)', fontWeight: 500, letterSpacing: '-0.005em' }}>
-            {about.introMobile}
-          </p>
-          <ul style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', marginTop: 8 }}>
-            {about.focus.map((f, i) => (
-              <li
-                key={f.label}
-                className={`info-chip${visible ? ' card-reveal-in' : ''}`}
-                style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.86rem', padding: '10px 14px', borderRadius: 12, ...(visible ? { animationDelay: `${i * 60}ms` } : { opacity: 0 }) }}
-              >
-                <span className="icon-chip" style={{ width: 24, height: 24 }}>
-                  <Icon name={f.icon} size={14} />
+
+        {/* Narrative left, strengths as a compact row-list card on the
+            right -- deliberately not the pill/icon-tag pattern Hero's
+            skill tags use, so the two sections read as different content
+            with a different shape, not a visual repeat. */}
+        <div className="split" style={{ display: 'grid', gap: 28, '--sa': '1.3fr', '--sb': '1fr' }}>
+          <div>
+            <p className="desk-only" style={{ fontSize: '1.15rem', lineHeight: 1.6, fontFamily: 'var(--font-h)', fontWeight: 500, letterSpacing: '-0.005em', margin: 0 }}>
+              {about.intro}
+            </p>
+            <p className="mob-only" style={{ fontSize: '1.15rem', lineHeight: 1.6, fontFamily: 'var(--font-h)', fontWeight: 500, letterSpacing: '-0.005em', margin: 0 }}>
+              {about.introMobile}
+            </p>
+          </div>
+          <div className={`feature-card${visible ? ' card-reveal-in' : ''}`} style={{ padding: 8, alignSelf: 'start' }}>
+            {about.focus.map((f) => (
+              <div key={f.label} className="flow-row">
+                <span className="icon-chip" style={{ width: 32, height: 32 }}>
+                  <Icon name={f.icon} size={15} />
                 </span>
-                {f.label}
-              </li>
+                <span style={{ fontFamily: 'var(--font-h)', fontWeight: 500, fontSize: '0.88rem', alignSelf: 'center' }}>{f.label}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </section>

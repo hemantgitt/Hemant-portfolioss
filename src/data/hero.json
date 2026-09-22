@@ -3,7 +3,7 @@
   "title": "Senior Software Engineer",
   "titleSuffix": "Frontend",
   "availabilityText": "Open to senior frontend roles",
-  "summary": "Six years building production React.js and Next.js applications across automotive, healthcare, entertainment and government platforms. I work on the parts of the frontend that are hard to retrofit: architecture, Core Web Vitals, WCAG 2.1 AA accessibility and frontend security.",
+  "summary": "I build the parts of the frontend that are hard to retrofit — architecture, performance, and accessibility that hold up under real production load.",
   "strengths": ["React.js", "Next.js", "TypeScript", "Frontend architecture", "Performance", "Accessibility", "API integration", "Security", "Testing"],
   "facts": [
     { "label": "Experience", "value": "6 years", "note": "Production React & Next.js" },

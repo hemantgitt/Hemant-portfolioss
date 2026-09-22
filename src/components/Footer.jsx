@@ -31,26 +31,8 @@ export function Footer({ reducedMotion } = {}) {
     <footer ref={ref} className="site-footer">
       <span aria-hidden="true" className="site-footer-topline" />
       <div style={{ maxWidth: 1180, margin: '0 auto', padding: '64px 20px 28px', position: 'relative' }}>
-        <div className={`site-footer-cta${visible ? ' card-reveal-in' : ''}`} style={visible ? undefined : { opacity: 0 }}>
-          <span aria-hidden="true" className="site-footer-cta-blob" />
-          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gap: 6, maxWidth: '38ch' }}>
-            <h3 style={{ margin: 0, fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(1.25rem, 2.6vw, 1.6rem)' }}>Let&apos;s build something great</h3>
-            <p style={{ margin: 0, fontSize: '0.92rem', opacity: 0.88, lineHeight: 1.5 }}>Open to senior frontend roles — email works fastest.</p>
-          </div>
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-            <a href={site.emailHref} className="site-footer-cta-btn site-footer-cta-btn-solid">
-              <Icon name="mail" size={15} />
-              Email me
-            </a>
-            <a href={site.resumeUrl} download={site.resumeDownloadName} className="site-footer-cta-btn site-footer-cta-btn-outline">
-              <Icon name="download" size={15} />
-              Resume
-            </a>
-          </div>
-        </div>
-
         <div
-          style={{ display: 'grid', gap: 48, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', marginTop: 48 }}
+          style={{ display: 'grid', gap: 48, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}
           className={visible ? 'reveal-in' : 'reveal-init'}
         >
           <div style={{ display: 'grid', gap: 14 }}>
