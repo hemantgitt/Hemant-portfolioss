@@ -21,13 +21,13 @@ function SectionHeaderBase({ eyebrow, title, id, subtitle, style }) {
       </p>
       <h2
         id={id}
+        className="font-display"
         style={{
           margin: 0,
-          fontFamily: 'var(--font-h)',
-          fontWeight: 700,
+          fontWeight: 600,
           fontSize: 'clamp(1.7rem, 3.4vw, 2.3rem)',
-          letterSpacing: '-0.02em',
-          lineHeight: 1.1,
+          letterSpacing: '-0.01em',
+          lineHeight: 1.15,
         }}
       >
         {title}

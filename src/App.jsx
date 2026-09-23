@@ -10,7 +10,6 @@ import { SkillsSection } from './components/sections/SkillsSection.jsx';
 import { ExperienceSection } from './components/sections/ExperienceSection.jsx';
 import { ProjectsSection } from './components/sections/ProjectsSection.jsx';
 import { ImpactSection } from './components/sections/ImpactSection.jsx';
-import { PerformanceSection } from './components/sections/PerformanceSection.jsx';
 import { AccessibilitySection } from './components/sections/AccessibilitySection.jsx';
 import { EngineeringSection } from './components/sections/EngineeringSection.jsx';
 import { EducationSection } from './components/sections/EducationSection.jsx';
@@ -108,7 +107,6 @@ export default function App() {
         <ExperienceSection reducedMotion={reducedMotion} />
         <ProjectsSection reducedMotion={reducedMotion} />
         <ImpactSection reducedMotion={reducedMotion} />
-        <PerformanceSection reducedMotion={reducedMotion} />
         <AccessibilitySection reducedMotion={reducedMotion} onOpenPanel={a11y.openPanel} onReadAloud={handleReadAloudFromAccessibility} />
         <EngineeringSection reducedMotion={reducedMotion} />
         <EducationSection reducedMotion={reducedMotion} />

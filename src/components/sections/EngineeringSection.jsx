@@ -21,6 +21,15 @@ export function EngineeringSection({ reducedMotion }) {
                 <span>
                   <strong style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.94rem', display: 'block', marginTop: 2 }}>{eng[key].title}</strong>
                   <span style={{ fontSize: '0.85rem', lineHeight: 1.5, color: 'var(--muted)' }}>{eng[key].body}</span>
+                  {eng[key].tags && (
+                    <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
+                      {eng[key].tags.map((t) => (
+                        <li key={t} className="tag" style={{ fontSize: '0.76rem' }}>
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </span>
               </li>
             ))}

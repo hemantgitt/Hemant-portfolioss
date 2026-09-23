@@ -1,5 +1,5 @@
 {
-  "eyebrow": "07 — Accessibility",
+  "eyebrow": "06 — Accessibility",
   "title": "Accessibility, demonstrated",
   "intro": "WCAG 2.1 AA is built-in, not audited later — shipped on healthcare platforms (see Impact). Here: semantic landmarks, ordered headings, visible focus rings, 44px touch targets, full keyboard navigation, and user preference controls.",
   "practices": [

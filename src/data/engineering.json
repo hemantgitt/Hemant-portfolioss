@@ -1,19 +1,22 @@
 {
-  "eyebrow": "08 — Engineering practice",
+  "eyebrow": "07 — Engineering practice",
   "title": "Security, testing & AI-assisted delivery",
   "security": {
     "icon": "shield-check",
     "title": "Frontend security",
-    "body": "JWT auth, RBAC and XSS/CSRF-aware handling across patient, admin and document-upload flows."
+    "body": "JWT/OAuth2 auth and RBAC across patient, admin and document-upload flows, with XSS/CSRF-aware handling and SonarQube-enforced quality gates on every merge.",
+    "tags": ["JWT", "OAuth2", "RBAC", "XSS / CSRF prevention", "SonarQube"]
   },
   "testing": {
     "icon": "flask-conical",
     "title": "Testing & quality",
-    "body": "Jest & React Testing Library on the paths that matter most — 90% statement coverage on PVR INOX booking & payment."
+    "body": "Jest and React Testing Library on the paths that matter most — 90% statement coverage on PVR INOX's booking & payment flow, enforced through SonarQube quality gates before merge.",
+    "tags": ["Jest", "React Testing Library", "SonarQube", "90% coverage"]
   },
   "ai": {
     "icon": "cpu",
     "title": "AI-assisted, engineer-reviewed",
-    "body": "AI-assisted at Appinventiv, but every generated change clears the same review bar as hand-written code before merging."
+    "body": "GitHub Copilot, Cursor and Claude (via MCP connectors) for prompt engineering, test scaffolding, code review and Figma-to-code conversion — cut delivery time by about 30% at UV Technologies, with every AI-generated change reviewed for bugs and security issues before merge.",
+    "tags": ["GitHub Copilot", "Cursor", "Claude (MCP)", "~30% faster delivery"]
   }
 }

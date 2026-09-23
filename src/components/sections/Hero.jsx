@@ -76,7 +76,7 @@ export function Hero() {
                   fetchPriority="high"
                 />
               </picture>
-              <h1 id="hero-h" className="hero-name-in hero-name-3d-text" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.02em' }}>
+              <h1 id="hero-h" className="hero-name-in hero-name-3d-text font-display" style={{ fontWeight: 600, fontSize: 'clamp(2.4rem, 6vw, 4.2rem)', lineHeight: 1.03, letterSpacing: '-0.01em' }}>
                 {hero.name}
               </h1>
             </div>

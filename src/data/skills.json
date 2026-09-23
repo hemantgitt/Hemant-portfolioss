@@ -22,10 +22,12 @@
       { "name": "Lighthouse", "icon": "activity" }
     ] },
     { "id": "sg-qa", "name": "Quality & accessibility", "icon": "accessibility", "items": [
-      { "name": "Jest", "icon": "flask-conical" }, { "name": "React Testing Library", "icon": "test-tube" },
+      { "name": "Jest", "icon": "flask-conical" }, { "name": "Vitest", "icon": "search-check" },
+      { "name": "React Testing Library", "icon": "test-tube" },
       { "name": "SonarQube", "icon": "scan-search" }, { "name": "WCAG 2.1 AA", "icon": "accessibility" },
       { "name": "ARIA", "icon": "ear" }, { "name": "XSS / CSRF prevention", "icon": "shield-alert" },
-      { "name": "JWT", "icon": "key-round" }, { "name": "OAuth2", "icon": "shield-check" }, { "name": "RBAC", "icon": "lock" }
+      { "name": "JWT", "icon": "key-round" }, { "name": "OAuth2", "icon": "shield-check" },
+      { "name": "Microsoft Entra ID", "icon": "globe" }, { "name": "RBAC", "icon": "lock" }
     ] },
     { "id": "sg-tool", "name": "Tooling & CI/CD", "icon": "wrench", "items": [
       { "name": "GitHub Actions", "icon": "git-branch" }, { "name": "AWS (EC2, S3, CloudFront)", "icon": "cloud" },
@@ -36,7 +38,10 @@
       { "name": "Husky", "icon": "git-pull-request" }
     ] },
     { "id": "sg-ai", "name": "AI-assisted development", "icon": "cpu", "items": [
-      { "name": "GitHub Copilot", "icon": "cpu" }, { "name": "Cursor", "icon": "text-cursor" }, { "name": "Claude", "icon": "bot" }
+      { "name": "GitHub Copilot", "icon": "cpu" }, { "name": "Cursor", "icon": "text-cursor" }, { "name": "Claude", "icon": "bot" },
+      { "name": "MCP connectors (Cursor, Figma)", "icon": "plug" }, { "name": "AI code review", "icon": "scan-search" },
+      { "name": "Prompt engineering", "icon": "braces" }, { "name": "Test scaffolding", "icon": "flask-conical" },
+      { "name": "Figma-to-code", "icon": "figma" }
     ] }
   ]
 }

@@ -7,7 +7,16 @@ export function ImpactSection({ reducedMotion }) {
   return (
     <section id="impact" ref={ref} aria-labelledby="impact-h" data-readable="Engineering impact" className={`desk-only${visible ? ' reveal-in' : ' reveal-init'}`} style={{ borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px,8vw,96px) 20px' }}>
-        <SectionHeader eyebrow={impact.eyebrow} title={impact.title} id="impact-h" subtitle={impact.intro} style={{ marginBottom: 36 }} />
+        <SectionHeader eyebrow={impact.eyebrow} title={impact.title} id="impact-h" subtitle={impact.intro} style={{ marginBottom: 18 }} />
+
+        <p style={{ margin: '0 0 14px', fontSize: '0.92rem', color: 'var(--muted)' }}>{impact.approach}</p>
+        <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 28 }}>
+          {impact.topics.map((t) => (
+            <li key={t} className="tag" style={{ fontFamily: 'var(--font-h)', fontWeight: 500 }}>
+              {t}
+            </li>
+          ))}
+        </ul>
 
         {/* One stat-card grid for every viewport -- single column and
             stacked on mobile, 3 columns on desktop via .grid-auto's own

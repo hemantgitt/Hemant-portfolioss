@@ -46,7 +46,15 @@
   --shadow-lg: 0 24px 64px rgba(0,0,0,0.5);
   --font-h: 'Space Grotesk', system-ui, sans-serif;
   --font-b: 'Manrope', system-ui, sans-serif;
+  /* Serif display face for large headlines only (hero name, section
+     titles) -- everything else (nav, buttons, badges, pills, eyebrow
+     labels) stays on --font-h, since a serif reads badly at small UI
+     sizes. This is what actually breaks the "SaaS dashboard" look: big
+     type is where a typeface's personality shows, not 12px nav links. */
+  --font-display: 'Fraunces', 'Space Grotesk', system-ui, serif;
 }
+
+.font-display { font-family: var(--font-display); }
 :root[data-theme="light"] {
   --bg: #faf9fb; --surface: #ffffff; --surface2: #f4f3f7; --surface3: #edecf2;
   --border: rgba(20,16,30,0.09); --border-strong: rgba(20,16,30,0.16);

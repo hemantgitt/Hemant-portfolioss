@@ -2,6 +2,8 @@
   "eyebrow": "05 — Impact",
   "title": "Measured outcomes",
   "intro": "Every figure below is documented from the work in my resume — no estimates added.",
+  "approach": "Measure first, code second — Lighthouse CI and real-user field data find the bottleneck before I touch code.",
+  "topics": ["Core Web Vitals", "LCP", "INP", "CLS", "Code splitting", "Lazy loading", "Bundle optimisation", "SSR", "ISR", "Caching"],
   "items": [
     { "project": "Sonny's Quivio", "value": "3.8s → 2.6s", "label": "Largest Contentful Paint", "note": "Multi-tenant Next.js UI." },
     { "project": "Sonny's Quivio", "value": "−25%", "label": "Initial bundle size", "note": "Shared tenant module optimisation." },
