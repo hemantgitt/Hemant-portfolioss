@@ -11,7 +11,7 @@
       ], "projects": ["Sonny's Quivio", "Evaria - Cycles & Wellness", "PVR INOX"],
       "tech": ["Next.js", "React", "TypeScript", "Redux Toolkit", "GraphQL", "Vite"] },
     { "company": "UV Technologies", "title": "Senior Frontend Developer", "meta": "Noida · Nov 2022 – Aug 2024",
-      "points": [
+      "points": [ 
         "Mentored a team of 4 engineers on React/TypeScript best practices and accessibility standards, building the code review checklist the team still uses.",
         "Used AI pair-programming (Claude, Cursor) to speed up delivery by about 30%, reviewing every AI-generated change for security issues before merge.",
         "Built the SSR portal for a national government examination platform, cutting load time by 20% and shipping multi-language (i18n) support.",
