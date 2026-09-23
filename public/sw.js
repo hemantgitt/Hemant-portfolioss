@@ -45,14 +45,14 @@
 // again on the next deploy (a byte-identical sw.js is never re-fetched or
 // re-installed by the browser) -- bump it whenever this file OR the set of
 // files it needs to precache changes.
-const CACHE_NAME = 'hjha-portfolio-v11';
+const CACHE_NAME = 'hjha-portfolio-v12';
 const APP_SHELL = ['/', '/index.html', '/manifest.webmanifest', '/favicon.svg', '/offline.html'];
 // Cached separately from APP_SHELL (not with cache.addAll, which fails the
 // *entire* install atomically if even one URL 404s) — the filename has a
 // version suffix that's likely to change on a future re-upload, and a
 // stale/missing resume link shouldn't be able to take down offline caching
 // for the whole rest of the site.
-const RESUME_PDF_URL = '/uploads/Hemant_Jha_Senior_Software_Engineer_Frontend_v23.pdf';
+const RESUME_PDF_URL = '/uploads/Hemant_Kumar_Jha_Senior_Software_Engineer_Frontend_Updated_26.pdf';
 
 async function precacheBuildAssets(cache) {
   try {

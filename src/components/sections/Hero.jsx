@@ -108,9 +108,9 @@ export function Hero() {
               View my work
               <Icon name="arrow-down-right" size={15} />
             </a>
-            <a href={site.resumeUrl} download={site.resumeDownloadName} className="btn btn-outline" style={{ minHeight: 46, paddingInline: 22, fontSize: '0.9rem' }}>
-              <Icon name="download" size={15} />
-              Download Resume
+            <a href={site.resumeUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ minHeight: 46, paddingInline: 22, fontSize: '0.9rem' }}>
+              <Icon name="eye" size={15} />
+              View Resume
             </a>
             <a href="#contact" className="btn btn-outline" style={{ minHeight: 46, paddingInline: 22, fontSize: '0.9rem' }}>
               <Icon name="mail" size={15} />

@@ -1,9 +1,9 @@
 {
   "eyebrow": "01 — About",
   "title": "Professional summary",
-  "intro": "Six years, four industries — automotive, healthcare, entertainment and government — each with a different bar for what \"production-ready\" means. My approach stays the same everywhere: understand the constraint before writing the component, build the reusable version instead of the one-off, and treat code review as part of shipping rather than a gate after it.",
-  "introMobile": "Six years, four industries — automotive, healthcare, entertainment, government. Core approach: understand the constraint, build reusable components, treat code review as part of shipping, not a gate.",
-  "body": "Day to day that means designing component libraries and state/data-fetching patterns teams can build on, testing the flows that carry money and personal data, and owning code review standards. I most recently mentored four engineers at Appinventiv, where the React, TypeScript and accessibility review standards I established were adopted team-wide.",
+  "intro": "Senior Software Engineer - Frontend with 6 years building production React.js and Next.js applications across automotive, healthcare, entertainment, and government platforms. Focused on Core Web Vitals optimization, WCAG 2.1 AA accessibility, and frontend security. Experienced mentoring engineers, working in Agile/Scrum teams with Jira, and establishing code quality standards.",
+  "introMobile": "Senior Software Engineer - Frontend with 6 years building production React.js and Next.js applications across automotive, healthcare, entertainment, and government platforms. Focused on Core Web Vitals, WCAG 2.1 AA and frontend security, mentoring engineers in Agile/Scrum teams with Jira.",
+  "body": "Day to day that means designing component libraries and state/data-fetching patterns teams can build on, testing the flows that carry money and personal data, and owning code quality standards within Agile/Scrum delivery. I most recently mentored four engineers at Appinventiv, where the React, TypeScript and accessibility review standards I established were adopted team-wide.",
   "focus": [
     { "icon": "layout-template", "label": "Frontend architecture" },
     { "icon": "gauge", "label": "Core Web Vitals" },
