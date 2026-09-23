@@ -32,6 +32,15 @@ function ExperienceItemBase({ item, isActive }) {
               </li>
             ))}
           </ul>
+          {item.tech && (
+            <ul style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 2 }}>
+              {item.tech.map((t) => (
+                <li key={t} className="tag" style={{ fontSize: '0.76rem' }}>
+                  {t}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </li>

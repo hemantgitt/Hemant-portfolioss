@@ -4,19 +4,26 @@
   "items": [
     { "company": "Appinventiv", "title": "Senior Software Engineer, Frontend", "meta": "Noida · Sep 2024 – Jul 2026",
       "points": [
-        "Mentored 4 engineers and established frontend code review standards for React, TypeScript and accessibility, adopted team-wide.",
-        "Accelerated feature delivery by about 30% using AI-assisted development (Claude, Cursor).",
-        "Reviewed every AI-generated change for bugs and security issues — race conditions, stale closures, XSS/CSRF — before merge and AWS deployment."
-      ], "projects": ["Sonny's Quivio", "Evaria - Cycles & Wellness", "PVR INOX"] },
+        "Led frontend architecture for a multi-tenant automotive dealer platform, built with Micro Frontend/Module Federation across CRM, SAT and white-label modules on one shared component system.",
+        "Cut page load time by 30%+ by migrating the build pipeline to Vite + Rollup and optimizing Core Web Vitals (LCP: 3.8s → 2.6s).",
+        "Shipped a WCAG 2.1 AA-compliant healthcare portal with OAuth2/JWT auth, real-time GraphQL/WebSocket updates and integrated payments.",
+        "Built a booking & payment flow with 90% test coverage and SonarQube-enforced code quality."
+      ], "projects": ["Sonny's Quivio", "Evaria - Cycles & Wellness", "PVR INOX"],
+      "tech": ["Next.js", "React", "TypeScript", "Redux Toolkit", "GraphQL", "Vite"] },
     { "company": "UV Technologies", "title": "Senior Frontend Developer", "meta": "Noida · Nov 2022 – Aug 2024",
       "points": [
-        "Led requirements gathering with government stakeholders, translating compliance and audit requirements into UI specifications.",
-        "Partnered with backend and QA teams to deliver against strict security and accessibility review gates."
-      ], "projects": ["UPSC Examination Platform"] },
+        "Mentored a team of 4 engineers on React/TypeScript best practices and accessibility standards, building the code review checklist the team still uses.",
+        "Used AI pair-programming (Claude, Cursor) to speed up delivery by about 30%, reviewing every AI-generated change for security issues before merge.",
+        "Built the SSR portal for a national government examination platform, cutting load time by 20% and shipping multi-language (i18n) support.",
+        "Rolled out accessibility tooling (axe DevTools) across projects and trained the team on WCAG 2.1 AA patterns."
+      ], "projects": ["UPSC Examination Platform"],
+      "tech": ["Next.js", "React", "TypeScript", "Material UI", "i18n"] },
     { "company": "Blue9 Technologies", "title": "Software Engineer", "meta": "Gurugram · Aug 2020 – Oct 2022",
       "points": [
-        "Developed reusable React components and REST API integrations for content management and translation features across multiple locales.",
-        "Converted designs into responsive, cross-browser interfaces using Material UI with WCAG 2.1 AA accessibility."
-      ], "projects": ["Arab EZ Translator"] }
+        "Built the core rich-text editor for a translation platform — formatting controls, live word count and syntax highlighting.",
+        "Converted Figma designs into 10+ reusable, WCAG-accessible UI components using Material UI and Design Tokens.",
+        "Built REST API integrations powering content management across multiple locales."
+      ], "projects": ["Arab EZ Translator"],
+      "tech": ["React", "JavaScript (ES6+)", "Material UI", "REST APIs"] }
   ]
 }

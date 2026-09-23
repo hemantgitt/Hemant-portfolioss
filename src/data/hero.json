@@ -3,7 +3,7 @@
   "title": "Senior Software Engineer",
   "titleSuffix": "Frontend",
   "availabilityText": "Open to senior frontend roles",
-  "summary": "I build the parts of the frontend that are hard to retrofit — architecture, performance, and accessibility that hold up under real production load.",
+  "summary": "Frontend engineer who ships production React/Next.js at scale — cutting load times, shipping accessible UI, and closing security gaps before they ship.",
   "strengths": ["React.js", "Next.js", "TypeScript", "Frontend architecture", "Performance", "Accessibility", "API integration", "Security", "Testing"],
   "facts": [
     { "label": "Experience", "value": "6 years", "note": "Production React & Next.js" },
