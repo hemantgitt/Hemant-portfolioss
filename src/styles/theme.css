@@ -277,6 +277,20 @@ button { font: inherit; }
 .icon-btn:hover { background: var(--surface2); }
 .icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* Mobile menu toggle: 3 lines that morph into an X on open instead of
+   swapping two unrelated icons instantly (which read as a flicker/flash).
+   The middle line fades while the outer two rotate and slide to meet at
+   the center -- one continuous, smooth motion. */
+.hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; width: 17px; height: 13px; }
+.hamburger-line {
+  display: block; width: 100%; height: 2px; border-radius: 2px; background: currentColor;
+  transform-origin: center; transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.2s ease;
+}
+.hamburger-btn.is-open .hamburger-line:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.hamburger-btn.is-open .hamburger-line:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-open .hamburger-line:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+:root[data-motion="off"] .hamburger-line { transition: none; }
+
 .btn {
   display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
   font-family: var(--font-h); font-weight: 600; border-radius: 12px; cursor: pointer; border: none;

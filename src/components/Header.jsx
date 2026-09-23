@@ -248,14 +248,18 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
             Resume
           </a>
           <button
-            className="mob-only icon-btn"
+            className={`mob-only icon-btn hamburger-btn${menuOpen ? ' is-open' : ''}`}
             type="button"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMenuOpen((v) => !v)}
           >
-            <Icon name={menuOpen ? 'x' : 'menu'} size={17} />
+            <span aria-hidden="true" className="hamburger-lines">
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+            </span>
           </button>
         </div>
       </div>
