@@ -3,45 +3,45 @@
   "title": "Technologies I work with",
   "groups": [
     { "id": "sg-fe", "name": "Frontend", "icon": "code-xml", "items": [
-      { "name": "React.js", "icon": "atom" }, { "name": "Next.js (SSR/ISR)", "icon": "triangle" },
-      { "name": "TypeScript", "icon": "file-code" }, { "name": "JavaScript (ES6+)", "icon": "braces" },
-      { "name": "HTML5", "icon": "code" }, { "name": "CSS / SCSS", "icon": "palette" },
-      { "name": "Tailwind CSS", "icon": "wind" }, { "name": "Material UI", "icon": "layout-panel-left" },
-      { "name": "Micro Frontend (Module Federation)", "icon": "layout-template" }
+      { "name": "React.js", "icon": "atom", "brand": "react" }, { "name": "Next.js (SSR/ISR)", "icon": "triangle", "brand": "nextdotjs" },
+      { "name": "TypeScript", "icon": "file-code", "brand": "typescript" }, { "name": "JavaScript (ES6+)", "icon": "braces", "brand": "javascript" },
+      { "name": "HTML5", "icon": "code", "brand": "html5" }, { "name": "CSS / SCSS", "icon": "palette", "brand": "sass" },
+      { "name": "Tailwind CSS", "icon": "wind", "brand": "tailwindcss" }, { "name": "Material UI", "icon": "layout-panel-left", "brand": "mui" },
+      { "name": "Micro Frontend (Module Federation)", "icon": "layout-template", "brand": "webpack" }
     ] },
     { "id": "sg-state", "name": "State & data", "icon": "database", "items": [
-      { "name": "Redux Toolkit", "icon": "refresh-cw" }, { "name": "TanStack Query", "icon": "database" },
-      { "name": "React Hooks", "icon": "anchor" }, { "name": "REST APIs", "icon": "plug" },
-      { "name": "GraphQL", "icon": "share-2" }
+      { "name": "Redux Toolkit", "icon": "refresh-cw", "brand": "redux" }, { "name": "TanStack Query", "icon": "database", "brand": "reactquery" },
+      { "name": "React Hooks", "icon": "anchor", "brand": "react" }, { "name": "REST APIs", "icon": "plug" },
+      { "name": "GraphQL", "icon": "share-2", "brand": "graphql" }
     ] },
     { "id": "sg-perf", "name": "Performance", "icon": "gauge", "items": [
       { "name": "Core Web Vitals", "icon": "gauge" }, { "name": "LCP", "icon": "image" },
       { "name": "INP", "icon": "mouse-pointer-click" }, { "name": "CLS", "icon": "move-vertical" },
-      { "name": "Bundle optimization", "icon": "container" }, { "name": "Vite", "icon": "zap" },
-      { "name": "Rollup", "icon": "settings-2" }, { "name": "Webpack", "icon": "package" },
-      { "name": "Lighthouse", "icon": "activity" }
+      { "name": "Bundle optimization", "icon": "container" }, { "name": "Vite", "icon": "zap", "brand": "vite" },
+      { "name": "Rollup", "icon": "settings-2", "brand": "rollupdotjs" }, { "name": "Webpack", "icon": "package", "brand": "webpack" },
+      { "name": "Lighthouse", "icon": "activity", "brand": "lighthouse" }
     ] },
     { "id": "sg-qa", "name": "Quality & accessibility", "icon": "accessibility", "items": [
-      { "name": "Jest", "icon": "flask-conical" }, { "name": "Vitest", "icon": "search-check" },
-      { "name": "React Testing Library", "icon": "test-tube" },
-      { "name": "SonarQube", "icon": "scan-search" }, { "name": "WCAG 2.1 AA", "icon": "accessibility" },
+      { "name": "Jest", "icon": "flask-conical", "brand": "jest" }, { "name": "Vitest", "icon": "search-check", "brand": "vitest" },
+      { "name": "React Testing Library", "icon": "test-tube", "brand": "testinglibrary" },
+      { "name": "SonarQube", "icon": "scan-search", "brand": "sonarqubeserver" }, { "name": "WCAG 2.1 AA", "icon": "accessibility" },
       { "name": "ARIA", "icon": "ear" }, { "name": "XSS / CSRF prevention", "icon": "shield-alert" },
-      { "name": "JWT", "icon": "key-round" }, { "name": "OAuth2", "icon": "shield-check" },
+      { "name": "JWT", "icon": "key-round", "brand": "jsonwebtokens" }, { "name": "OAuth2", "icon": "shield-check" },
       { "name": "Microsoft Entra ID", "icon": "globe" }, { "name": "RBAC", "icon": "lock" }
     ] },
     { "id": "sg-tool", "name": "Tooling & CI/CD", "icon": "wrench", "items": [
-      { "name": "GitHub Actions", "icon": "git-branch" }, { "name": "AWS (EC2, S3, CloudFront)", "icon": "cloud" },
-      { "name": "Docker", "icon": "container" }, { "name": "Git", "icon": "git-commit-horizontal" },
-      { "name": "Jira", "icon": "square-check" }, { "name": "Agile / Scrum", "icon": "users" },
-      { "name": "Figma", "icon": "figma" }, { "name": "Design Tokens", "icon": "palette" },
-      { "name": "ESLint", "icon": "check-check" }, { "name": "Prettier", "icon": "align-left" },
+      { "name": "GitHub Actions", "icon": "git-branch", "brand": "githubactions" }, { "name": "AWS (EC2, S3, CloudFront)", "icon": "cloud" },
+      { "name": "Docker", "icon": "container", "brand": "docker" }, { "name": "Git", "icon": "git-commit-horizontal", "brand": "git" },
+      { "name": "Jira", "icon": "square-check", "brand": "jira" }, { "name": "Agile / Scrum", "icon": "users" },
+      { "name": "Figma", "icon": "figma", "brand": "figma" }, { "name": "Design Tokens", "icon": "palette" },
+      { "name": "ESLint", "icon": "check-check", "brand": "eslint" }, { "name": "Prettier", "icon": "align-left", "brand": "prettier" },
       { "name": "Husky", "icon": "git-pull-request" }
     ] },
     { "id": "sg-ai", "name": "AI-assisted development", "icon": "cpu", "items": [
-      { "name": "GitHub Copilot", "icon": "cpu" }, { "name": "Cursor", "icon": "text-cursor" }, { "name": "Claude", "icon": "bot" },
-      { "name": "MCP connectors (Cursor, Figma)", "icon": "plug" }, { "name": "AI code review", "icon": "scan-search" },
+      { "name": "GitHub Copilot", "icon": "cpu", "brand": "githubcopilot" }, { "name": "Cursor", "icon": "text-cursor", "brand": "cursor" }, { "name": "Claude", "icon": "bot", "brand": "claude" },
+      { "name": "MCP connectors (Cursor, Figma)", "icon": "plug", "brand": "modelcontextprotocol" }, { "name": "AI code review", "icon": "scan-search" },
       { "name": "Prompt engineering", "icon": "braces" }, { "name": "Test scaffolding", "icon": "flask-conical" },
-      { "name": "Figma-to-code", "icon": "figma" }
+      { "name": "Figma-to-code", "icon": "figma", "brand": "figma" }
     ] }
   ]
 }

@@ -333,6 +333,10 @@ button { font: inherit; }
 
 .pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--surface2); border: 1px solid transparent; font-size: 0.79rem; font-family: var(--font-b); font-weight: 500; transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
 .pill:hover { background: var(--accent-tint); border-color: var(--accent); transform: scale(1.03); }
+@keyframes brand-icon-in { from { opacity: 0; } to { opacity: 1; } }
+.brand-icon { color: var(--bi-dark); animation: brand-icon-in 0.35s ease both; }
+:root[data-theme="light"] .brand-icon { color: var(--bi-light); }
+:root[data-motion="off"] .brand-icon { animation: none; }
 :root[data-motion="off"] .pill { transition: none; }
 :root[data-motion="off"] .pill:hover { transform: none; }
 
