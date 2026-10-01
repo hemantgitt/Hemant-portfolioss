@@ -15,6 +15,7 @@ import { EngineeringSection } from './components/sections/EngineeringSection.jsx
 import { EducationSection } from './components/sections/EducationSection.jsx';
 import { ContactSection } from './components/sections/ContactSection.jsx';
 import { Footer } from './components/Footer.jsx';
+import { ProjectPage } from './components/ProjectPage.jsx';
 import { useTheme } from './hooks/useTheme.js';
 import { useServiceWorkerUpdate } from './hooks/useServiceWorkerUpdate.js';
 import { useAccentColor } from './hooks/useAccentColor.js';
@@ -25,6 +26,17 @@ import nav from './data/nav.json';
 
 const SECTION_IDS = nav.map((n) => n.href.slice(1));
 
+// Computed once at module scope, not per-render: a direct load of
+// /projects/:id (not a same-page overlay transition, which ProjectsSection
+// handles on its own via pushState) should render the standalone
+// case-study page -- a real, crawlable, individually-titled URL for each
+// project -- while every other section stays the single scrolling page.
+function getInitialProjectRouteId() {
+  if (typeof window === 'undefined') return null;
+  const match = window.location.pathname.match(/^\/projects\/([^/]+)/);
+  return match ? match[1] : null;
+}
+
 export default function App() {
   const { isDark, toggleTheme } = useTheme('dark');
   const { accent, setAccent } = useAccentColor('purple');
@@ -34,6 +46,7 @@ export default function App() {
   const { updateAvailable, applyUpdate } = useServiceWorkerUpdate();
   const footerRef = useRef(null);
   const [footerInView, setFooterInView] = useState(false);
+  const [projectRouteId] = useState(getInitialProjectRouteId);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -80,6 +93,29 @@ export default function App() {
     () => showBackToTop && !a11y.panelOpen && !footerInView,
     [showBackToTop, a11y.panelOpen, footerInView]
   );
+
+  // A direct visit/refresh on /projects/:id gets its own standalone page
+  // (still with the site's header/footer, unlike a chromeless document
+  // view) instead of the full homepage underneath -- see
+  // getInitialProjectRouteId above.
+  if (projectRouteId) {
+    return (
+      <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', fontFamily: 'var(--font-b)', display: 'flex', flexDirection: 'column' }}>
+        <Header
+          active="projects"
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={toggleTheme}
+          accent={accent}
+          onSetAccent={setAccent}
+          onOpenA11yPanel={a11y.openPanel}
+          panelOpen={a11y.panelOpen}
+        />
+        <ProjectPage projectId={projectRouteId} />
+        <Footer reducedMotion={reducedMotion} />
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)', fontFamily: 'var(--font-b)', display: 'flex', flexDirection: 'column' }}>

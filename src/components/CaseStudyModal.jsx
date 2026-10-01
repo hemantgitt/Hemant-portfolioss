@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Icon } from './Icon.jsx';
+import { CaseStudyBody } from './CaseStudyBody.jsx';
 import { useModal } from '../hooks/useModal.js';
 
 /** @param {{ project: import('../data/types.js').Project, onClose: () => void }} props */
@@ -15,10 +16,6 @@ export function CaseStudyModal({ project, onClose }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  const onBackdrop = (e) => {
-    if (e.target === e.currentTarget) onClose();
-  };
-
   // Rendered via a portal into document.body rather than in place: this
   // modal is mounted inside sections that have a CSS `transform` animation
   // (the scroll-reveal effect), and any ancestor with a transform becomes
@@ -26,52 +23,53 @@ export function CaseStudyModal({ project, onClose }) {
   // the backdrop, making it cover only part of that ancestor's box instead
   // of the full viewport. Escaping to body sidesteps that entirely.
   return createPortal(
-    // The backdrop is a pointer-only convenience for closing; keyboard users
-    // close via the Escape handler above or the Close button in the dialog,
-    // so it's intentionally not a focusable/keyboard-interactive element.
-    <div
-      role="presentation"
-      style={{ position: 'fixed', inset: 0, zIndex: 80, display: 'flex', justifyContent: 'center', padding: 0, background: 'rgba(6,6,8,0.6)', backdropFilter: 'blur(4px)' }}
-      onClick={onBackdrop}
-    >
-      <div role="dialog" aria-modal="true" aria-labelledby="cs-title" ref={dialogRef} style={{ width: 'min(980px, 100%)', margin: '0 auto', background: 'var(--bg)', overflow: 'auto', maxHeight: '100vh' }}>
-        <header style={{ position: 'sticky', top: 0, background: 'color-mix(in srgb, var(--bg) 88%, transparent)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)', padding: '22px 24px', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-          <div style={{ flex: 1 }}>
-            <p style={{ margin: '0 0 6px', fontSize: '0.72rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-h)', fontWeight: 600 }}>
+    <div role="presentation" style={{ position: 'fixed', inset: 0, zIndex: 80 }}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cs-title"
+        ref={dialogRef}
+        className="case-study-panel"
+        style={{ position: 'absolute', inset: 0, background: 'var(--bg)', overflowY: 'auto' }}
+      >
+        {/* Hero banner: the project's own logo/mark blown up on an
+            accent-tinted field, the same bold-panel language the Contact
+            and About sections use, so opening a case study feels like a
+            deliberate "cover", not a plain box of text. */}
+        <div style={{ position: 'relative', background: project.imageBg, overflow: 'hidden', borderBottom: '1px solid var(--border)' }}>
+          <div
+            aria-hidden="true"
+            style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%, color-mix(in srgb, var(--bg) 92%, transparent) 96%)' }}
+          />
+          <div style={{ position: 'relative', maxWidth: 1180, margin: '0 auto', padding: 'clamp(70px,10vw,110px) 24px 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+            <img
+              src={project.image}
+              alt=""
+              width={project.imageWidth}
+              height={project.imageHeight}
+              className="case-study-banner-img"
+              style={{ maxWidth: 220, maxHeight: 110, width: 'auto', height: 'auto', objectFit: 'contain', marginBottom: 20, filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.35))' }}
+            />
+            <p style={{ margin: '0 0 10px', fontSize: '0.74rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--accent)', fontFamily: 'var(--font-h)', fontWeight: 700, background: 'var(--accent-tint)', padding: '6px 14px', borderRadius: 999 }}>
               Case study — {project.category}
             </p>
-            <h2 id="cs-title" style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(1.5rem, 4vw, 2.1rem)', letterSpacing: '-0.02em' }}>{project.name}</h2>
+            <h2 id="cs-title" style={{ margin: 0, fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: 'clamp(1.8rem, 5vw, 3rem)', letterSpacing: '-0.02em' }}>
+              {project.name}
+            </h2>
           </div>
-          <button type="button" onClick={onClose} aria-label="Close case study" className="icon-btn" style={{ width: 38, height: 38, flex: 'none' }}>
-            <Icon name="x" size={16} />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close case study"
+            className="icon-btn"
+            style={{ position: 'absolute', top: 18, right: 18, width: 40, height: 40, background: 'color-mix(in srgb, var(--bg) 55%, transparent)', backdropFilter: 'blur(8px)' }}
+          >
+            <Icon name="x" size={17} />
           </button>
-        </header>
-        <div style={{ padding: '24px 24px 72px', display: 'grid', gap: 32 }}>
-          <p style={{ fontSize: '1.08rem', lineHeight: 1.6, maxWidth: '70ch', color: 'var(--muted)' }}>{project.description}</p>
-          <dl className="grid-auto" style={{ display: 'grid', gap: 12, '--cols': 'repeat(4,1fr)' }}>
-            {project.metrics.map((m) => (
-              <div key={m.label} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, padding: 16 }}>
-                <dt style={{ fontSize: '0.68rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)' }}>{m.label}</dt>
-                <dd style={{ margin: '6px 0 0', fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1.3rem', color: 'var(--accent)' }}>{m.value}</dd>
-              </div>
-            ))}
-          </dl>
-          {project.sections.map((sec) => (
-            <section key={sec.h} style={{ borderTop: '1px solid var(--border)', paddingTop: 22, display: 'grid', gap: 12 }}>
-              <h3 style={{ fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '1.15rem' }}>{sec.h}</h3>
-              <p style={{ lineHeight: 1.65, maxWidth: '74ch', color: 'var(--muted)' }}>{sec.p}</p>
-              {sec.bullets.length > 0 && (
-                <ul style={{ display: 'grid', gap: 8 }}>
-                  {sec.bullets.map((b) => (
-                    <li key={b} style={{ display: 'grid', gridTemplateColumns: '14px minmax(0,1fr)', gap: 10, fontSize: '0.94rem', lineHeight: 1.55 }}>
-                      <Icon name="check" size={14} style={{ marginTop: 4, color: 'var(--accent)' }} />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
+        </div>
+
+        <div style={{ maxWidth: 820, margin: '0 auto', padding: '40px 24px 80px', display: 'grid', gap: 32 }}>
+          <CaseStudyBody project={project} />
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, borderTop: '1px solid var(--border)', paddingTop: 24 }}>
             <button type="button" onClick={onClose} className="btn btn-outline" style={{ minHeight: 44, paddingInline: 18, fontSize: '0.87rem' }}>
               Close

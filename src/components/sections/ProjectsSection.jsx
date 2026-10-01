@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import projects from '../../data/projects.json';
 import { SectionHeader } from '../SectionHeader.jsx';
 import { ProjectCard } from '../ProjectCard.jsx';
@@ -8,9 +8,27 @@ import { useIntersectionObserver } from '../../hooks/useIntersectionObserver.js'
 export function ProjectsSection({ reducedMotion }) {
   const [ref, visible] = useIntersectionObserver({ reduced: reducedMotion });
   const [openId, setOpenId] = useState(null);
-  const openProject = useCallback((id) => setOpenId(id), []);
-  const closeProject = useCallback(() => setOpenId(null), []);
+  const openProject = useCallback((id) => {
+    history.pushState(null, '', `/projects/${id}`);
+    setOpenId(id);
+  }, []);
+  const closeProject = useCallback(() => {
+    history.pushState(null, '', '/');
+    setOpenId(null);
+  }, []);
   const current = projects.items.find((p) => p.id === openId);
+
+  // Back button while the overlay is open closes it instead of leaving the
+  // page, matching how the browser's own history would behave for a real
+  // route transition.
+  useEffect(() => {
+    const onPopState = () => {
+      const match = window.location.pathname.match(/^\/projects\/([^/]+)/);
+      setOpenId(match ? match[1] : null);
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
 
   return (
     <section id="projects" ref={ref} aria-labelledby="proj-h" className={visible ? 'reveal-in' : 'reveal-init'} style={{ borderTop: '1px solid var(--border)' }}>

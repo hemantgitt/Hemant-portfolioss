@@ -3,6 +3,7 @@ import hero from '../../data/hero.json';
 import site from '../../data/site.json';
 import { Icon } from '../Icon.jsx';
 import { QuickStatsModal } from '../QuickStatsModal.jsx';
+import { HeroTechBackground } from './HeroTechBackground.jsx';
 
 // Maps hero.strengths (plain label strings) to the same lucide icon used for
 // that skill in skills.json, so the marquee tags below don't need their own
@@ -51,6 +52,7 @@ export function Hero() {
         aria-hidden="true"
         style={{ position: 'absolute', inset: '-20% -10%', background: 'radial-gradient(circle at 30% 20%, var(--hero-glow, var(--accent-tint)), transparent 55%)', pointerEvents: 'none' }}
       />
+      <HeroTechBackground />
       <div className="hero-grid" style={{ position: 'relative', maxWidth: 1180, margin: '0 auto', padding: 'clamp(56px, 10vw, 120px) 20px 80px' }}>
         <div className="hero-left">
           <p

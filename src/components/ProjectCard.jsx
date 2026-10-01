@@ -56,17 +56,25 @@ function ProjectCardBase({ project, onOpen }) {
             </li>
           ))}
         </ul>
-        <button
-          type="button"
-          onClick={() => onOpen(project.id)}
+        <a
+          href={`/projects/${project.id}`}
+          onClick={(e) => {
+            // Real href so the link is crawlable, right-clickable and
+            // "open in new tab"-able -- but a plain click opens the case
+            // study as an in-page overlay instead of a full navigation,
+            // for a smoother transition from the Projects grid.
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+            e.preventDefault();
+            onOpen(project.id);
+          }}
           style={{
             justifySelf: 'start', marginTop: 6, display: 'inline-flex', alignItems: 'center', gap: 8, minHeight: 44, paddingInline: 4,
-            background: 'none', border: 'none', color: 'var(--accent)', fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer',
+            color: 'var(--accent)', fontFamily: 'var(--font-h)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none',
           }}
         >
           View case study
           <Icon name="arrow-right" size={16} />
-        </button>
+        </a>
       </div>
     </li>
   );

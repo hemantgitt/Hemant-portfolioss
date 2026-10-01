@@ -21,6 +21,12 @@ const ACCENT_SWATCHES = [
  * }} props
  */
 export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'purple', onSetAccent, onOpenA11yPanel, panelOpen }) {
+  // On a standalone page (e.g. /projects/:id -- see ProjectPage.jsx), nav
+  // links point to "/#about" etc, a real cross-page navigation back to the
+  // homepage's scroll position, instead of "#about", which on any page
+  // other than "/" would just rewrite the URL's hash without scrolling
+  // anywhere (no element with that id exists on this page).
+  const onStandalonePage = typeof window !== 'undefined' && window.location.pathname !== '/';
   const [menuOpen, setMenuOpen] = useState(false);
   const mobileNavRef = useModal(menuOpen);
   const [appearanceOpen, setAppearanceOpen] = useState(false);
@@ -72,6 +78,10 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
   };
 
   const handleNavClick = (e, href) => {
+    if (onStandalonePage) {
+      setMenuOpen(false);
+      return; // Let the browser follow the real "/#id" href -- a normal cross-page navigation.
+    }
     const id = href.slice(1);
     if (menuOpen) {
       e.preventDefault();
@@ -98,7 +108,7 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
         }}
       >
         <a
-          href="#home"
+          href={onStandalonePage ? '/#home' : '#home'}
           onClick={(e) => handleNavClick(e, '#home')}
           className="logo-scale-hover"
           style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'var(--text)', marginRight: 'auto', lineHeight: 1.3 }}
@@ -126,7 +136,7 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
                   ref={(el) => {
                     navLinkRefs.current[item.href.slice(1)] = el;
                   }}
-                  href={item.href}
+                  href={onStandalonePage ? `/${item.href}` : item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   aria-current={active === item.href.slice(1) ? 'true' : undefined}
                   className="nav-link"
@@ -278,7 +288,7 @@ export function Header({ active, onNavigate, isDark, onToggleTheme, accent = 'pu
               scrolling to a hidden section. */}
           {nav.filter((item) => item.href !== '#impact').map((item, i) => (
             <li key={item.href} style={{ borderTop: i === 0 ? 'none' : '1px solid var(--border)' }}>
-              <a href={item.href} onClick={(e) => handleNavClick(e, item.href)} className="mobile-nav-link">
+              <a href={onStandalonePage ? `/${item.href}` : item.href} onClick={(e) => handleNavClick(e, item.href)} className="mobile-nav-link">
                 {item.label}
               </a>
             </li>

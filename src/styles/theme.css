@@ -333,6 +333,29 @@ button { font: inherit; }
 
 .pill { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--surface2); border: 1px solid transparent; font-size: 0.79rem; font-family: var(--font-b); font-weight: 500; transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease; }
 .pill:hover { background: var(--accent-tint); border-color: var(--accent); transform: scale(1.03); }
+/* Hero background texture: real tech-stack logos drifting slowly behind
+   the content, well below the text in both z-index and opacity so they
+   read as atmosphere, never compete with it or the photo for attention. */
+.hero-tech-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+@keyframes hero-tech-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(14px, -18px) rotate(6deg); }
+  50% { transform: translate(-10px, 10px) rotate(-4deg); }
+  75% { transform: translate(10px, 16px) rotate(5deg); }
+}
+.hero-tech-icon {
+  position: absolute; display: block; color: var(--muted); opacity: 0.22;
+  animation-name: hero-tech-drift; animation-timing-function: ease-in-out; animation-iteration-count: infinite;
+}
+:root[data-theme="light"] .hero-tech-icon { opacity: 0.16; }
+:root[data-motion="off"] .hero-tech-icon { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-tech-icon { animation: none; }
+}
+@media (max-width: 760px) {
+  .hero-tech-bg { opacity: 0.6; }
+}
+
 @keyframes brand-icon-in { from { opacity: 0; } to { opacity: 1; } }
 .brand-icon { color: var(--bi-dark); animation: brand-icon-in 0.35s ease both; }
 :root[data-theme="light"] .brand-icon { color: var(--bi-light); }
@@ -480,6 +503,18 @@ kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 5px; fon
 }
 .info-chip:hover { border-color: var(--accent); background: var(--accent-tint); }
 :root[data-motion="off"] .info-chip { transition: none; }
+
+/* Case study overlay (CaseStudyModal): a full-bleed takeover -- edge to
+   edge, top to bottom, not a centered box floating over a mostly-empty
+   backdrop -- that slides/fades in rather than just appearing. */
+@keyframes case-study-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes case-study-banner-in { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+.case-study-panel { animation: case-study-in 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+.case-study-banner-img { animation: case-study-banner-in 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+:root[data-motion="off"] .case-study-panel, :root[data-motion="off"] .case-study-banner-img { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .case-study-panel, .case-study-banner-img { animation: none; }
+}
 
 @keyframes card-fade-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .card-reveal-in { animation: card-fade-in 0.4s cubic-bezier(0.16,1,0.3,1) both; }

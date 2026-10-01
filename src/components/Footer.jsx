@@ -7,6 +7,10 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver.js';
 /** @param {{ reducedMotion?: boolean }} props */
 export function Footer({ reducedMotion } = {}) {
   const year = new Date().getFullYear();
+  // Same reasoning as Header.jsx: on a standalone page (e.g. /projects/:id)
+  // the "#about"-style hrefs need the "/" prefix to actually navigate back
+  // to the homepage's sections instead of rewriting this page's own hash.
+  const onStandalonePage = typeof window !== 'undefined' && window.location.pathname !== '/';
   const [ref, visible] = useIntersectionObserver({ reduced: reducedMotion, threshold: 0.05 });
 
   const handlePrintResume = () => {
@@ -36,7 +40,7 @@ export function Footer({ reducedMotion } = {}) {
           className={visible ? 'reveal-in' : 'reveal-init'}
         >
           <div style={{ display: 'grid', gap: 14 }}>
-            <a href="#home" className="logo-scale-hover" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', width: 'fit-content' }}>
+            <a href={onStandalonePage ? '/#home' : '#home'} className="logo-scale-hover" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', width: 'fit-content' }}>
               <img src="/logo-main.svg" alt="" width={30} height={30} style={{ display: 'block', flex: 'none' }} />
               <span style={{ fontFamily: 'var(--font-h)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--text)' }}>{site.name}</span>
             </a>
@@ -54,7 +58,7 @@ export function Footer({ reducedMotion } = {}) {
               {nav.map((item) => (
                 // Impact section is desktop-only (see ImpactSection.jsx); its link would be dead on mobile.
                 <li key={item.href} className={item.href === '#impact' ? 'desk-only' : undefined}>
-                  <a href={item.href} className="site-footer-link">
+                  <a href={onStandalonePage ? `/${item.href}` : item.href} className="site-footer-link">
                     {item.label}
                   </a>
                 </li>
